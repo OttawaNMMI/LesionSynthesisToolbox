@@ -1,3 +1,7 @@
+%% Things to do 
+% Documentation header 
+% tables instead of cells
+
 function DiscoveryDR_SC(updateDRclients,MRN2SearchDir)
 
 % Where all the data is on the scanner
