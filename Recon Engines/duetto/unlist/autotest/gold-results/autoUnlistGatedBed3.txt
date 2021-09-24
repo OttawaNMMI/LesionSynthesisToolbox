@@ -1,0 +1,1506 @@
+*** unlist rx struct ***
+       listFilePath: '/localdata/unlist-autotest/exam-54803/list/LIST0002.BLF'
+       startMsecVec: 0
+         endMsecVec: 60000
+         unlistType: 'static'
+            tofMode: 'nontof'
+    resultsFileName: 'autoUnlistGatedBed3.txt'
+     forceVqcAdjust: 0
+    maxTableLocDiff: 5
+        listDirPath: '/localdata/unlist-autotest/exam-54803/list'
+          seriesUid: '1.2.840.113619.2.363.4.1401309821.204734.0'
+             bedPos: 3
+          numOfBeds: 3
+       tableZposRaw: -361.4000
+       tableZposVqc: -363.1992
+       tableLocDiff: 0
+        imageSlices: 219
+    listHdrFilePath: '/localdata/unlist-autotest/exam-54803/list/i484299.RPDC.3'
+          seriesNum: 30001
+            tofBool: 0
+                 nv: 1981
+                 nt: 27
+                 nu: 357
+               nPhi: 224
+    bytesPerCellMax: 2
+      unlistDirPath: '/localdata/unlist-autotest/exam-54803/list/unlist-2017-03-03_110415'
+         rawDirPath: '/localdata/unlist-autotest/exam-54803/list/unlist-2017-03-03_110415/raw'
+    resultsFilePath: '/localdata/unlist-autotest/exam-54803/list/unlist-2017-03-03_110415/raw/autoUnlistGatedBed3.txt'
+
+
+*** Begin sinoFileName: SINO0002 ***
+
+omitList='/Deadtime/BlockBusy/ /Deadtime/BlockMuxLoss/ /Singles/CrystalSingles/sample1'
+/Deadtime/DTEvents/sample1/coincProcessorFovFiltEvts: 1 double(5.8453e+05)
+/Deadtime/DTEvents/sample1/coincProcessorInFovEvts: 1 double(3.0638e+06)
+/Deadtime/DTEvents/sample1/coincProcessorLosses: 1 double(1525.7)
+/Deadtime/DTEvents/sample1/coincProcessorSinglesLosses: 1 double(4924.7)
+/Deadtime/DTEvents/sample1/singlesHistogrammerLosses: 1 double(0)
+/Deadtime/DTEvents/sample1/sorterInputCoincCount: 1 double(3.0638e+06)
+/Deadtime/DTEvents/sample1/sorterOverrunLosses: 1 double(501.35)
+/DeadtimeCoefficients/CorrectionConstants/dt_3dintCorrectionConstant: 1 single(1)
+/DeadtimeCoefficients/CorrectionConstants/dt_3dmuxCorrectionConstant: 1 single(0)
+/DeadtimeCoefficients/CorrectionConstants/dt_3dtimingCorrectionConstant: 1 single(1.5)
+/DeadtimeCoefficients/dt_3dcrystalpileUp_factors: 45 single([0.60224 0.15387 -0.36851 -0.49725 -0.065956 -0.54284 -0.44355 0.11551 0.75875 0.58748 -0.095369 -0.6161 -0.70056 -0.2933 -0.72359 -0.64815 -0.067008 0.58703 0.62481 -0.017022 -0.56216 -0.61669 -0.18281 -0.59455 -0.53174 0.063024 0.84827 0.58703 -0.067008 -0.64815 -0.72359 -0.2933 -0.70056 -0.6161 -0.095369 0.58748 0.75875 0.11551 -0.44355 -0.54284 -0.065956 -0.49725 -0.36851 0.15387 0.60224;0.56332 -0.14105 -0.73735 -0.88493 -0.69202 -0.9707 -0.88372 -0.29715 0.76426 0.59325 -0.42761 -1.0038 -1.1275 -0.92739 -1.1399 -1.0438 -0.46253 0.65371 0.6044 -0.39785 -0.93871 -1.0488 -0.81241 -0.9985 -0.91976 -0.28513 0.90246 0.65371 -0.46253 -1.0438 -1.1399 -0.92739 -1.1275 -1.0038 -0.42761 0.59325 0.76426 -0.29715 -0.88372 -0.9707 -0.69202 -0.88493 -0.73735 -0.14105 0.56332;0.67444 -0.040169 -0.65174 -0.80594 -0.62176 -0.86145 -0.81596 -0.22444 0.87619 0.67926 -0.337 -0.89435 -1.0086 -0.81989 -1.0472 -0.94551 -0.41584 0.75381 0.69728 -0.28294 -0.83355 -0.93923 -0.72027 -0.91052 -0.82672 -0.19781 0.98624 0.75381 -0.41584 -0.94551 -1.0472 -0.81989 -1.0086 -0.89435 -0.337 0.67926 0.87619 -0.22444 -0.81596 -0.86145 -0.62176 -0.80594 -0.65174 -0.040169 0.67444;1.1286 0.6996 0.19548 0.15925 0.55786 0.13938 0.079305 0.64597 1.3293 1.1499 0.49542 -0.0091666 -0.10399 0.33143 -0.074466 -0.066516 0.50071 1.1893 1.1923 0.54913 0.054953 0.048365 0.42762 0.009213 0.058658 0.65197 1.4238 1.1893 0.50071 -0.066516 -0.074466 0.33143 -0.10399 -0.0091666 0.49542 1.1499 1.3293 0.64597 0.079305 0.13938 0.55786 0.15925 0.19548 0.6996 1.1286;1.1399 0.82192 0.29482 0.20409 0.62981 0.13321 0.20747 0.74765 1.3723 1.1355 0.54118 0.020036 -0.062789 0.34053 -0.1578 -0.0083169 0.5407 1.1789 1.18 0.58454 0.0996 0.043448 0.5172 0.086457 0.053019 0.71362 1.4308 1.1789 0.5407 -0.0083169 -0.1578 0.34053 -0.062789 0.020036 0.54118 1.1355 1.3723 0.74765 0.20747 0.13321 0.62981 0.20409 0.29482 0.82192 1.1399;0.69469 0.050035 -0.56594 -0.71088 -0.54469 -0.75244 -0.69828 -0.16053 0.96371 0.69155 -0.28481 -0.8392 -0.987 -0.83095 -0.97611 -0.88863 -0.36747 0.81137 0.7233 -0.19907 -0.7704 -0.87238 -0.65615 -0.85081 -0.75262 -0.13084 1.0618 0.81137 -0.36747 -0.88863 -0.97611 -0.83095 -0.987 -0.8392 -0.28481 0.69155 0.96371 -0.16053 -0.69828 -0.75244 -0.54469 -0.71088 -0.56594 0.050035 0.69469;0.67875 0.087411 -0.55379 -0.71379 -0.52885 -0.74753 -0.69335 -0.12825 1.0028 0.70321 -0.26757 -0.84603 -0.98639 -0.80256 -0.94901 -0.90395 -0.39513 0.83592 0.71169 -0.2589 -0.76227 -0.87917 -0.64946 -0.85496 -0.75175 -0.11024 1.0831 0.83592 -0.39513 -0.90395 -0.94901 -0.80256 -0.98639 -0.84603 -0.26757 0.70321 1.0028 -0.12825 -0.69335 -0.74753 -0.52885 -0.71379 -0.55379 0.087411 0.67875;1.1397 0.8624 0.25825 0.20988 0.62938 0.15542 0.20777 0.72963 1.3947 1.1566 0.52848 0.0087221 -0.047021 0.36955 -0.021734 -0.058104 0.49052 1.1856 1.1788 0.58357 0.12307 0.0026025 0.46302 0.036841 0.095919 0.65846 1.4487 1.1856 0.49052 -0.058104 -0.021734 0.36955 -0.047021 0.0087221 0.52848 1.1566 1.3947 0.72963 0.20777 0.15542 0.62938 0.20988 0.25825 0.8624 1.1397;1.1397 0.8624 0.25825 0.20988 0.62938 0.15542 0.20777 0.72963 1.3947 1.1566 0.52848 0.0087221 -0.047021 0.36955 -0.021734 -0.058104 0.49052 1.1856 1.1788 0.58357 0.12307 0.0026025 0.46302 0.036841 0.095919 0.65846 1.4487 1.1856 0.49052 -0.058104 -0.021734 0.36955 -0.047021 0.0087221 0.52848 1.1566 1.3947 0.72963 0.20777 0.15542 0.62938 0.20988 0.25825 0.8624 1.1397;0.67875 0.087411 -0.55379 -0.71379 -0.52885 -0.74753 -0.69335 -0.12825 1.0028 0.70321 -0.26757 -0.84603 -0.98639 -0.80256 -0.94901 -0.90395 -0.39513 0.83592 0.71169 -0.2589 -0.76227 -0.87917 -0.64946 -0.85496 -0.75175 -0.11024 1.0831 0.83592 -0.39513 -0.90395 -0.94901 -0.80256 -0.98639 -0.84603 -0.26757 0.70321 1.0028 -0.12825 -0.69335 -0.74753 -0.52885 -0.71379 -0.55379 0.087411 0.67875;0.69469 0.050035 -0.56594 -0.71088 -0.54469 -0.75244 -0.69828 -0.16053 0.96371 0.69155 -0.28481 -0.8392 -0.987 -0.83095 -0.97611 -0.88863 -0.36747 0.81137 0.7233 -0.19907 -0.7704 -0.87238 -0.65615 -0.85081 -0.75262 -0.13084 1.0618 0.81137 -0.36747 -0.88863 -0.97611 -0.83095 -0.987 -0.8392 -0.28481 0.69155 0.96371 -0.16053 -0.69828 -0.75244 -0.54469 -0.71088 -0.56594 0.050035 0.69469;1.1399 0.82192 0.29482 0.20409 0.62981 0.13321 0.20747 0.74765 1.3723 1.1355 0.54118 0.020036 -0.062789 0.34053 -0.1578 -0.0083169 0.5407 1.1789 1.18 0.58454 0.0996 0.043448 0.5172 0.086457 0.053019 0.71362 1.4308 1.1789 0.5407 -0.0083169 -0.1578 0.34053 -0.062789 0.020036 0.54118 1.1355 1.3723 0.74765 0.20747 0.13321 0.62981 0.20409 0.29482 0.82192 1.1399;1.1286 0.6996 0.19548 0.15925 0.55786 0.13938 0.079305 0.64597 1.3293 1.1499 0.49542 -0.0091666 -0.10399 0.33143 -0.074466 -0.066516 0.50071 1.1893 1.1923 0.54913 0.054953 0.048365 0.42762 0.009213 0.058658 0.65197 1.4238 1.1893 0.50071 -0.066516 -0.074466 0.33143 -0.10399 -0.0091666 0.49542 1.1499 1.3293 0.64597 0.079305 0.13938 0.55786 0.15925 0.19548 0.6996 1.1286;0.67444 -0.040169 -0.65174 -0.80594 -0.62176 -0.86145 -0.81596 -0.22444 0.87619 0.67926 -0.337 -0.89435 -1.0086 -0.81989 -1.0472 -0.94551 -0.41584 0.75381 0.69728 -0.28294 -0.83355 -0.93923 -0.72027 -0.91052 -0.82672 -0.19781 0.98624 0.75381 -0.41584 -0.94551 -1.0472 -0.81989 -1.0086 -0.89435 -0.337 0.67926 0.87619 -0.22444 -0.81596 -0.86145 -0.62176 -0.80594 -0.65174 -0.040169 0.67444;0.56332 -0.14105 -0.73735 -0.88493 -0.69202 -0.9707 -0.88372 -0.29715 0.76426 0.59325 -0.42761 -1.0038 -1.1275 -0.92739 -1.1399 -1.0438 -0.46253 0.65371 0.6044 -0.39785 -0.93871 -1.0488 -0.81241 -0.9985 -0.91976 -0.28513 0.90246 0.65371 -0.46253 -1.0438 -1.1399 -0.92739 -1.1275 -1.0038 -0.42761 0.59325 0.76426 -0.29715 -0.88372 -0.9707 -0.69202 -0.88493 -0.73735 -0.14105 0.56332;0.60224 0.15387 -0.36851 -0.49725 -0.065956 -0.54284 -0.44355 0.11551 0.75875 0.58748 -0.095369 -0.6161 -0.70056 -0.2933 -0.72359 -0.64815 -0.067008 0.58703 0.62481 -0.017022 -0.56216 -0.61669 -0.18281 -0.59455 -0.53174 0.063024 0.84827 0.58703 -0.067008 -0.64815 -0.72359 -0.2933 -0.70056 -0.6161 -0.095369 0.58748 0.75875 0.11551 -0.44355 -0.54284 -0.065956 -0.49725 -0.36851 0.15387 0.60224])
+/DeadtimeCoefficients/dt_3dpileUp_factors: 45 single([0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0])
+/DetectorSerialNumbers/BlockSerialNumbers/block0: 33 'LA00BD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block1: 33 'LA00BD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block10: 33 'LA00SE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block100: 33 'LA00DJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block101: 33 'LA00DJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block102: 33 'LA00DJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block103: 33 'LA00DJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block104: 33 'LA006J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block105: 33 'LA006J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block106: 33 'LA006J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block107: 33 'LA006J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block108: 33 'LA00PE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block109: 33 'LA00PE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block11: 33 'LA00SE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block110: 33 'LA00PE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block111: 33 'LA00PE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block112: 33 'LA004J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block113: 33 'LA004J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block114: 33 'LA004J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block115: 33 'LA004J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block116: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block117: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block118: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block119: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block12: 33 'la00kc2b'
+/DetectorSerialNumbers/BlockSerialNumbers/block120: 33 'LA00KF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block121: 33 'LA00KF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block122: 33 'LA00KF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block123: 33 'LA00KF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block124: 33 'LA004F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block125: 33 'LA004F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block126: 33 'LA004F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block127: 33 'LA004F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block128: 33 'LA00TE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block129: 33 'LA00TE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block13: 33 'la00kc2b'
+/DetectorSerialNumbers/BlockSerialNumbers/block130: 33 'LA00TE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block131: 33 'LA00TE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block132: 33 'LA00SE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block133: 33 'LA00SE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block134: 33 'LA00SE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block135: 33 'LA00SE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block136: 33 'LA00NH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block137: 33 'LA00NH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block138: 33 'LA00NH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block139: 33 'LA00NH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block14: 33 'la00kc2b'
+/DetectorSerialNumbers/BlockSerialNumbers/block140: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block141: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block142: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block143: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block144: 33 'LA00YE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block145: 33 'LA00YE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block146: 33 'LA00YE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block147: 33 'LA00YE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block148: 33 'LA006G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block149: 33 'LA006G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block15: 33 'la00kc2b'
+/DetectorSerialNumbers/BlockSerialNumbers/block150: 33 'LA006G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block151: 33 'LA006G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block152: 33 'LA00NE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block153: 33 'LA00NE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block154: 33 'LA00NE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block155: 33 'LA00NE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block156: 33 'LA008H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block157: 33 'LA008H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block158: 33 'LA008H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block159: 33 'LA008H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block16: 33 'LA00SD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block160: 33 'LA00LE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block161: 33 'LA00LE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block162: 33 'LA00LE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block163: 33 'LA00LE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block164: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block165: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block166: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block167: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block168: 33 'LA00ZG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block169: 33 'LA00ZG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block17: 33 'LA00SD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block170: 33 'LA00ZG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block171: 33 'LA00ZG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block172: 33 'LA00UG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block173: 33 'LA00UG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block174: 33 'LA00UG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block175: 33 'LA00UG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block176: 33 'LA00MJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block177: 33 'LA00MJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block178: 33 'LA00MJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block179: 33 'LA00MJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block18: 33 'LA00SD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block180: 33 'LA00LJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block181: 33 'LA00LJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block182: 33 'LA00LJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block183: 33 'LA00LJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block184: 33 'LA009G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block185: 33 'LA009G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block186: 33 'LA009G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block187: 33 'LA009G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block188: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block189: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block19: 33 'LA00SD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block190: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block191: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block192: 33 'LA00HG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block193: 33 'LA00HG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block194: 33 'LA00HG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block195: 33 'LA00HG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block196: 33 'LA00SG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block197: 33 'LA00SG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block198: 33 'LA00SG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block199: 33 'LA00SG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block2: 33 'LA00BD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block20: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block200: 33 'LA00HF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block201: 33 'LA00HF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block202: 33 'LA00HF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block203: 33 'LA00HF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block204: 33 'LA00CG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block205: 33 'LA00CG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block206: 33 'LA00CG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block207: 33 'LA00CG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block208: 33 'LA00UE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block209: 33 'LA00UE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block21: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block210: 33 'LA00UE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block211: 33 'LA00UE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block212: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block213: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block214: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block215: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block216: 33 'LA00E34B'
+/DetectorSerialNumbers/BlockSerialNumbers/block217: 33 'LA00E34B'
+/DetectorSerialNumbers/BlockSerialNumbers/block218: 33 'LA00E34B'
+/DetectorSerialNumbers/BlockSerialNumbers/block219: 33 'LA00E34B'
+/DetectorSerialNumbers/BlockSerialNumbers/block22: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block220: 33 'LA00F44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block221: 33 'LA00F44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block222: 33 'LA00F44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block223: 33 'LA00F44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block224: 33 'LA00H44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block225: 33 'LA00H44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block226: 33 'LA00H44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block227: 33 'LA00H44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block228: 33 'LA00T44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block229: 33 'LA00T44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block23: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block230: 33 'LA00T44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block231: 33 'LA00T44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block232: 33 'LA00X44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block233: 33 'LA00X44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block234: 33 'LA00X44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block235: 33 'LA00X44B'
+/DetectorSerialNumbers/BlockSerialNumbers/block236: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block237: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block238: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block239: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block24: 33 'la00fc2b'
+/DetectorSerialNumbers/BlockSerialNumbers/block240: 33 'LA00PH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block241: 33 'LA00PH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block242: 33 'LA00PH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block243: 33 'LA00PH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block244: 33 'LA009H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block245: 33 'LA009H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block246: 33 'LA009H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block247: 33 'LA009H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block248: 33 'LA00XH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block249: 33 'LA00XH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block25: 33 'la00fc2b'
+/DetectorSerialNumbers/BlockSerialNumbers/block250: 33 'LA00XH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block251: 33 'LA00XH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block252: 33 'LA00RH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block253: 33 'LA00RH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block254: 33 'LA00RH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block255: 33 'LA00RH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block256: 33 'LA00334B'
+/DetectorSerialNumbers/BlockSerialNumbers/block257: 33 'LA00334B'
+/DetectorSerialNumbers/BlockSerialNumbers/block258: 33 'LA00334B'
+/DetectorSerialNumbers/BlockSerialNumbers/block259: 33 'LA00334B'
+/DetectorSerialNumbers/BlockSerialNumbers/block26: 33 'la00fc2b'
+/DetectorSerialNumbers/BlockSerialNumbers/block260: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block261: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block262: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block263: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block264: 33 'LA00NJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block265: 33 'LA00NJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block266: 33 'LA00NJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block267: 33 'LA00NJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block268: 33 'LA003G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block269: 33 'LA003G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block27: 33 'la00fc2b'
+/DetectorSerialNumbers/BlockSerialNumbers/block270: 33 'LA003G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block271: 33 'LA003G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block272: 33 'LA00HJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block273: 33 'LA00HJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block274: 33 'LA00HJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block275: 33 'LA00HJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block276: 33 'LA00V24B'
+/DetectorSerialNumbers/BlockSerialNumbers/block277: 33 'LA00V24B'
+/DetectorSerialNumbers/BlockSerialNumbers/block278: 33 'LA00V24B'
+/DetectorSerialNumbers/BlockSerialNumbers/block279: 33 'LA00V24B'
+/DetectorSerialNumbers/BlockSerialNumbers/block28: 33 'LA00LE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block280: 33 'LA004G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block281: 33 'LA004G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block282: 33 'LA004G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block283: 33 'LA004G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block284: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block285: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block286: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block287: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block288: 33 'LA00ZF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block289: 33 'LA00ZF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block29: 33 'LA00LE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block290: 33 'LA00ZF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block291: 33 'LA00ZF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block292: 33 'LA00YF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block293: 33 'LA00YF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block294: 33 'LA00YF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block295: 33 'LA00YF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block296: 33 'LA00AF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block297: 33 'LA00AF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block298: 33 'LA00AF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block299: 33 'LA00AF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block3: 33 'LA00BD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block30: 33 'LA00LE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block300: 33 'LA009F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block301: 33 'LA009F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block302: 33 'LA009F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block303: 33 'LA009F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block304: 33 'LA00KE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block305: 33 'LA00KE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block306: 33 'LA00KE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block307: 33 'LA00KE3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block308: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block309: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block31: 33 'LA00LE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block310: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block311: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block312: 33 'LA00WF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block313: 33 'LA00WF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block314: 33 'LA00WF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block315: 33 'LA00WF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block316: 33 'LA002F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block317: 33 'LA002F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block318: 33 'LA002F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block319: 33 'LA002F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block32: 33 'LA00TD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block320: 33 'LA00MF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block321: 33 'LA00MF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block322: 33 'LA00MF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block323: 33 'LA00MF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block324: 33 'LA00GF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block325: 33 'LA00GF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block326: 33 'LA00GF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block327: 33 'LA00GF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block328: 33 'LA00VF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block329: 33 'LA00VF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block33: 33 'LA00TD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block330: 33 'LA00VF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block331: 33 'LA00VF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block332: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block333: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block334: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block335: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block336: 33 'LA00GJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block337: 33 'LA00GJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block338: 33 'LA00GJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block339: 33 'LA00GJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block34: 33 'LA00TD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block340: 33 'LA005J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block341: 33 'LA005J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block342: 33 'LA005J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block343: 33 'LA005J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block344: 33 'LA00CJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block345: 33 'LA00CJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block346: 33 'LA00CJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block347: 33 'LA00CJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block348: 33 'LA00AJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block349: 33 'LA00AJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block35: 33 'LA00TD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block350: 33 'LA00AJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block351: 33 'LA00AJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block352: 33 'LA001J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block353: 33 'LA001J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block354: 33 'LA001J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block355: 33 'LA001J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block356: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block357: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block358: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block359: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block36: 33 'LA00ED2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block360: 33 'LA00EJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block361: 33 'LA00EJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block362: 33 'LA00EJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block363: 33 'LA00EJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block364: 33 'LA00PJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block365: 33 'LA00PJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block366: 33 'LA00PJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block367: 33 'LA00PJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block368: 33 'LA00UJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block369: 33 'LA00UJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block37: 33 'LA00ED2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block370: 33 'LA00UJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block371: 33 'LA00UJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block372: 33 'LA00KJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block373: 33 'LA00KJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block374: 33 'LA00KJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block375: 33 'LA00KJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block376: 33 'LA000J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block377: 33 'LA000J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block378: 33 'LA000J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block379: 33 'LA000J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block38: 33 'LA00ED2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block380: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block381: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block382: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block383: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block384: 33 'LA00YG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block385: 33 'LA00YG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block386: 33 'LA00YG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block387: 33 'LA00YG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block388: 33 'LA00EG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block389: 33 'LA00EG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block39: 33 'LA00ED2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block390: 33 'LA00EG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block391: 33 'LA00EG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block392: 33 'LA005H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block393: 33 'LA005H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block394: 33 'LA005H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block395: 33 'LA005H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block396: 33 'LA002J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block397: 33 'LA002J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block398: 33 'LA002J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block399: 33 'LA002J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block4: 33 'LA00LC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block40: 33 'LA00CC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block400: 33 'LA00AG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block401: 33 'LA00AG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block402: 33 'LA00AG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block403: 33 'LA00AG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block404: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block405: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block406: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block407: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block408: 33 'LA00T54B'
+/DetectorSerialNumbers/BlockSerialNumbers/block409: 33 'LA00T54B'
+/DetectorSerialNumbers/BlockSerialNumbers/block41: 33 'LA00CC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block410: 33 'LA00T54B'
+/DetectorSerialNumbers/BlockSerialNumbers/block411: 33 'LA00T54B'
+/DetectorSerialNumbers/BlockSerialNumbers/block412: 33 'LA00TJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block413: 33 'LA00TJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block414: 33 'LA00TJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block415: 33 'LA00TJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block416: 33 'LA00FJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block417: 33 'LA00FJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block418: 33 'LA00FJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block419: 33 'LA00FJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block42: 33 'LA00CC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block420: 33 'LA00XG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block421: 33 'LA00XG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block422: 33 'LA00XG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block423: 33 'LA00XG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block424: 33 'LA00LG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block425: 33 'LA00LG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block426: 33 'LA00LG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block427: 33 'LA00LG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block428: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block429: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block43: 33 'LA00CC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block430: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block431: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block432: 33 'LA00RF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block433: 33 'LA00RF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block434: 33 'LA00RF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block435: 33 'LA00RF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block436: 33 'LA00DF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block437: 33 'LA00DF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block438: 33 'LA00DF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block439: 33 'LA00DF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block44: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block440: 33 'LA00UF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block441: 33 'LA00UF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block442: 33 'LA00UF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block443: 33 'LA00UF3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block444: 33 'LA006F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block445: 33 'LA006F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block446: 33 'LA006F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block447: 33 'LA006F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block448: 33 'LA008F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block449: 33 'LA008F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block45: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block450: 33 'LA008F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block451: 33 'LA008F3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block452: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block453: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block454: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block455: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block456: 33 'LA003J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block457: 33 'LA003J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block458: 33 'LA003J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block459: 33 'LA003J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block46: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block460: 33 'LA00JJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block461: 33 'LA00JJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block462: 33 'LA00JJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block463: 33 'LA00JJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block464: 33 'LA009J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block465: 33 'LA009J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block466: 33 'LA009J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block467: 33 'LA009J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block468: 33 'LA00BJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block469: 33 'LA00BJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block47: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block470: 33 'LA00BJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block471: 33 'LA00BJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block472: 33 'LA00RJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block473: 33 'LA00RJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block474: 33 'LA00RJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block475: 33 'LA00RJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block476: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block477: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block478: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block479: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block48: 33 'LA00UE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block480: 33 'LA00SJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block481: 33 'LA00SJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block482: 33 'LA00SJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block483: 33 'LA00SJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block484: 33 'LA007J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block485: 33 'LA007J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block486: 33 'LA007J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block487: 33 'LA007J3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block488: 33 'A00WG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block489: 33 'A00WG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block49: 33 'LA00UE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block490: 33 'A00WG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block491: 33 'A00WG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block492: 33 'LA008G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block493: 33 'LA008G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block494: 33 'LA008G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block495: 33 'LA008G3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block496: 33 'LA00BG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block497: 33 'LA00BG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block498: 33 'LA00BG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block499: 33 'LA00BG3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block5: 33 'LA00LC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block50: 33 'LA00UE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block500: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block501: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block502: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block503: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block504: 33 'LA00HH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block505: 33 'LA00HH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block506: 33 'LA00HH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block507: 33 'LA00HH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block508: 33 'LA00VH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block509: 33 'LA00VH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block51: 33 'LA00UE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block510: 33 'LA00VH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block511: 33 'LA00VH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block512: 33 'LA00AH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block513: 33 'LA00AH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block514: 33 'LA00AH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block515: 33 'LA00AH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block516: 33 'LA00MH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block517: 33 'LA00MH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block518: 33 'LA00MH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block519: 33 'LA00MH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block52: 33 'LA00ZD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block520: 33 'LA007H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block521: 33 'LA007H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block522: 33 'LA007H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block523: 33 'LA007H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block524: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block525: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block526: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block527: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block528: 33 'LA000H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block529: 33 'LA000H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block53: 33 'LA00ZD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block530: 33 'LA000H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block531: 33 'LA000H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block532: 33 'LA00KH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block533: 33 'LA00KH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block534: 33 'LA00KH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block535: 33 'LA00KH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block536: 33 'LA00FH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block537: 33 'LA00FH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block538: 33 'LA00FH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block539: 33 'LA00FH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block54: 33 'LA00ZD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block540: 33 'LA00JH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block541: 33 'LA00JH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block542: 33 'LA00JH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block543: 33 'LA00JH3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block544: 33 'LA003H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block545: 33 'LA003H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block546: 33 'LA003H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block547: 33 'LA003H3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block548: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block549: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block55: 33 'LA00ZD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block550: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block551: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block552: 33 '00ALDVT8'
+/DetectorSerialNumbers/BlockSerialNumbers/block553: 33 '00ALDVT8'
+/DetectorSerialNumbers/BlockSerialNumbers/block554: 33 '00ALDVT8'
+/DetectorSerialNumbers/BlockSerialNumbers/block555: 33 '00ALDVT8'
+/DetectorSerialNumbers/BlockSerialNumbers/block556: 33 '00ALEGFW'
+/DetectorSerialNumbers/BlockSerialNumbers/block557: 33 '00ALEGFW'
+/DetectorSerialNumbers/BlockSerialNumbers/block558: 33 '00ALEGFW'
+/DetectorSerialNumbers/BlockSerialNumbers/block559: 33 '00ALEGFW'
+/DetectorSerialNumbers/BlockSerialNumbers/block56: 33 'LA003E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block57: 33 'LA003E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block58: 33 'LA003E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block59: 33 'LA003E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block6: 33 'LA00LC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block60: 33 'LA007E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block61: 33 'LA007E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block62: 33 'LA007E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block63: 33 'LA007E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block64: 33 'LA005C2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block65: 33 'LA005C2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block66: 33 'LA005C2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block67: 33 'LA005C2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block68: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block69: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block7: 33 'LA00LC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block70: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block71: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block72: 33 'LA00XB2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block73: 33 'LA00XB2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block74: 33 'LA00XB2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block75: 33 'LA00XB2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block76: 33 'LA00RD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block77: 33 'LA00RD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block78: 33 'LA00RD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block79: 33 'LA00RD2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block8: 33 'LA00SE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block80: 33 'LA00RC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block81: 33 'LA00RC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block82: 33 'LA00RC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block83: 33 'LA00RC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block84: 33 'LA000E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block85: 33 'LA000E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block86: 33 'LA000E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block87: 33 'LA000E2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block88: 33 'LA00SC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block89: 33 'LA00SC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block9: 33 'LA00SE2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block90: 33 'LA00SC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block91: 33 'LA00SC2B'
+/DetectorSerialNumbers/BlockSerialNumbers/block92: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block93: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block94: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block95: 33 'UNKNOWN'
+/DetectorSerialNumbers/BlockSerialNumbers/block96: 33 'LA00VJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block97: 33 'LA00VJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block98: 33 'LA00VJ3B'
+/DetectorSerialNumbers/BlockSerialNumbers/block99: 33 'LA00VJ3B'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod0: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod1: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod10: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod11: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod12: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod13: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod14: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod15: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod16: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod17: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod18: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod19: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod2: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod20: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod21: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod22: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod23: 33 'ALCZ26'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod24: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod25: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod26: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod27: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod3: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod4: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod5: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod6: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod7: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod8: 33 'UNKNOWN'
+/DetectorSerialNumbers/ModuleSerialNumbers/dmod9: 33 'UNKNOWN'
+/DetectorValidFlags/BlockValidFlags: 28 uint8([1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1])
+/HeaderData/3DCrystalEfficiencyHeader/crystalEfficiencyDataOffset: 1 uint32(3.3721e+09)
+/HeaderData/3DCrystalEfficiencyHeader/crystalEfficiencyDim1: 1 uint32(0)
+/HeaderData/3DCrystalEfficiencyHeader/crystalEfficiencyDim2: 1 uint32(0)
+/HeaderData/AcqParameters/AcqRxGatedParams/binDurations: 64 single([0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0])
+/HeaderData/AcqParameters/AcqRxGatedParams/binningMode: 1 uint32(0)
+/HeaderData/AcqParameters/AcqRxGatedParams/cardiacTriggerPhaseOffset: 1 uint32(65)
+/HeaderData/AcqParameters/AcqRxGatedParams/lowerRejLimit: 1 uint32(0)
+/HeaderData/AcqParameters/AcqRxGatedParams/nTrigRejections: 1 uint32(1)
+/HeaderData/AcqParameters/AcqRxGatedParams/numberOfBins: 1 uint32(0)
+/HeaderData/AcqParameters/AcqRxGatedParams/physioGatingType: 1 uint32(2)
+/HeaderData/AcqParameters/AcqRxGatedParams/respiratoryTriggerPhaseOffset: 1 uint32(10)
+/HeaderData/AcqParameters/AcqRxGatedParams/trigRejMethod: 1 uint32(3)
+/HeaderData/AcqParameters/AcqRxGatedParams/upperRejLimit: 1 uint32(0)
+/HeaderData/AcqParameters/AcqRxTransControl/teoMaskRadialSum: 284 int16([0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0])
+/HeaderData/AcqParameters/AcqRxTransControl/teoMaskScaleFactor: 1 single(0)
+/HeaderData/AcqParameters/AcqRxTransControl/teoMaskWidth: 1 uint32(0)
+/HeaderData/AcqParameters/AcqRxTransControl/tsHolder1: 1 uint32(0)
+/HeaderData/AcqParameters/AcqRxTransControl/tsHolder2: 1 uint32(0)
+/HeaderData/AcqParameters/AcqRxTransControl/tsLocation: 1 uint32(0)
+/HeaderData/AcqParameters/AcqRxTransControl/tsSpeed: 1 uint32(0)
+/HeaderData/AcqParameters/BackEndAcqFilters/maxCoincDiffLSBs: 1 uint32(175)
+/HeaderData/AcqParameters/BackEndAcqFilters/maxEnergyKeV: 1 single(650)
+/HeaderData/AcqParameters/BackEndAcqFilters/maxRingDiff: 1 uint32(44)
+/HeaderData/AcqParameters/BackEndAcqFilters/minEnergyKeV: 1 single(425)
+/HeaderData/AcqParameters/BackEndAcqFilters/transaxialFovInMM: 1 single(600)
+/HeaderData/AcqParameters/EDCATParameters/coinOutputMode: 1 int32(802)
+/HeaderData/AcqParameters/EDCATParameters/coincTimingPrecision: 1 single(0.01302)
+/HeaderData/AcqParameters/EDCATParameters/crystalsInTFOV: 1 uint32(357)
+/HeaderData/AcqParameters/EDCATParameters/delayWindowOffset: 1 int32(32)
+/HeaderData/AcqParameters/EDCATParameters/eventIntegrationMode: 1 uint32(0)
+/HeaderData/AcqParameters/EDCATParameters/lower_energy_limit: 1 uint32(425)
+/HeaderData/AcqParameters/EDCATParameters/majorClockPeriodFEE: 1 uint32(200)
+/HeaderData/AcqParameters/EDCATParameters/negAxialAcceptanceAngle: 1 int32(44)
+/HeaderData/AcqParameters/EDCATParameters/negCoincidenceWindow: 1 int32(175)
+/HeaderData/AcqParameters/EDCATParameters/posAxialAcceptanceAngle: 1 int32(44)
+/HeaderData/AcqParameters/EDCATParameters/posCoincidenceWindow: 1 int32(175)
+/HeaderData/AcqParameters/EDCATParameters/transAxialFOV: 1 int32(60)
+/HeaderData/AcqParameters/EDCATParameters/upper_energy_limit: 1 uint32(650)
+/HeaderData/AcqParameters/ImageNumberAids/locationOfImageOne: 1 single(122.32)
+/HeaderData/AcqParameters/ImageNumberAids/locationOfImageOneIndx: 1 single(-483.72)
+/HeaderData/AcqParameters/ImageNumberAids/prospectiveNumbOfImageSlices: 1 uint32(219)
+/HeaderData/AcqParameters/LandmarkParameters/absTableLongitude: 1 int32(4811)
+/HeaderData/AcqParameters/LandmarkParameters/gantryTilt: 1 int32(0)
+/HeaderData/AcqParameters/LandmarkParameters/landmarkDateTime: 1 uint32(1.4013e+09)
+/HeaderData/AcqParameters/LandmarkParameters/landmarkQualifier: 1 uint32(1)
+/HeaderData/AcqParameters/LandmarkParameters/patientEntry: 1 uint32(0)
+/HeaderData/AcqParameters/LandmarkParameters/patientPosition: 1 uint32(0)
+/HeaderData/AcqParameters/LandmarkParameters/tableElevation: 1 int32(0)
+/HeaderData/AcqParameters/RxScanParameters/TransPlusEmiss: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/acqDelay: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/acqTime: 1 uint32(60)
+/HeaderData/AcqParameters/RxScanParameters/angleThickness: 1 single(0.80357)
+/HeaderData/AcqParameters/RxScanParameters/axialAcceptance: 1 uint32(2)
+/HeaderData/AcqParameters/RxScanParameters/axialCompression: 1 uint32(1)
+/HeaderData/AcqParameters/RxScanParameters/collimation: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/ct_contrast: 65 'NULL'
+/HeaderData/AcqParameters/RxScanParameters/ct_kv: 1 single(0)
+/HeaderData/AcqParameters/RxScanParameters/deadtimeCollect: 1 uint32(1)
+/HeaderData/AcqParameters/RxScanParameters/delayedEvents: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/delayedSubtractBias: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/deltaAngle: 1 single(0.80357)
+/HeaderData/AcqParameters/RxScanParameters/deltaSlice: 1 uint32(1)
+/HeaderData/AcqParameters/RxScanParameters/eventSimulationData: 257 ''
+/HeaderData/AcqParameters/RxScanParameters/eventSource: 1 uint32(1)
+/HeaderData/AcqParameters/RxScanParameters/extraRsForTFOV: 1 uint32(3)
+/HeaderData/AcqParameters/RxScanParameters/frame_of_reference: 65 '1.2.840.113619.2.363.10499743.2782540.15928.1401307351.882'
+/HeaderData/AcqParameters/RxScanParameters/gantryTilt: 1 single(0)
+/HeaderData/AcqParameters/RxScanParameters/retroScan: 1 uint32(1)
+/HeaderData/AcqParameters/RxScanParameters/scanMode: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/scanPerspective: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/scanType: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/singleCollect: 1 uint32(1)
+/HeaderData/AcqParameters/RxScanParameters/slicesCompressed: 1 uint32(1)
+/HeaderData/AcqParameters/RxScanParameters/startAngle: 1 single(0)
+/HeaderData/AcqParameters/RxScanParameters/startCondData: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/startCondition: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/startSlice: 1 uint32(1)
+/HeaderData/AcqParameters/RxScanParameters/stopCondData: 1 uint32(0)
+/HeaderData/AcqParameters/RxScanParameters/stopCondition: 1 uint32(1)
+/HeaderData/AcqParameters/RxScanParameters/tableLocation: 1 single(-361.4)
+/HeaderData/AcqParameters/RxScanParameters/thetaCompression: 1 uint32(1)
+/HeaderData/AcqParameters/RxScanParameters/tofCompressionFactor: 1 uint32(13)
+/HeaderData/AcqStats/acceptedTriggers: 1 uint32(50)
+/HeaderData/AcqStats/accumBinDurations: 64 uint32([0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0])
+/HeaderData/AcqStats/badCoincStreamEvts: 1 uint32(99999)
+/HeaderData/AcqStats/binNumber: 1 uint32(0)
+/HeaderData/AcqStats/frameDuration: 1 uint32(60000)
+/HeaderData/AcqStats/frameID: 69 ''
+/HeaderData/AcqStats/frameNumber: 1 uint32(2)
+/HeaderData/AcqStats/frameStartCoincTStamp: 1 uint32(3.1685e+05)
+/HeaderData/AcqStats/frameStartTime: 1 uint32(1.4013e+09)
+/HeaderData/AcqStats/isRejectBin: 1 uint32(0)
+/HeaderData/AcqStats/readyToScanUTC: 1 uint32(1.4013e+09)
+/HeaderData/AcqStats/rejectedTriggers: 1 uint32(0)
+/HeaderData/AcqStats/scanStartTime: 1 uint32(1.4013e+09)
+/HeaderData/AcqStats/sorterFilteredEvtsLS: 1 uint32(0)
+/HeaderData/AcqStats/sorterFilteredEvtsMS: 1 uint32(0)
+/HeaderData/AcqStats/terminationCondition: 1 uint32(0)
+/HeaderData/AcqStats/totalDelays: 1 uint32(4.962e+06)
+/HeaderData/AcqStats/totalDelaysMs: 1 uint32(0)
+/HeaderData/AcqStats/totalPrompts: 1 uint32(3.0633e+06)
+/HeaderData/AcqStats/totalPromptsMs: 1 uint32(0)
+/HeaderData/CTCCrystalTimeDiffHeader/ctcCrystalTimeDiffOffset: 1 uint32(2)
+/HeaderData/CTCCrystalTimeDiffHeader/sizeOfCtcCrystalTimeDiff: 1 uint32(0)
+/HeaderData/CTCCrystalTimeDiffHeader/timeDiffToNanosecConvFactor: 1 single(-5.1936e+05)
+/HeaderData/CalibrationSet/crystalMapCal: 257 '/usr/PET/systemConfig/cal/crystalMap_140517_1255_1.cal'
+/HeaderData/CalibrationSet/edpcCal: 257 '/usr/PET/systemConfig/cal/ctc_140517_1325_00.cal'
+/HeaderData/CalibrationSet/energyMapCal: 257 '/usr/PET/systemConfig/cal/energy_140517_1310_1.cal'
+/HeaderData/CalibrationSet/pmtGainCal: 257 '/usr/PET/systemConfig/cal/sipmGain_140517_1310_1_0.cal'
+/HeaderData/Compression/compVectorTableOffset: 1 uint32(0)
+/HeaderData/Compression/compressionAlgorithm: 1 uint32(2)
+/HeaderData/Compression/sizeOfCompVectorTable: 1 uint32(0)
+/HeaderData/DeadtimeHeader/DeadtimeOffsets/deadtimeEventsDataOffset: 1 uint32(1.8222e+06)
+/HeaderData/DeadtimeHeader/DeadtimeOffsets/samplesRecordsOffset: 1 uint32(1.8314e+06)
+/HeaderData/DeadtimeHeader/DeadtimeOffsets/unitIntegDeadTimeOffset: 1 uint32(7680)
+/HeaderData/DeadtimeHeader/DeadtimeOffsets/unitMuxDeadTimeOffset: 1 uint32(3.7069e+05)
+/HeaderData/DeadtimeHeader/DeadtimeSizes/sizeOfDeadtimeEventsData: 1 uint32(56)
+/HeaderData/DeadtimeHeader/DeadtimeSizes/sizeOfSamplesRecords: 1 uint32(8)
+/HeaderData/DeadtimeHeader/DeadtimeSizes/sizeOfUnitIntegDeadTime: 1 uint32(2240)
+/HeaderData/DeadtimeHeader/DeadtimeSizes/sizeOfUnitMuxDeadTime: 1 uint32(2240)
+/HeaderData/DeadtimeHeader/allocatedSamples: 1 uint32(1)
+/HeaderData/DeadtimeHeader/muxLossDataType: 1 uint32(0)
+/HeaderData/DeadtimeHeader/numValidSamplesDtEvents: 1 uint32(1)
+/HeaderData/DeadtimeHeader/numValidSamplesRecords: 1 uint32(0)
+/HeaderData/DeadtimeHeader/numValidSamplesUnitInteg: 1 uint32(1)
+/HeaderData/DeadtimeHeader/numValidSamplesUnitMux: 1 uint32(1)
+/HeaderData/DetectorSignature/detModuleElecVintage: 1 uint32(0)
+/HeaderData/DetectorSignature/isDetBlockFlagsValid: 1 uint32(1)
+/HeaderData/DetectorSignature/isSerialNumbersValid: 1 uint32(1)
+/HeaderData/DetectorSignature/isTemperaturesValid: 1 uint32(1)
+/HeaderData/DetectorSignature/offsetOfDetBlkValidFlags: 1 uint32(6656)
+/HeaderData/DetectorSignature/offsetOfSNs: 1 uint32(1.4898e+07)
+/HeaderData/DetectorSignature/offsetOfTemps: 1 uint32(6144)
+/HeaderData/DetectorSignature/signatureVersion: 1 uint32(0)
+/HeaderData/DetectorSignature/sizeOfDetBlkValidFlags: 1 uint32(560)
+/HeaderData/DetectorSignature/sizeOfSerialNumbers: 1 uint32(896)
+/HeaderData/DetectorSignature/sizeOfTemperatures: 1 uint32(224)
+/HeaderData/ExamData/Operator: 69 ''
+/HeaderData/ExamData/adminDateTime: 29 ''
+/HeaderData/ExamData/batchDescription: 45 ''
+/HeaderData/ExamData/blankCalID: 69 ''
+/HeaderData/ExamData/examDesc: 69 'Acq4D SSVP 2.15 Q.Static'
+/HeaderData/ExamData/examID: 2 uint32([0;4.295e+09])
+/HeaderData/ExamData/examIdDicom: 69 '1.2.840.113619.6.363.101523152397013850890189415873273513689'
+/HeaderData/ExamData/halfLife: 1 single(6586.2)
+/HeaderData/ExamData/hospitalName: 37 'MRHQBAY17'
+/HeaderData/ExamData/isotopeHasPromptGamma: 1 uint32(0)
+/HeaderData/ExamData/landmarkAbbrev: 5 ''
+/HeaderData/ExamData/landmarkName: 69 ''
+/HeaderData/ExamData/manufacturer: 69 'GE MEDICAL SYSTEMS'
+/HeaderData/ExamData/measDateTime: 29 ''
+/HeaderData/ExamData/modality: 9 'PT'
+/HeaderData/ExamData/normal2dCalID: 69 '1.2.840.113619.2.131.1459872910.1219799569.748327'
+/HeaderData/ExamData/normalCalID: 69 '1.2.840.113619.2.363.755228240.1400622610.436348'
+/HeaderData/ExamData/patientID: 69 ''
+/HeaderData/ExamData/patientType: 1 uint32(0)
+/HeaderData/ExamData/positronFraction: 1 single(0.967)
+/HeaderData/ExamData/postInjectionActivity: 1 single(0)
+/HeaderData/ExamData/postInjectionDateTime: 29 ''
+/HeaderData/ExamData/preInjectionVolume: 1 single(0)
+/HeaderData/ExamData/radionuclideName: 9 '18F'
+/HeaderData/ExamData/scanDescription: 69 'Q.Static Record 2.15'
+/HeaderData/ExamData/scanID: 2 uint32([1.4013e+09;3.3543e+08])
+/HeaderData/ExamData/scanIdDicom: 69 '1.2.840.113619.2.363.4.1401309821.204734.0'
+/HeaderData/ExamData/scannerDesc: 37 'SIGNA PET/MR'
+/HeaderData/ExamData/softwareVersion: 69 '61.00'
+/HeaderData/ExamData/source1Activity: 1 single(0)
+/HeaderData/ExamData/source1HalfLife: 1 single(0)
+/HeaderData/ExamData/source1MeasDateTime: 29 ''
+/HeaderData/ExamData/source1Radionuclide: 9 ''
+/HeaderData/ExamData/source2Activity: 1 single(0)
+/HeaderData/ExamData/source2HalfLife: 1 single(0)
+/HeaderData/ExamData/source2MeasDateTime: 29 ''
+/HeaderData/ExamData/source2Radionuclide: 9 ''
+/HeaderData/ExamData/tracerActivity: 1 single(0)
+/HeaderData/ExamData/tracerName: 45 'FDG -- fluorodeoxyglucose'
+/HeaderData/ExamData/wcCalID: 69 '1.2.840.113619.2.363.755228240.1400625385.203729'
+/HeaderData/ListHeader/areEvtTimeStampsKnown: 1 uint32(0)
+/HeaderData/ListHeader/evalAsBadCompress: 1 uint32(1)
+/HeaderData/ListHeader/firstTmAbsTimeStamp: 1 uint32(0)
+/HeaderData/ListHeader/isListCompressed: 1 uint32(0)
+/HeaderData/ListHeader/lastTmAbsTimeStamp: 1 uint32(0)
+/HeaderData/ListHeader/listAcqTime: 1 uint32(0)
+/HeaderData/ListHeader/listCompAlgCoefs: 4 double([0;0;0;0])
+/HeaderData/ListHeader/listCompressionAlg: 1 uint32(0)
+/HeaderData/ListHeader/listStartOffset: 1 uint32(0)
+/HeaderData/ListHeader/listType: 1 uint32(0)
+/HeaderData/ListHeader/numAssocListFiles: 1 uint32(0)
+/HeaderData/ListHeader/sizeOfCompressedList: 1 uint64(0)
+/HeaderData/ListHeader/sizeOfList: 1 uint64(0)
+/HeaderData/ListHeader/whichAssocLFile: 1 uint32(0)
+/HeaderData/RDFConfiguration/fileVersion/majorVersion: 1 uint32(9)
+/HeaderData/RDFConfiguration/fileVersion/minorVersion: 1 uint32(0)
+/HeaderData/RDFConfiguration/legacyVersion/majorVersion: 1 uint32(9)
+/HeaderData/RDFConfiguration/legacyVersion/minorVersion: 1 uint32(0)
+/HeaderData/RDFConfiguration/RDFComplete: 1 uint32(2.1475e+09)
+/HeaderData/RDFConfiguration/deadTimeVersion: 1 uint32(0)
+/HeaderData/RDFConfiguration/fileSizeInBytes: 1 uint64(6.1266e+06)
+/HeaderData/RDFConfiguration/isListFile: 1 uint32(0)
+/HeaderData/RDFConfiguration/singlesVersion: 1 uint32(1)
+/HeaderData/RDFOffsetHeader/RDFConfigStructOffset: 1 uint32(72)
+/HeaderData/RDFOffsetHeader/_3DNormStructOffset: 1 uint32(3424)
+/HeaderData/RDFOffsetHeader/acqParamStructOffset: 1 uint32(3440)
+/HeaderData/RDFOffsetHeader/acqStatsStructOffset: 1 uint32(5424)
+/HeaderData/RDFOffsetHeader/calSetStructOffset: 1 uint32(2272)
+/HeaderData/RDFOffsetHeader/compressionStructOffset: 1 uint32(5840)
+/HeaderData/RDFOffsetHeader/computeParmStructOffset: 1 uint32(5080)
+/HeaderData/RDFOffsetHeader/ctcCrystalTimeDiffStructOffset: 1 uint32(3408)
+/HeaderData/RDFOffsetHeader/deadTimeStructOffset: 1 uint32(3320)
+/HeaderData/RDFOffsetHeader/detModuleSignatureOffset: 1 uint32(5968)
+/HeaderData/RDFOffsetHeader/listHeaderOffset: 1 uint32(5872)
+/HeaderData/RDFOffsetHeader/petExamStructOffset: 1 uint32(992)
+/HeaderData/RDFOffsetHeader/rdfBOM: 1 uint32(65279)
+/HeaderData/RDFOffsetHeader/singlesStructOffset: 1 uint32(3384)
+/HeaderData/RDFOffsetHeader/sorterStructOffset: 1 uint32(120)
+/HeaderData/RDFOffsetHeader/sysGeometryStructOffset: 1 uint32(824)
+/HeaderData/SinglesHeader/allocatedSamples: 1 uint32(1)
+/HeaderData/SinglesHeader/numValidSamples: 1 uint32(1)
+/HeaderData/SinglesHeader/samplesTimeStampsOffset: 1 uint32(1.833e+06)
+/HeaderData/SinglesHeader/singlesOffset: 1 uint32(1.8345e+06)
+/HeaderData/SinglesHeader/sizeOfSampleTimeStamps: 1 uint32(8)
+/HeaderData/SinglesHeader/sizeOfSingles: 1 uint32(80640)
+/HeaderData/Sorter/Segment0/compDataSegOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment0/compDataSegSize: 1 uint64(0)
+/HeaderData/Sorter/Segment0/dataSegmentOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment0/dimension3Size: 1 uint32(0)
+/HeaderData/Sorter/Segment0/numScaleFactors: 1 uint32(0)
+/HeaderData/Sorter/Segment0/scaleFactorsOffset: 1 uint32(0)
+/HeaderData/Sorter/Segment0/seg1stCvtEntryOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment0/segCvtEntries: 1 uint32(0)
+/HeaderData/Sorter/Segment0/segmentType: 1 uint32(0)
+/HeaderData/Sorter/Segment0/tofCollapsed: 1 uint32(0)
+/HeaderData/Sorter/Segment1/compDataSegOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment1/compDataSegSize: 1 uint64(0)
+/HeaderData/Sorter/Segment1/dataSegmentOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment1/dimension3Size: 1 uint32(0)
+/HeaderData/Sorter/Segment1/numScaleFactors: 1 uint32(0)
+/HeaderData/Sorter/Segment1/scaleFactorsOffset: 1 uint32(0)
+/HeaderData/Sorter/Segment1/seg1stCvtEntryOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment1/segCvtEntries: 1 uint32(0)
+/HeaderData/Sorter/Segment1/segmentType: 1 uint32(0)
+/HeaderData/Sorter/Segment1/tofCollapsed: 1 uint32(0)
+/HeaderData/Sorter/Segment2/compDataSegOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment2/compDataSegSize: 1 uint64(0)
+/HeaderData/Sorter/Segment2/dataSegmentOffset: 1 uint64(1)
+/HeaderData/Sorter/Segment2/dimension3Size: 1 uint32(224)
+/HeaderData/Sorter/Segment2/numScaleFactors: 1 uint32(0)
+/HeaderData/Sorter/Segment2/scaleFactorsOffset: 1 uint32(0)
+/HeaderData/Sorter/Segment2/seg1stCvtEntryOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment2/segCvtEntries: 1 uint32(0)
+/HeaderData/Sorter/Segment2/segmentType: 1 uint32(4)
+/HeaderData/Sorter/Segment2/tofCollapsed: 1 uint32(0)
+/HeaderData/Sorter/Segment3/compDataSegOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment3/compDataSegSize: 1 uint64(0)
+/HeaderData/Sorter/Segment3/dataSegmentOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment3/dimension3Size: 1 uint32(0)
+/HeaderData/Sorter/Segment3/numScaleFactors: 1 uint32(0)
+/HeaderData/Sorter/Segment3/scaleFactorsOffset: 1 uint32(0)
+/HeaderData/Sorter/Segment3/seg1stCvtEntryOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment3/segCvtEntries: 1 uint32(0)
+/HeaderData/Sorter/Segment3/segmentType: 1 uint32(0)
+/HeaderData/Sorter/Segment3/tofCollapsed: 1 uint32(0)
+/HeaderData/Sorter/Segment4/compDataSegOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment4/compDataSegSize: 1 uint64(0)
+/HeaderData/Sorter/Segment4/dataSegmentOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment4/dimension3Size: 1 uint32(0)
+/HeaderData/Sorter/Segment4/numScaleFactors: 1 uint32(0)
+/HeaderData/Sorter/Segment4/scaleFactorsOffset: 1 uint32(0)
+/HeaderData/Sorter/Segment4/seg1stCvtEntryOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment4/segCvtEntries: 1 uint32(0)
+/HeaderData/Sorter/Segment4/segmentType: 1 uint32(0)
+/HeaderData/Sorter/Segment4/tofCollapsed: 1 uint32(0)
+/HeaderData/Sorter/Segment5/compDataSegOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment5/compDataSegSize: 1 uint64(0)
+/HeaderData/Sorter/Segment5/dataSegmentOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment5/dimension3Size: 1 uint32(0)
+/HeaderData/Sorter/Segment5/numScaleFactors: 1 uint32(0)
+/HeaderData/Sorter/Segment5/scaleFactorsOffset: 1 uint32(0)
+/HeaderData/Sorter/Segment5/seg1stCvtEntryOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment5/segCvtEntries: 1 uint32(0)
+/HeaderData/Sorter/Segment5/segmentType: 1 uint32(0)
+/HeaderData/Sorter/Segment5/tofCollapsed: 1 uint32(0)
+/HeaderData/Sorter/Segment6/compDataSegOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment6/compDataSegSize: 1 uint64(0)
+/HeaderData/Sorter/Segment6/dataSegmentOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment6/dimension3Size: 1 uint32(0)
+/HeaderData/Sorter/Segment6/numScaleFactors: 1 uint32(0)
+/HeaderData/Sorter/Segment6/scaleFactorsOffset: 1 uint32(0)
+/HeaderData/Sorter/Segment6/seg1stCvtEntryOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment6/segCvtEntries: 1 uint32(0)
+/HeaderData/Sorter/Segment6/segmentType: 1 uint32(0)
+/HeaderData/Sorter/Segment6/tofCollapsed: 1 uint32(0)
+/HeaderData/Sorter/Segment7/compDataSegOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment7/compDataSegSize: 1 uint64(0)
+/HeaderData/Sorter/Segment7/dataSegmentOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment7/dimension3Size: 1 uint32(0)
+/HeaderData/Sorter/Segment7/numScaleFactors: 1 uint32(0)
+/HeaderData/Sorter/Segment7/scaleFactorsOffset: 1 uint32(0)
+/HeaderData/Sorter/Segment7/seg1stCvtEntryOffset: 1 uint64(0)
+/HeaderData/Sorter/Segment7/segCvtEntries: 1 uint32(0)
+/HeaderData/Sorter/Segment7/segmentType: 1 uint32(0)
+/HeaderData/Sorter/Segment7/tofCollapsed: 1 uint32(0)
+/HeaderData/Sorter/DHMErrorFifoDepth: 1 uint32(0)
+/HeaderData/Sorter/acquisitionNumber: 1 uint32(3)
+/HeaderData/Sorter/ctc_elements: 1 uint32(0)
+/HeaderData/Sorter/ctc_invalid_elements: 1 uint32(0)
+/HeaderData/Sorter/ctc_radial_positions: 1 uint32(0)
+/HeaderData/Sorter/dataOrientation: 1 uint32(3)
+/HeaderData/Sorter/dimension1Size: 1 uint32(357)
+/HeaderData/Sorter/dimension2Size: 1 uint32(1981)
+/HeaderData/Sorter/histogramCellSize: 1 uint32(2)
+/HeaderData/Sorter/num3dThetas: 1 uint32(45)
+/HeaderData/Sorter/numTOF_bins: 1 uint32(1)
+/HeaderData/Sorter/numberOfAcquisitions: 1 uint32(3)
+/HeaderData/Sorter/sinoAlignCorr: 1 uint32(0)
+/HeaderData/SystemGeometry/avgBlockDeadtime: 1 single(0.0016)
+/HeaderData/SystemGeometry/avgCrystalSingles: 1 single(48.746)
+/HeaderData/SystemGeometry/axialBlockGap: 1 single(2.8)
+/HeaderData/SystemGeometry/axialBlocksPerModule: 1 uint32(5)
+/HeaderData/SystemGeometry/axialBlocksPerUnit: 1 uint32(1)
+/HeaderData/SystemGeometry/axialCassetteGap: 1 single(1.5)
+/HeaderData/SystemGeometry/axialCrystalGap: 1 single(0)
+/HeaderData/SystemGeometry/axialCrystalsPerBlock: 1 uint32(9)
+/HeaderData/SystemGeometry/axialModulesPerSystem: 1 uint32(1)
+/HeaderData/SystemGeometry/axialUnitsPerModule: 1 uint32(5)
+/HeaderData/SystemGeometry/blockRepeatFactor: 1 int32(16)
+/HeaderData/SystemGeometry/collimatorInnerRadius: 1 single(379.2)
+/HeaderData/SystemGeometry/collimatorOuterRadius: 1 single(400)
+/HeaderData/SystemGeometry/collimatorType: 1 uint32(0)
+/HeaderData/SystemGeometry/delaysCorrectionFactor: 1 single(1)
+/HeaderData/SystemGeometry/detectorAxialSize: 1 single(250.4)
+/HeaderData/SystemGeometry/detectorRadialSize: 1 single(317)
+/HeaderData/SystemGeometry/effectiveRingDiameter: 1 single(640.6)
+/HeaderData/SystemGeometry/interBlockPitch: 1 single(0.02296)
+/HeaderData/SystemGeometry/interCrystalPitch: 1 single(0.01259)
+/HeaderData/SystemGeometry/photoMultiplierType: 1 uint32(2)
+/HeaderData/SystemGeometry/radialBlockGap: 1 single(0.3)
+/HeaderData/SystemGeometry/radialBlocksPerModule: 1 uint32(4)
+/HeaderData/SystemGeometry/radialBlocksPerUnit: 1 uint32(4)
+/HeaderData/SystemGeometry/radialCassetteGap: 1 single(1.5)
+/HeaderData/SystemGeometry/radialCrystalGap: 1 single(0)
+/HeaderData/SystemGeometry/radialCrystalsPerBlock: 1 uint32(4)
+/HeaderData/SystemGeometry/radialModulesPerSystem: 1 uint32(28)
+/HeaderData/SystemGeometry/radialUnitsPerModule: 1 uint32(1)
+/HeaderData/SystemGeometry/scanner_first_slice: 1 uint32(0)
+/HeaderData/SystemGeometry/sourceRadius: 1 single(311.3)
+/HeaderData/SystemGeometry/timingResolutionInPico: 1 single(0)
+/HeaderData/SystemGeometry/transaxial_crystal_0_offset: 1 single(-5.23)
+/HeaderData/SystemGeometry/unit_depth_mm: 1 single(25)
+/HeaderData/SystemGeometry/unit_height_mm: 1 single(47.84)
+/HeaderData/SystemGeometry/unit_width_mm: 1 single(64.5)
+/HeaderData/SystemGeometry/vqc_XaxisTilt: 1 single(0.29995)
+/HeaderData/SystemGeometry/vqc_XaxisTranslation: 1 single(0.075009)
+/HeaderData/SystemGeometry/vqc_YaxisSwivel: 1 single(-0.15891)
+/HeaderData/SystemGeometry/vqc_YaxisTranslation: 1 single(-1.0172)
+/HeaderData/SystemGeometry/vqc_ZaxisRoll: 1 single(-0.70271)
+/HeaderData/SystemGeometry/vqc_ZaxisTranslation: 1 single(-1.7992)
+
+
+   Segment 0:
+      EMPTY
+
+   Segment 1:
+      EMPTY
+
+   Segment 2:
+      Slice 01 MinCounts 00000000 TotalCounts 00012756 MaxCounts 00000003   Checksum: 1160131029
+      Slice 02 MinCounts 00000000 TotalCounts 00012753 MaxCounts 00000003   Checksum: 1401106898
+      Slice 03 MinCounts 00000000 TotalCounts 00012824 MaxCounts 00000002   Checksum: 2498048537
+      Slice 04 MinCounts 00000000 TotalCounts 00012807 MaxCounts 00000002   Checksum: 2923377160
+      Slice 05 MinCounts 00000000 TotalCounts 00012702 MaxCounts 00000003   Checksum: 4010946975
+      Slice 06 MinCounts 00000000 TotalCounts 00012610 MaxCounts 00000003   Checksum: 2599170371
+      Slice 07 MinCounts 00000000 TotalCounts 00012320 MaxCounts 00000002   Checksum: 1147482145
+      Slice 08 MinCounts 00000000 TotalCounts 00012655 MaxCounts 00000003   Checksum: 3166581104
+      Slice 09 MinCounts 00000000 TotalCounts 00012403 MaxCounts 00000003   Checksum: 1289236596
+      Slice 10 MinCounts 00000000 TotalCounts 00012667 MaxCounts 00000003   Checksum: 2000367996
+      Slice 11 MinCounts 00000000 TotalCounts 00012619 MaxCounts 00000003   Checksum: 0044642636
+      Slice 12 MinCounts 00000000 TotalCounts 00012438 MaxCounts 00000003   Checksum: 0136654999
+      Slice 13 MinCounts 00000000 TotalCounts 00012498 MaxCounts 00000003   Checksum: 1333276883
+      Slice 14 MinCounts 00000000 TotalCounts 00012626 MaxCounts 00000002   Checksum: 0345977171
+      Slice 15 MinCounts 00000000 TotalCounts 00012762 MaxCounts 00000002   Checksum: 0737227227
+      Slice 16 MinCounts 00000000 TotalCounts 00012760 MaxCounts 00000003   Checksum: 3545575897
+      Slice 17 MinCounts 00000000 TotalCounts 00012870 MaxCounts 00000003   Checksum: 2906534471
+      Slice 18 MinCounts 00000000 TotalCounts 00012631 MaxCounts 00000003   Checksum: 1279144280
+      Slice 19 MinCounts 00000000 TotalCounts 00012774 MaxCounts 00000002   Checksum: 3779211751
+      Slice 20 MinCounts 00000000 TotalCounts 00012643 MaxCounts 00000002   Checksum: 4124979556
+      Slice 21 MinCounts 00000000 TotalCounts 00012823 MaxCounts 00000003   Checksum: 1093349912
+      Slice 22 MinCounts 00000000 TotalCounts 00012773 MaxCounts 00000003   Checksum: 1418932710
+      Slice 23 MinCounts 00000000 TotalCounts 00012718 MaxCounts 00000003   Checksum: 4223152559
+      Slice 24 MinCounts 00000000 TotalCounts 00012764 MaxCounts 00000002   Checksum: 2654024157
+      Slice 25 MinCounts 00000000 TotalCounts 00012839 MaxCounts 00000003   Checksum: 0091763240
+      Slice 26 MinCounts 00000000 TotalCounts 00012891 MaxCounts 00000003   Checksum: 4194775644
+      Slice 27 MinCounts 00000000 TotalCounts 00012855 MaxCounts 00000003   Checksum: 0862532152
+      Slice 28 MinCounts 00000000 TotalCounts 00012959 MaxCounts 00000003   Checksum: 0325399200
+      Slice 29 MinCounts 00000000 TotalCounts 00012889 MaxCounts 00000003   Checksum: 1328951898
+      Slice 30 MinCounts 00000000 TotalCounts 00013047 MaxCounts 00000003   Checksum: 3275043576
+      Slice 31 MinCounts 00000000 TotalCounts 00013175 MaxCounts 00000003   Checksum: 0400241528
+      Slice 32 MinCounts 00000000 TotalCounts 00013361 MaxCounts 00000003   Checksum: 2443719730
+      Slice 33 MinCounts 00000000 TotalCounts 00013043 MaxCounts 00000003   Checksum: 1375810292
+      Slice 34 MinCounts 00000000 TotalCounts 00013196 MaxCounts 00000003   Checksum: 0184300429
+      Slice 35 MinCounts 00000000 TotalCounts 00013043 MaxCounts 00000002   Checksum: 4014879476
+      Slice 36 MinCounts 00000000 TotalCounts 00013000 MaxCounts 00000003   Checksum: 1336881865
+      Slice 37 MinCounts 00000000 TotalCounts 00012991 MaxCounts 00000003   Checksum: 3517526720
+      Slice 38 MinCounts 00000000 TotalCounts 00013104 MaxCounts 00000003   Checksum: 2629251889
+      Slice 39 MinCounts 00000000 TotalCounts 00013366 MaxCounts 00000003   Checksum: 1639068727
+      Slice 40 MinCounts 00000000 TotalCounts 00013191 MaxCounts 00000003   Checksum: 1528050568
+      Slice 41 MinCounts 00000000 TotalCounts 00013185 MaxCounts 00000002   Checksum: 2388931458
+      Slice 42 MinCounts 00000000 TotalCounts 00013379 MaxCounts 00000003   Checksum: 2314613828
+      Slice 43 MinCounts 00000000 TotalCounts 00013216 MaxCounts 00000003   Checksum: 3278779297
+      Slice 44 MinCounts 00000000 TotalCounts 00013417 MaxCounts 00000003   Checksum: 3920442474
+      Slice 45 MinCounts 00000000 TotalCounts 00013361 MaxCounts 00000003   Checksum: 2064856114
+      Slice 46 MinCounts 00000000 TotalCounts 00013311 MaxCounts 00000003   Checksum: 1624060928
+      Slice 47 MinCounts 00000000 TotalCounts 00013346 MaxCounts 00000002   Checksum: 3021288483
+      Slice 48 MinCounts 00000000 TotalCounts 00013436 MaxCounts 00000003   Checksum: 1131099261
+      Slice 49 MinCounts 00000000 TotalCounts 00013580 MaxCounts 00000003   Checksum: 0559953165
+      Slice 50 MinCounts 00000000 TotalCounts 00013512 MaxCounts 00000002   Checksum: 0529937609
+      Slice 51 MinCounts 00000000 TotalCounts 00013471 MaxCounts 00000003   Checksum: 2688169120
+      Slice 52 MinCounts 00000000 TotalCounts 00013570 MaxCounts 00000003   Checksum: 3840292099
+      Slice 53 MinCounts 00000000 TotalCounts 00013378 MaxCounts 00000003   Checksum: 0020001859
+      Slice 54 MinCounts 00000000 TotalCounts 00013580 MaxCounts 00000003   Checksum: 2211001613
+      Slice 55 MinCounts 00000000 TotalCounts 00013798 MaxCounts 00000002   Checksum: 3535943143
+      Slice 56 MinCounts 00000000 TotalCounts 00013787 MaxCounts 00000003   Checksum: 2241738204
+      Slice 57 MinCounts 00000000 TotalCounts 00013770 MaxCounts 00000003   Checksum: 2809017803
+      Slice 58 MinCounts 00000000 TotalCounts 00013571 MaxCounts 00000003   Checksum: 0889468164
+      Slice 59 MinCounts 00000000 TotalCounts 00013919 MaxCounts 00000003   Checksum: 3194828384
+      Slice 60 MinCounts 00000000 TotalCounts 00013735 MaxCounts 00000002   Checksum: 3550033320
+      Slice 61 MinCounts 00000000 TotalCounts 00013745 MaxCounts 00000003   Checksum: 0750007730
+      Slice 62 MinCounts 00000000 TotalCounts 00013739 MaxCounts 00000003   Checksum: 0622212524
+      Slice 63 MinCounts 00000000 TotalCounts 00013775 MaxCounts 00000003   Checksum: 2503554512
+      Slice 64 MinCounts 00000000 TotalCounts 00013964 MaxCounts 00000003   Checksum: 0604321421
+      Slice 65 MinCounts 00000000 TotalCounts 00014034 MaxCounts 00000003   Checksum: 0102708947
+      Slice 66 MinCounts 00000000 TotalCounts 00013995 MaxCounts 00000002   Checksum: 2096248492
+      Slice 67 MinCounts 00000000 TotalCounts 00013859 MaxCounts 00000003   Checksum: 3857331748
+      Slice 68 MinCounts 00000000 TotalCounts 00014001 MaxCounts 00000002   Checksum: 2389980850
+      Slice 69 MinCounts 00000000 TotalCounts 00013880 MaxCounts 00000004   Checksum: 3530831417
+      Slice 70 MinCounts 00000000 TotalCounts 00013966 MaxCounts 00000002   Checksum: 4217583247
+      Slice 71 MinCounts 00000000 TotalCounts 00013870 MaxCounts 00000003   Checksum: 1641690671
+      Slice 72 MinCounts 00000000 TotalCounts 00014031 MaxCounts 00000003   Checksum: 2813408976
+      Slice 73 MinCounts 00000000 TotalCounts 00014023 MaxCounts 00000003   Checksum: 3414636232
+      Slice 74 MinCounts 00000000 TotalCounts 00013709 MaxCounts 00000003   Checksum: 2933273998
+      Slice 75 MinCounts 00000000 TotalCounts 00013809 MaxCounts 00000003   Checksum: 0309343730
+      Slice 76 MinCounts 00000000 TotalCounts 00013730 MaxCounts 00000003   Checksum: 3444716963
+      Slice 77 MinCounts 00000000 TotalCounts 00013775 MaxCounts 00000003   Checksum: 0854930896
+      Slice 78 MinCounts 00000000 TotalCounts 00013873 MaxCounts 00000003   Checksum: 1948005938
+      Slice 79 MinCounts 00000000 TotalCounts 00013958 MaxCounts 00000003   Checksum: 1180317319
+      Slice 80 MinCounts 00000000 TotalCounts 00013876 MaxCounts 00000003   Checksum: 1952200245
+      Slice 81 MinCounts 00000000 TotalCounts 00013984 MaxCounts 00000003   Checksum: 0018626209
+      Slice 82 MinCounts 00000000 TotalCounts 00013801 MaxCounts 00000002   Checksum: 3007985130
+      Slice 83 MinCounts 00000000 TotalCounts 00014041 MaxCounts 00000003   Checksum: 3115071194
+      Slice 84 MinCounts 00000000 TotalCounts 00013743 MaxCounts 00000003   Checksum: 2587899312
+      Slice 85 MinCounts 00000000 TotalCounts 00013958 MaxCounts 00000003   Checksum: 2540582535
+      Slice 86 MinCounts 00000000 TotalCounts 00013945 MaxCounts 00000003   Checksum: 3082434170
+      Slice 87 MinCounts 00000000 TotalCounts 00013815 MaxCounts 00000002   Checksum: 1769682424
+      Slice 88 MinCounts 00000000 TotalCounts 00013876 MaxCounts 00000003   Checksum: 1465595445
+      Slice 89 MinCounts 00000000 TotalCounts 00013775 MaxCounts 00000002   Checksum: 3747886544
+      Slice 90 MinCounts 00000000 TotalCounts 00013963 MaxCounts 00000003   Checksum: 0909719180
+      Slice 91 MinCounts 00000000 TotalCounts 00013755 MaxCounts 00000003   Checksum: 3874633148
+      Slice 92 MinCounts 00000000 TotalCounts 00014133 MaxCounts 00000002   Checksum: 0159790902
+      Slice 93 MinCounts 00000000 TotalCounts 00014061 MaxCounts 00000003   Checksum: 0754005742
+      Slice 94 MinCounts 00000000 TotalCounts 00013679 MaxCounts 00000003   Checksum: 1832203632
+      Slice 95 MinCounts 00000000 TotalCounts 00013975 MaxCounts 00000002   Checksum: 2784245400
+      Slice 96 MinCounts 00000000 TotalCounts 00014038 MaxCounts 00000003   Checksum: 1856255703
+      Slice 97 MinCounts 00000000 TotalCounts 00014027 MaxCounts 00000003   Checksum: 1420441292
+      Slice 98 MinCounts 00000000 TotalCounts 00013838 MaxCounts 00000003   Checksum: 0316945935
+      Slice 99 MinCounts 00000000 TotalCounts 00014000 MaxCounts 00000003   Checksum: 0410465969
+      Slice 100 MinCounts 00000000 TotalCounts 00013896 MaxCounts 00000003   Checksum: 4160960073
+      Slice 101 MinCounts 00000000 TotalCounts 00013909 MaxCounts 00000003   Checksum: 1414739542
+      Slice 102 MinCounts 00000000 TotalCounts 00013998 MaxCounts 00000003   Checksum: 1747400367
+      Slice 103 MinCounts 00000000 TotalCounts 00014039 MaxCounts 00000003   Checksum: 1974744792
+      Slice 104 MinCounts 00000000 TotalCounts 00014111 MaxCounts 00000003   Checksum: 0020068128
+      Slice 105 MinCounts 00000000 TotalCounts 00014091 MaxCounts 00000002   Checksum: 2299082508
+      Slice 106 MinCounts 00000000 TotalCounts 00014039 MaxCounts 00000003   Checksum: 2781427416
+      Slice 107 MinCounts 00000000 TotalCounts 00014005 MaxCounts 00000003   Checksum: 0081934006
+      Slice 108 MinCounts 00000000 TotalCounts 00014157 MaxCounts 00000003   Checksum: 1120089934
+      Slice 109 MinCounts 00000000 TotalCounts 00014026 MaxCounts 00000003   Checksum: 4129044171
+      Slice 110 MinCounts 00000000 TotalCounts 00014020 MaxCounts 00000003   Checksum: 0795031237
+      Slice 111 MinCounts 00000000 TotalCounts 00013889 MaxCounts 00000002   Checksum: 2330211906
+      Slice 112 MinCounts 00000000 TotalCounts 00014105 MaxCounts 00000002   Checksum: 1611937562
+      Slice 113 MinCounts 00000000 TotalCounts 00014090 MaxCounts 00000002   Checksum: 0140719883
+      Slice 114 MinCounts 00000000 TotalCounts 00014094 MaxCounts 00000003   Checksum: 1654863631
+      Slice 115 MinCounts 00000000 TotalCounts 00014284 MaxCounts 00000003   Checksum: 3828496333
+      Slice 116 MinCounts 00000000 TotalCounts 00013948 MaxCounts 00000003   Checksum: 0592918141
+      Slice 117 MinCounts 00000000 TotalCounts 00014062 MaxCounts 00000003   Checksum: 2628138735
+      Slice 118 MinCounts 00000000 TotalCounts 00014196 MaxCounts 00000003   Checksum: 1518417781
+      Slice 119 MinCounts 00000000 TotalCounts 00014202 MaxCounts 00000003   Checksum: 2264020859
+      Slice 120 MinCounts 00000000 TotalCounts 00014142 MaxCounts 00000003   Checksum: 2181642047
+      Slice 121 MinCounts 00000000 TotalCounts 00014228 MaxCounts 00000003   Checksum: 0261830549
+      Slice 122 MinCounts 00000000 TotalCounts 00014242 MaxCounts 00000002   Checksum: 0561723299
+      Slice 123 MinCounts 00000000 TotalCounts 00014166 MaxCounts 00000003   Checksum: 0008075095
+      Slice 124 MinCounts 00000000 TotalCounts 00014129 MaxCounts 00000002   Checksum: 0644691762
+      Slice 125 MinCounts 00000000 TotalCounts 00014139 MaxCounts 00000003   Checksum: 0111753020
+      Slice 126 MinCounts 00000000 TotalCounts 00014332 MaxCounts 00000003   Checksum: 3294771197
+      Slice 127 MinCounts 00000000 TotalCounts 00014147 MaxCounts 00000003   Checksum: 4263917380
+      Slice 128 MinCounts 00000000 TotalCounts 00014205 MaxCounts 00000003   Checksum: 2693674878
+      Slice 129 MinCounts 00000000 TotalCounts 00014144 MaxCounts 00000002   Checksum: 1916614465
+      Slice 130 MinCounts 00000000 TotalCounts 00014125 MaxCounts 00000002   Checksum: 0167130926
+      Slice 131 MinCounts 00000000 TotalCounts 00014409 MaxCounts 00000003   Checksum: 1143289930
+      Slice 132 MinCounts 00000000 TotalCounts 00014253 MaxCounts 00000003   Checksum: 1354708910
+      Slice 133 MinCounts 00000000 TotalCounts 00014148 MaxCounts 00000003   Checksum: 2734372677
+      Slice 134 MinCounts 00000000 TotalCounts 00014373 MaxCounts 00000003   Checksum: 2785884198
+      Slice 135 MinCounts 00000000 TotalCounts 00014240 MaxCounts 00000003   Checksum: 1019099041
+      Slice 136 MinCounts 00000000 TotalCounts 00014370 MaxCounts 00000003   Checksum: 0213071907
+      Slice 137 MinCounts 00000000 TotalCounts 00014226 MaxCounts 00000002   Checksum: 1663383443
+      Slice 138 MinCounts 00000000 TotalCounts 00014295 MaxCounts 00000003   Checksum: 2622896088
+      Slice 139 MinCounts 00000000 TotalCounts 00014542 MaxCounts 00000003   Checksum: 2566797519
+      Slice 140 MinCounts 00000000 TotalCounts 00014403 MaxCounts 00000003   Checksum: 2320840772
+      Slice 141 MinCounts 00000000 TotalCounts 00014366 MaxCounts 00000003   Checksum: 1254242335
+      Slice 142 MinCounts 00000000 TotalCounts 00014151 MaxCounts 00000002   Checksum: 3428398920
+      Slice 143 MinCounts 00000000 TotalCounts 00014462 MaxCounts 00000003   Checksum: 4261492863
+      Slice 144 MinCounts 00000000 TotalCounts 00014328 MaxCounts 00000003   Checksum: 3174316025
+      Slice 145 MinCounts 00000000 TotalCounts 00014170 MaxCounts 00000003   Checksum: 1884370779
+      Slice 146 MinCounts 00000000 TotalCounts 00014401 MaxCounts 00000003   Checksum: 2126723138
+      Slice 147 MinCounts 00000000 TotalCounts 00014116 MaxCounts 00000002   Checksum: 3397990181
+      Slice 148 MinCounts 00000000 TotalCounts 00014229 MaxCounts 00000003   Checksum: 1372338070
+      Slice 149 MinCounts 00000000 TotalCounts 00014245 MaxCounts 00000003   Checksum: 3165534118
+      Slice 150 MinCounts 00000000 TotalCounts 00014477 MaxCounts 00000003   Checksum: 3363649678
+      Slice 151 MinCounts 00000000 TotalCounts 00014280 MaxCounts 00000004   Checksum: 1698248649
+      Slice 152 MinCounts 00000000 TotalCounts 00014416 MaxCounts 00000003   Checksum: 2186229841
+      Slice 153 MinCounts 00000000 TotalCounts 00014319 MaxCounts 00000003   Checksum: 1677015024
+      Slice 154 MinCounts 00000000 TotalCounts 00014254 MaxCounts 00000003   Checksum: 1263876015
+      Slice 155 MinCounts 00000000 TotalCounts 00014262 MaxCounts 00000002   Checksum: 1308702647
+      Slice 156 MinCounts 00000000 TotalCounts 00014271 MaxCounts 00000003   Checksum: 1571698624
+      Slice 157 MinCounts 00000000 TotalCounts 00014307 MaxCounts 00000003   Checksum: 2612606948
+      Slice 158 MinCounts 00000000 TotalCounts 00014361 MaxCounts 00000003   Checksum: 3165075482
+      Slice 159 MinCounts 00000000 TotalCounts 00014348 MaxCounts 00000003   Checksum: 1176385549
+      Slice 160 MinCounts 00000000 TotalCounts 00014304 MaxCounts 00000003   Checksum: 2249799649
+      Slice 161 MinCounts 00000000 TotalCounts 00014431 MaxCounts 00000002   Checksum: 2554411104
+      Slice 162 MinCounts 00000000 TotalCounts 00014198 MaxCounts 00000003   Checksum: 2593273719
+      Slice 163 MinCounts 00000000 TotalCounts 00014212 MaxCounts 00000003   Checksum: 1875785605
+      Slice 164 MinCounts 00000000 TotalCounts 00014428 MaxCounts 00000003   Checksum: 1699952733
+      Slice 165 MinCounts 00000000 TotalCounts 00014167 MaxCounts 00000003   Checksum: 0089274200
+      Slice 166 MinCounts 00000000 TotalCounts 00014077 MaxCounts 00000003   Checksum: 0716125950
+      Slice 167 MinCounts 00000000 TotalCounts 00014373 MaxCounts 00000003   Checksum: 4144445478
+      Slice 168 MinCounts 00000000 TotalCounts 00014303 MaxCounts 00000003   Checksum: 2527016928
+      Slice 169 MinCounts 00000000 TotalCounts 00014151 MaxCounts 00000003   Checksum: 3562223432
+      Slice 170 MinCounts 00000000 TotalCounts 00014405 MaxCounts 00000003   Checksum: 3206559814
+      Slice 171 MinCounts 00000000 TotalCounts 00014233 MaxCounts 00000003   Checksum: 0102315930
+      Slice 172 MinCounts 00000000 TotalCounts 00014173 MaxCounts 00000003   Checksum: 3762304862
+      Slice 173 MinCounts 00000000 TotalCounts 00014088 MaxCounts 00000003   Checksum: 0127285001
+      Slice 174 MinCounts 00000000 TotalCounts 00014235 MaxCounts 00000002   Checksum: 0157431708
+      Slice 175 MinCounts 00000000 TotalCounts 00014290 MaxCounts 00000003   Checksum: 2481272787
+      Slice 176 MinCounts 00000000 TotalCounts 00013906 MaxCounts 00000003   Checksum: 2841589331
+      Slice 177 MinCounts 00000000 TotalCounts 00014182 MaxCounts 00000003   Checksum: 2781230951
+      Slice 178 MinCounts 00000000 TotalCounts 00013993 MaxCounts 00000003   Checksum: 0335885994
+      Slice 179 MinCounts 00000000 TotalCounts 00014013 MaxCounts 00000003   Checksum: 0750204606
+      Slice 180 MinCounts 00000000 TotalCounts 00014080 MaxCounts 00000003   Checksum: 1383151361
+      Slice 181 MinCounts 00000000 TotalCounts 00013838 MaxCounts 00000003   Checksum: 1383151119
+      Slice 182 MinCounts 00000000 TotalCounts 00013954 MaxCounts 00000003   Checksum: 1345861251
+      Slice 183 MinCounts 00000000 TotalCounts 00013886 MaxCounts 00000003   Checksum: 2365797951
+      Slice 184 MinCounts 00000000 TotalCounts 00014112 MaxCounts 00000003   Checksum: 2048014113
+      Slice 185 MinCounts 00000000 TotalCounts 00013832 MaxCounts 00000003   Checksum: 1964717577
+      Slice 186 MinCounts 00000000 TotalCounts 00014053 MaxCounts 00000002   Checksum: 0020920038
+      Slice 187 MinCounts 00000000 TotalCounts 00013821 MaxCounts 00000003   Checksum: 1893676542
+      Slice 188 MinCounts 00000000 TotalCounts 00013799 MaxCounts 00000003   Checksum: 1128084968
+      Slice 189 MinCounts 00000000 TotalCounts 00013679 MaxCounts 00000003   Checksum: 2605528432
+      Slice 190 MinCounts 00000000 TotalCounts 00013754 MaxCounts 00000003   Checksum: 0887633339
+      Slice 191 MinCounts 00000000 TotalCounts 00013736 MaxCounts 00000003   Checksum: 0970077609
+      Slice 192 MinCounts 00000000 TotalCounts 00013579 MaxCounts 00000003   Checksum: 3882366220
+      Slice 193 MinCounts 00000000 TotalCounts 00013686 MaxCounts 00000002   Checksum: 0450180471
+      Slice 194 MinCounts 00000000 TotalCounts 00013679 MaxCounts 00000002   Checksum: 2950968688
+      Slice 195 MinCounts 00000000 TotalCounts 00013813 MaxCounts 00000002   Checksum: 1595160054
+      Slice 196 MinCounts 00000000 TotalCounts 00013637 MaxCounts 00000003   Checksum: 0461387078
+      Slice 197 MinCounts 00000000 TotalCounts 00013325 MaxCounts 00000002   Checksum: 4276040718
+      Slice 198 MinCounts 00000000 TotalCounts 00013251 MaxCounts 00000003   Checksum: 1567830980
+      Slice 199 MinCounts 00000000 TotalCounts 00013357 MaxCounts 00000003   Checksum: 3102225454
+      Slice 200 MinCounts 00000000 TotalCounts 00013445 MaxCounts 00000003   Checksum: 0789722246
+      Slice 201 MinCounts 00000000 TotalCounts 00013318 MaxCounts 00000003   Checksum: 0648492039
+      Slice 202 MinCounts 00000000 TotalCounts 00013205 MaxCounts 00000003   Checksum: 0819606422
+      Slice 203 MinCounts 00000000 TotalCounts 00013425 MaxCounts 00000003   Checksum: 0261960818
+      Slice 204 MinCounts 00000000 TotalCounts 00013237 MaxCounts 00000003   Checksum: 2066625462
+      Slice 205 MinCounts 00000000 TotalCounts 00013359 MaxCounts 00000003   Checksum: 1054094384
+      Slice 206 MinCounts 00000000 TotalCounts 00013021 MaxCounts 00000003   Checksum: 0391066334
+      Slice 207 MinCounts 00000000 TotalCounts 00013112 MaxCounts 00000002   Checksum: 0821244729
+      Slice 208 MinCounts 00000000 TotalCounts 00013124 MaxCounts 00000002   Checksum: 0314979141
+      Slice 209 MinCounts 00000000 TotalCounts 00013215 MaxCounts 00000003   Checksum: 3503502240
+      Slice 210 MinCounts 00000000 TotalCounts 00013276 MaxCounts 00000002   Checksum: 2443785181
+      Slice 211 MinCounts 00000000 TotalCounts 00013141 MaxCounts 00000003   Checksum: 0041759574
+      Slice 212 MinCounts 00000000 TotalCounts 00012872 MaxCounts 00000003   Checksum: 2963092041
+      Slice 213 MinCounts 00000000 TotalCounts 00013012 MaxCounts 00000002   Checksum: 0509293269
+      Slice 214 MinCounts 00000000 TotalCounts 00013068 MaxCounts 00000003   Checksum: 0123220749
+      Slice 215 MinCounts 00000000 TotalCounts 00012827 MaxCounts 00000003   Checksum: 0085471772
+      Slice 216 MinCounts 00000000 TotalCounts 00013049 MaxCounts 00000003   Checksum: 1159672570
+      Slice 217 MinCounts 00000000 TotalCounts 00012823 MaxCounts 00000003   Checksum: 1368273432
+      Slice 218 MinCounts 00000000 TotalCounts 00013000 MaxCounts 00000003   Checksum: 2611098313
+      Slice 219 MinCounts 00000000 TotalCounts 00012982 MaxCounts 00000002   Checksum: 1007891127
+      Slice 220 MinCounts 00000000 TotalCounts 00012770 MaxCounts 00000002   Checksum: 3338482147
+      Slice 221 MinCounts 00000000 TotalCounts 00012792 MaxCounts 00000003   Checksum: 3217175033
+      Slice 222 MinCounts 00000000 TotalCounts 00012885 MaxCounts 00000003   Checksum: 3253023318
+      Slice 223 MinCounts 00000000 TotalCounts 00012872 MaxCounts 00000003   Checksum: 0865415753
+      Slice 224 MinCounts 00000000 TotalCounts 00012767 MaxCounts 00000003   Checksum: 2700423648
+
+   Segment 2 Total Counts: 3063299
+
+   Segment 3:
+      EMPTY
+
+   Segment 4:
+      EMPTY
+
+   Segment 5:
+      EMPTY
+
+   Segment 6:
+      EMPTY
+
+   Segment 7:
+      EMPTY
+
+
+Deadtime Data:
+   Block Busy Dead Time Data Checksum: 3466924316
+   Block Mux Dead Time Data Checksum: 4126159125
+
+
+Singles Data:
+   Singles Data Checksum: 3769260494
+
+*** End sinoFileName: SINO0002 ***
+
+*** Begin dicomFileName: i100000.RPDC.3 ***
+
+                             Filename: '/localdata/unlist-autotest/exam-54803/list/unlist-2017-03-03_110415/raw/i100000.RPDC.3'
+                          FileModDate: '03-Mar-2017 11:04:34'
+                             FileSize: 5666
+                               Format: 'DICOM'
+                        FormatVersion: 3
+                                Width: 0
+                               Height: 0
+                             BitDepth: 16
+                            ColorType: 'grayscale'
+               MetaElementGroupLength: 224
+           FileMetaInformationVersion: [2x1 uint8]
+              MediaStorageSOPClassUID: '1.2.840.113619.4.30'
+           MediaStorageSOPInstanceUID: '1.3.6.1.4.1.9590.100.1.2.292326251519472401129027589852594500649'
+                    TransferSyntaxUID: '1.2.840.10008.1.2.1'
+               ImplementationClassUID: '1.3.6.1.4.1.9590.100.1.3.100.7.1'
+            ImplementationVersionName: 'MATLAB IPT 7.1'
+         SourceApplicationEntityTitle: 'GE DISCOVERY'
+                 SpecificCharacterSet: 'ISO_IR 100'
+                 InstanceCreationDate: '20140528'
+                 InstanceCreationTime: '155051.00'
+                   InstanceCreatorUID: '1.2.840.113619.1.99.4'
+                          SOPClassUID: '1.2.840.113619.4.30'
+                       SOPInstanceUID: '1.3.6.1.4.1.9590.100.1.2.292326251519472401129027589852594500649'
+                            StudyDate: '20140528'
+                           SeriesDate: '20140528'
+                      AcquisitionDate: '20140528'
+                            ImageDate: '20140528'
+                            StudyTime: '154341.00'
+                           SeriesTime: '155051.00'
+                      AcquisitionTime: '155051.00'
+                            ImageTime: '155051.00'
+                      AccessionNumber: ''
+                             Modality: 'GEMS PET RAW'
+                         Manufacturer: 'GE MEDICAL SYSTEMS'
+                      InstitutionName: 'MRHQBAY17'
+              ReferringPhysiciansName: [1x1 struct]
+                TimezoneOffsetFromUTC: '-0500'
+                          StationName: '12344321'
+                     StudyDescription: 'Acq4D SSVP 2.15 Q.Static'
+                    SeriesDescription: 'Q.Static Record 2.15'
+         NameOfPhysiciansReadingStudy: [1x1 struct]
+                        OperatorsName: [1x1 struct]
+               ManufacturersModelName: 'SIGNA PET/MR'
+     ReferencedStudyComponentSequence: [1x1 struct]
+            ReferencedPatientSequence: [1x1 struct]
+    GEMSPrivateGroupCreator_0009_10xx: 'GEMS_PETD_01'
+                           Patient_Id: 'geservice'
+                     Patient_Datetime: '20140528154341.00'
+                         Patient_Type: 0
+                         scan_scan_id: '1.2.840.113619.2.363.4.1401309821.204734.0'
+                        scan_datetime: '20140528154356.00'
+                           scan_ready: '19691231180000.00'
+                  scan_for_identifier: '1.2.840.113619.2.363.10499743.2782540.15928.1401307351.882'
+                        landmark_name: ''
+                      landmark_abbrev: ''
+                     patient_position: 0
+                     scan_perspective: 0
+                            scan_type: 0
+                            scan_mode: 0
+                      start_condition: 1
+                      start_cond_data: 0
+                        sel_stop_cond: 1
+                   sel_stop_cond_data: 0
+                     collect_deadtime: 1
+                      collect_singles: 1
+                    collect_countrate: 0
+                     countrate_period: 0
+                       delayed_events: 0
+                         delayed_bias: 0
+                            word_size: 0
+                     axial_acceptance: 2
+                        axial_angle_3: 44
+                    theta_compression: 1
+                    axial_compression: 1
+                     gantry_tilt_angl: 0
+                          collimation: 0
+                             scan_fov: 60
+                            axial_fov: 250
+                     event_separation: 0
+                           mask_width: 0
+                     trigger_acquired: 50
+                     trigger_rejected: 0
+                          tracer_name: 'FDG -- fluorodeoxyglucose'
+                    batch_description: ''
+                      tracer_activity: 0
+                        meas_datetime: ''
+                       pre_inj_volume: 0
+                       admin_datetime: ''
+                    post_inj_activity: 0
+                    post_inj_datetime: ''
+                    radionuclide_name: '18F'
+                            half_life: 6.5862e+03
+                    positron_fraction: 0.9670
+                     emission_present: 0
+                      lower_axial_acc: 44
+                      upper_axial_acc: 44
+                    lower_coinc_limit: 175
+                    upper_coinc_limit: 175
+                   coinc_delay_offset: 32
+                    coinc_output_mode: 802
+                   upper_energy_limit: 650
+                    lower_energy_limi: 425
+                        normal_cal_id: '1.2.840.113619.2.363.755228240.1400622610.436348'
+                     normal_2d_cal_id: '1.2.840.113619.2.131.1459872910.1219799569.748327'
+                            wc_cal_id: '1.2.840.113619.2.363.755228240.1400625385.203729'
+                              derived: 0
+                             frame_id: '1.2.840.113619.2.363.755228240.1401310251.131211'
+                              scan_id: '1.2.840.113619.2.363.4.1401309821.204734.0'
+                              exam_id: '1.2.840.113619.6.363.101523152397013850890189415873273513689'
+                           patient_id: 'geservice'
+                       where_is_frame: '/petRDFS/AAAAAAAA/BBBBBBBB/CCCCCCCC/SINO0002'
+                           frame_size: 42
+                          file_exists: 0
+                         table_height: 141.3383
+                     table_z_position: -361.4000
+                    landmark_datetime: '20140528154349.00'
+                          slice_count: 1981
+                       start_location: -483.7200
+                            acq_delay: 0
+                            acq_start: '20140528154905.00'
+                         acq_duration: 60
+                     actual_stop_cond: 0
+                        total_prompts: 3063299
+                         total_delays: 4961959
+                          frame_valid: 1
+                        validity_info: 255
+                          attenuation: 0
+                            bp_filter: 0
+                     bp_filter_cutoff: 0
+                      bp_filter_order: 0
+                        trans_scan_id: ''
+                          bp_center_x: 0
+                          bp_center_y: 0
+                    ir_num_iterations: 2
+                       ir_num_subsets: 28
+                       ir_loop_filter: 0
+                          post_filter: 1
+                     vqc_x_axis_trans: 0.0750
+                      vqc_x_axis_tilt: 0.2999
+                     vqc_y_axis_trans: -1.0172
+                    vqc_y_axis_swivel: -0.1589
+                     vqc_z_axis_trans: -1.7992
+                      vqc_z_axis_roll: -0.7027
+                        image_one_loc: 122.3200
+                      image_index_loc: -483.7200
+                         frame_number: 3
+                     list_file_exists: 1
+                  where_is_list_frame: '/localdata/unlist-autotest/exam-54803/list/i484299.RPDC.3'
+                     ir_z_filter_flag: 2
+                    ir_z_filter_ratio: 4
+                     Number_of_Slices: 219
+                        unlisted_scan: 1
+                          rest_stress: 0
+                       recon_protocol: ''
+                  acq_bin_dur_percent: 0
+                            filter_3d: 7
+                     filter_cutoff_3d: 5
+                      filter_order_3d: 0
+                          promptGamma: 0
+                   tracerInjectionUid: '1.2.840.113619.2.363.3.755228240.689.1401307255.662'
+                scanBloodGlucoseLevel: 0
+                  scanPatientDiabetic: 0
+              scanDateOfLastTreatment: ''
+                      QStaticScanMode: 1
+                         QStaticFrame: 0
+                         PatientsName: [1x1 struct]
+                            PatientID: 'geservice'
+                    PatientsBirthDate: ''
+                          PatientsSex: ''
+                          PatientsAge: ''
+                         PatientsSize: 1.2200
+                       PatientsWeight: 55.7900
+             AdditionalPatientHistory: ''
+    GEMSPrivateGroupCreator_0015_10xx: 'GEMS_PETD_01'
+                     PhysioGatingType: 1
+                    TotalNumberOfBins: 0
+                 PETReconParamsExists: 1
+                    FirstPacketNumber: 0
+                    IRLoopFilterRatio: 1
+                     IRLoopFilterCorr: 0
+                      BP3dFilterFlagU: 0
+                    BP3dFilterCutoffU: 0
+                     BP3dFilterOrderU: 0
+                      BP3dFilterFlagV: 0
+                    BP3dFilterCutoffV: 0
+                     BP3dFilterOrderV: 0
+                            DecayFlag: 1
+                      ImgFilter3dFlag: 0
+                           WCCCalFlag: 2
+                     EmissScatterFlag: 0
+                       ReconAlgorithm: 3
+                    NormalizationFlag: 1
+                    EmissDeadtimeFlag: 1
+                      EmissRandomFlag: 3
+                        BlankScanFlag: 0
+                      TransRandomFlag: 0
+                    TransDeadtimeFlag: 0
+                  NaturalLogrithmFlag: 0
+                    EventHistogramFmt: 7
+                      NumDetectorRows: 9
+                      NumDetectorCols: 4
+                      ImageMatrixSize: 192
+                          sharpIrFlag: 0
+                         scatterLimit: 0
+                         QStaticRecon: 'Q.Static'
+                     SoftwareVersions: '61.00'
+                         ProtocolName: ''
+               ReconstructionDiameter: 600
+                      PatientPosition: 'HFS'
+                     StudyInstanceUID: '1.2.840.113619.6.363.101523152397013850890189415873273513689'
+                    SeriesInstanceUID: '1.2.840.113619.2.363.4.1401309821.204734.0'
+                              StudyID: '54803'
+                         SeriesNumber: 30001
+                       InstanceNumber: 3
+                  FrameOfReferenceUID: '1.2.840.113619.2.363.10499743.2782540.15928.1401307351.882'
+           PositionReferenceIndicator: ''
+    GEMSPrivateGroupCreator_0021_10xx: 'GEMS_PETD_01'
+                        TypeOfRawData: 3
+                        SizeOfRawData: 0
+    GEMSPrivateGroupCreator_0023_10xx: 'GEMS_PETD_01'
+             MRpetCardiacGatingOffset: 65
+                MRpetRespGatingOffset: 10
+                            MRacFatId: 136617624
+                          MRacWaterId: 32
+                        MRacInPhaseId: 136617624
+                       MRacOutPhaseId: 32
+                     MRanatomyInfoSeq: [1x1 struct]
+                    MRcoilPosSequence: [1x1 struct]
+                  MRanatomyPhantom_ac: 1
+                MRanatomyPhantom_name: 'Other'
+                MRanatomyPhantom_pifa: ''
+                           MRcoilInfo: 'A:\P1:\P2:\P3:\GEHCkB1Ut93l8U8bgrGjyGXhsOvS#0L3\5f000001cdb5390b\P4:\Tabl:\30T0CMA0E0FLAT0TABLE0P40xxxxxxxx'
+               MRtruncationCompletion: 'NO'
+                      SamplesPerPixel: 1
+            PhotometricInterpretation: 'MONOCHROME2'
+                                 Rows: 0
+                              Columns: 0
+                        BitsAllocated: 16
+                           BitsStored: 16
+                              HighBit: 15
+                  PixelRepresentation: 0
+              SmallestImagePixelValue: []
+               LargestImagePixelValue: []
+      PerformedProcedureStepStartDate: '20140528'
+      PerformedProcedureStepStartTime: '154341'
+             PerformedProcedureStepID: 'PPS ID  54803'
+    PerformedProcedureStepDescription: 'Acq4D SSVP 2.15 Q.Static'
+       PatientOrientationCodeSequence: [1x1 struct]
+
+
+*** End dicomFileName: i100000.RPDC.3 ***

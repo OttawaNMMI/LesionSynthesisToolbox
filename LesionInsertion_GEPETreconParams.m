@@ -85,8 +85,8 @@ reconParams.imOutFilename= fullfile(reconParams.dir, 'ir3d');
 reconParams.FOV = 700;
 reconParams.xOffset = 0;		%Units: mm
 reconParams.yOffset = 0;		%Units: mm
-reconParams.nx = 256;
-reconParams.ny = 256;
+reconParams.nx = 192;
+reconParams.ny = 192;
 reconParams.nz = 47;
 
 %OSEM RECONSTRUCTION CORRECTION PARAMETERS
@@ -106,7 +106,7 @@ reconParams.numIterations = 2;          % Number of iterations
 reconParams.startSubset = 1;            % Start subset
 reconParams.startIteration = 1;         % Start iteration
 reconParams.keepSubsetUpdates = 0;      % Store intermediate results after each subset
-reconParams.keepIterationUpdates = 1;   % Store intermediate results after each iteration
+reconParams.keepIterationUpdates = 0;   % Store intermediate results after each iteration
 reconParams.postFilterFWHM = 0; %3 ;%[1/6,4/6,1/6];         % FWHM for gaussian post filter, Units: mm
 reconParams.zfilter = 0; %6 ; %6;                % Center weighted for 3-point center weighted averager.
 

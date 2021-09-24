@@ -1,0 +1,65 @@
+Unlist related release notes.
+
+2016-05-19:
+- Resolved TOF sinogram getTimeBin() issue. Sign of deltaTime must be flipped
+  when view is < pi/2 or > 3/2pi.
+- Added UnlistMain.m optional maxTableLocDiff rx parameter that is used to
+  find the DICOM header file with the correct table_z_location.
+
+2016-04-07:
+- Resolved special case file naming issue with gated unlist of a single gated bin of a multi-bed scan. 
+  In this Q-Static like case, the SINO file name corresponds to the bed loc index.
+- Added UnlistMain.m optional forceVqcAdjust parameter to allow unlisting when the DICOM header
+  file table_z_location does not account for vqc_z_axis_trans.
+
+2016-01-12:
+- Replaced use of datetime() function with datenum().
+
+2015-12-03:
+- Updated UnlistMain() to support a relative list file path.
+
+2015-11-10:
+- Added support for unlisting scans with MRAC data.
+- Created pet-dicom-dict-ext.txt file (an extended version of pet-dicom-dict.txt) that contains all
+  private MRPET related attributes.
+
+2015-10-28:
+- Added support for multi-bed scans unlisted to a single directory with support for multi-bed image recon.
+- Improved matching of SINO and DICOM files with product.
+- Unlist directories of the form 'unlist-YYYY-MM-DD_HHMMSS/' contain a 'unlistRx-bed<n>' text file
+  for each bed position.
+- Added support for gated single phase percent binning mode (SPPB).
+- Added check for more than one DICOM header file with matching tableZpos.
+- The autotest/bin/autotestEnv.sh script is only auto-created if it does not already exist.
+- Various esthetic improvements to progress messages, comments, README (Getting started section), etc.
+
+2015-10-19:
+- Added dicom2txt.m and sino2txt.m utility functions.
+- Resolved issue related to VQC table offset for feet first scans so maxTableLocDiff (tolerance) is back to 2.0mm.
+- The startMsecVec and endMsecVec parameters may end a frame using '-1' or a number that exceeds time markers in 
+  the list file.
+- Improved startMsecVec and endMsecVec logic and diagnostic messages.
+
+2015-10-09:
+- Added cell overflow check for both 1 and 2 bytes per cell histograms.
+- Updated maxTableLocDiff (tolerance) from 2.0mm to 5.0mm.
+
+2015-10-07:
+- Resolved bug in PtbUnlist.cpp related to intermittent "Duplicates found!" error.
+- UnlistMain.m API change:
+  a) support optional rx.gatedWaitForFirstTrig parameter. Previously, this was called rx.gatedTrigType.
+  b) rx.gatedFrameMsecs is now optional.
+- Improved logic and diagnostic display related to finding the correct DICOM header file.
+- Added support for static and dynamic unlist of live gated list file. Previously, this did not work.
+- Added unlist automated test capability and framework.
+
+2015-09-23:
+- Added support for gated 'time', 'percent', and 'bypass' binning.
+- Added support for gated trigger rejection (min/max only, not same as product).
+- Added support for multi-bed (each bed resides in a separate directory, multi-bed image recon is not supported).
+- Added support for setting (1 or 2) bytesPerCell at run-time.
+- Optionally, generate a text result file for use by autotest.
+
+2015-09-03:
+- Initial release.
+

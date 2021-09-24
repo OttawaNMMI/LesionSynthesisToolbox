@@ -1,0 +1,1 @@
+% COLUMBIA scanner default parameters

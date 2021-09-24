@@ -1,0 +1,16 @@
+
+A compressed archive file exists external to the source control system that contains the binary files required to run unlist autotest.
+
+The archive file is named: petrecon-unlist-autotest-<YYYY-MM-DD.tgz>
+
+Typical steps to run autotest:
+1) find and unarchive the .tgz file noted above (e.g. tar xzvf petrecon-unlist-autotest*.tgz)
+
+2) In matlab, run "autoUnlistAll <dirPath>" where dirPath is the directory where the .tgz was unarchived.
+
+3) If all test cases do not pass, review the ".diff" files contained in "<dirPath>/result-YYYY-MM-DD_HHMMSS/".
+
+4) If needed update "filter.sed" to account for differences and rerun "bin/diffGold.sh" to review differences again.
+   A zero-length ".diff" file indicates no differences with the corresponding file in "gold-results/".
+
+

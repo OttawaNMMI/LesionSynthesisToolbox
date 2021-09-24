@@ -18,7 +18,7 @@
 %
 % Usage: 
 % ======
-% MakeLesionInsertionStudy(patdatadir, datastoredir) - Specify the directory where the
+% MakeLesionInsertionStudy(patdatadir) - Specify the directory where the
 % target patient data is stored. 
 %
 % patdatadir - Typically this folder should have two
@@ -33,58 +33,34 @@
 % Created: 2018
 % Last Modified: April 30 2019
 
-
-% FOR HANIF:
-% - I added the new 4dViewer and fused display with CT
-% - I had to permute the PET image for proper display, but hopefully will
-% not cause errors - please test
-% - Would be nice to display PET in SUV if possible
-% - When I ran this I got many messages:
-%     --------------------
-%     Check Hanif Edit ^^^
-%     --------------------
-% - When I ran there are many messages regarding:
-%    'cp' is not recognized as an internal or external command, 
-%    operable program or batch file.
-%  I think this is a Unix/Windows compatibility issue that we should be 
-%  able to address using copyfile
-% - Add logic to look for baseline reconstruction (with the correct
-% parameters) and perform it if need be.
-
-function MakeLesionInsertionStudy(patdatadir,datastoredir)
+function MakeLesionInsertionStudy(patdatadir,datastoredir,reconName)
 
 %patdatadir = '/media/hanif/HANIFHDD/Console Data/Local Patient DB/13187';
 %datastoredir = 'C:\Users\hjuma\Documents\MATLAB\Lesion Synthesis DB';
 
-[~, f, ~] = fileparts(patdatadir);
+[p f e] = fileparts(patdatadir);
 
 % Necessary that to follow this naming convention
-reconName = ['Patient_' f];
-
+if isempty(reconName)
+	reconName = ['Patient_' f];
+end
 
 imgGT = readSavefile([patdatadir filesep 'ir3d.sav']);
-if exist([patdatadir filesep 'CTAC'],'dir')
-	[CTvol, CThdr] = load_DICOMDirectory_scan([patdatadir filesep 'CTAC']);
-	CTAC = twobyte2double(CTvol, CThdr.quant_dynamic);
-	CTVolStruct = struct('vol',double(CTAC),...
-	                 'pixelDimensions',[CThdr.pix_mm_xy, CThdr.pix_mm_xy, CThdr.pix_mm_z],...
-					 'offset',[0 0 0],...
-					 'colormap','bone',...
-					 'clim',[0 300],...
-					 'alpha',0.3);
-else
-	CTVolStruct = [];
+if exist([patdatadir filesep 'CTAC.mat'])
+	load([patdatadir filesep 'CTAC.mat']);
+	CTAC = twobyte2double(vol,hdr.quant_dynamic);
 end
 
 % Create the HDR struct based on # of data elements
-hdr.pix_mm_xy = 700/size(imgGT,1);
+hdr.pix_mm_xy = 700/(2*size(imgGT,1));
 hdr.pix_mm_z = 3.27;
-hdr.xdim = size(imgGT,1);
-hdr.ydim = size(imgGT,2);
+hdr.xdim = 2*size(imgGT,1);
+hdr.ydim = 2*size(imgGT,2);
 hdr.nplanes = size(imgGT,3);
 
-% gen zero map for lesions
-phantom = zeros(size(imgGT));
+% gen zero map for lesions..twice the size of the target image (rescaled
+% later)
+phantom = zeros([2*size(imgGT,1),2*size(imgGT,2),size(imgGT,3)]);
 
 % Set flags
 makeLesion = 1;
@@ -103,31 +79,17 @@ ReconEstimate = imgGT;
 if makeLesion
 	
 	while addLesion
-						 
-		[~, ROI] = View4D(permute(ReconEstimate,[2 1 3]),[],...
-			  'PixelDimensions',[hdr.pix_mm_xy*[1 1] hdr.pix_mm_z],...
-			  'AxisNames',{'Coronal','Sagittal','Transaxial'},... axis labels
-			  'Units','Bq/cc',...% ideally would be SUV,... 
-			  'ScaleLimitsMode',[0 10^4],... % ideally would be SUV
-			  'Colormap','HotMetal',... The image colormap
-			  'Secondvolume', CTVolStruct,...
-			  'WaitForClose',true,...
-			  'FigureName', 'Define lesion locations',...
-			  'Position',[0 0.5 1 0.5],... 
-			  'KeyPressFunc', @view4DROIKeyPressCallback); % Add a callback to draw ROIs.
-
-		if 0
-			[contrast, radius, CTintensity] = LesionPropertiesGUI;
+		
+		[frames,ROI_x,ROI_y,ROI_z,ROI_r] = View4D(ReconEstimate,[],'PixelDimensions',[2*hdr.pix_mm_xy*[1 1] hdr.pix_mm_z], 'WaitForClose',true, 'FigureName', '4dview');
+		res = inputdlg('Enter Lesion Contrast Factor','Lesion Generation Parameters',[1 35],{'1.5'});
+		if isempty(res)
+			res = 1.5;
 		else
-			contrast = inputdlg('Enter Lesion Contrast Factor','Lesion Generation Parameters',[1 35],{'1.5'});
-			if isempty(contrast)
-				return;
-			else
-				contrast = str2double(contrast);
-			end
+			res = str2double(res);
 		end
 		
 		addLesion = questdlg('Would you like to add another lesion','Lesion Insertion Toolbox','Yes','No','No');
+		
 		switch addLesion
 			case ''
 				addLesion = 0;
@@ -137,104 +99,41 @@ if makeLesion
 				addLesion = 0;
 		end
 		
-		switch lower(ROI.shape)
-			case 'sphere'
-				[phantom] = MakeSphere(phantom,hdr,....
-					ROI.coord(2)/hdr.pix_mm_xy,...
-					ROI.coord(1)/hdr.pix_mm_xy,...
-					ROI.coord(3)/hdr.pix_mm_z,...
-					ROI.radius, contrast);
-			otherwise
-				error(['Unknown ROI shape encountered: ' ROI.shape]);
-		end
+		[phantom] = MakeSphere(phantom,hdr,ceil(ROI_x/hdr.pix_mm_xy),...
+			ceil(ROI_y/hdr.pix_mm_xy),...
+			ceil(ROI_z/hdr.pix_mm_z),ROI_r,res);
 		
-		if length(contrast) > 1
-			ReconEstimate(phantom) = inf;
+		phantom = imresize3(phantom,[size(imgGT,1),size(imgGT,2),size(imgGT,3)]); 
+		
+		if res < 3
+			ReconEstimate(:,:,:,1) = imgGT.*res.*10.*phantom + ReconEstimate(:,:,:,1);
 			disp('Lesion Intensity Dramatisized for Visualization')
 		else
-			ReconEstimate(:,:,:,1) = imgGT.*phantom.*contrast + ReconEstimate(:,:,:,1);
-		end
-		if ~isempty(CTVolStruct)
-			% TO DO - not so simple - must account for different number of
-			% voxels.
-% 			CTVolStruct.vol(phantom) = CTintensity;
+			
+			ReconEstimate(:,:,:,1) = imgGT.*phantom.*res + ReconEstimate(:,:,:,1);
 		end
 		
-% FOR HANIF - can the commented section below be deleted?
 		%[phantom] = MakeAsymSphere(phantom,hdr,ceil(ROI_x/hdr.pix_mm_xy),...
 		%ceil(ROI_y/hdr.pix_mm_xy),ceil(ROI_z/hdr.pix_mm_z),ROI_r,res);
 		
 		% Lesion Synthesis Necessary Parameters 
 		lesion{lesionCount}.map = phantom;
-		lesion{lesionCount}.uptake = contrast;
+		lesion{lesionCount}.uptake = res;
 		lesionCount = lesionCount + 1;
-		phantom = zeros(size(imgGT));
 		
+		phantom = zeros([2*size(imgGT,1),2*size(imgGT,2),size(imgGT,3)]);
+		
+		info.reconName = reconName; 
+		info.patdatadir = patdatadir; 
+		info.datastoredir = datastoredir; 
 	end
 	
 	% Make the dir to save the lesion synthesis study files
-	mkdir(datastoredir,reconName)
+	mkdir([datastoredir],reconName)
 	
 	% Save the lesion binary map and other necessary parameters
-	save([datastoredir filesep reconName filesep 'LesionParams_' reconName '.mat'],'lesion','lesionCount')
+	save([datastoredir filesep reconName filesep 'LesionParams_' reconName '.mat'],'lesion','lesionCount','info')
 	
 end
 
-end
-
-
-
-function view4DROIKeyPressCallback(hObject, key, handles)
-switch key
-	case {'s','S'} % add a sphere
-		% Make a 1 cm sphere ROI
-		d = 10; %mm
-		ROI_r = d/2; %mm 
-		dim = getappdata(handles.View4DFigure,'PixelDimensions');
-		[y0,x0,z0] = View4DCoord(hObject,'',handles); 
-        %disp(['Rad = ' num2str(r)])
-		disp(['Diameter = ' num2str(2*ROI_r)])
-		[theta, phi] = meshgrid((0:5:360)/180*pi, (0:5:180)/180*pi);
-		x = x0 + ROI_r*sin(phi).*cos(theta)/dim(1);
-		y = y0 + ROI_r*sin(phi).*sin(theta)/dim(1);
-		z = z0 + ROI_r*cos(phi)/dim(3);
-		contour{1} = struct('X',x,...
-			                'Y',y,...
-							'Z',z,...
-							'LineStyle','-w',...
-							'Type','mesh');
-		setappdata(handles.View4DFigure,'Contour',contour);
-		updateView4DSlices(handles)
-
-	case {'.',','} 
-		if key=='.' % make ROI radius bigger
-			factor = 1.1;
-		else % make ROI radius smaller
-			factor = 1/1.1;
-		end
-		contour = getappdata(handles.View4DFigure,'Contour');
-		if ~isempty(contour)
-			x0 = mean(contour{1}.X(:));
-			y0 = mean(contour{1}.Y(:));
-			z0 = mean(contour{1}.Z(:));
-			contour{1}.X = (contour{1}.X - x0) * factor + x0;
-			contour{1}.Y = (contour{1}.Y - y0) * factor + y0;
-			contour{1}.Z = (contour{1}.Z - z0) * factor + z0;
-			setappdata(handles.View4DFigure,'Contour',contour);
-			updateView4DSlices(handles)
-			
-			dim = getappdata(handles.View4DFigure,'PixelDimensions');
-% 			ROI_x = mean(contour{1}.X(:))*dim(1);
-% 			ROI_y = mean(contour{1}.Y(:))*dim(2);
-% 			ROI_z = mean(contour{1}.Z(:))*dim(3);
-			ROI_r = (max(contour{1}.X(:)) - min(contour{1}.X(:)))*dim(1)/2;
-			%disp(['Lesion location ' num2str(ROI_x) ', ' num2str(ROI_y) ', ' num2str(ROI_z) ' and size is ' num2str(ROI_r) ' mm'])
-			disp(['Diameter = ' num2str(2*ROI_r)])
-		end
-end
-handles.output = struct('shape','Sphere',...
-                        'coord',[x0, y0, z0],...
-						'radius',ROI_r);
-					
-guidata(handles.View4DFigure, handles);
 end

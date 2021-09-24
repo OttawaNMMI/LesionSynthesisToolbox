@@ -1,0 +1,9 @@
+/unlistDirPath:/d
+/rawDirPath:/d
+/resultsFilePath:/d
+/Filename:/d
+/FileModDate:/d
+/MediaStorageSOPInstanceUID:/d
+/SOPInstanceUID:/d
+/FileSize:/d
+/MetaElementGroupLength:/d

@@ -1,0 +1,63 @@
+# Filename: pet-dicom-dict.txt
+#
+# This is a DICOM dictionary designed and supported by the PET Toolbox project
+# to read PET DICOM files in MATLAB.  It has been designed (and tested) to be
+# effective for the purposes of its users to date; it is NOT warranted to be
+# an accurate or complete representation of the DICOM conformance document for
+# any particular GE scanner.
+#
+# Note that this file is different from the CT dictionary (ct-dicom-dict.txt)
+# because there are certain attributes that are defined differently in the GE
+# DICOM implementations for these two modalities.
+#
+# Please report corrections and/or additions:
+#  GE Employees: Use the "Bug Tracking" feature of the pettoolbox project
+#                    in OpenGE.
+#  Outside researchers: Contact the GE employee who distributed this file
+#                    to you.
+#
+# To parse the contents of this data dictionary in Matlab, execute:
+#
+# [group,element,VR,attributeName,VM] = textread('ct-dicom-dict.txt',...
+#                                      '(%4c,%4c)\t%s%s%s',...
+#                                      'commentstyle','shell',...
+#                                      'delimiter','\t');
+#
+#
+# GE DICOM Conformance statements can be found at:
+#    http://www.gehealthcare.com/usen/interoperability/dicom/index.html
+
+# Copyright (c) 2003-2010 General Electric Company. All rights reserved.
+# This code is only made available outside the General Electric Company
+# pursuant to a signed agreement between the Company and the institution to
+# which the code is made available.  This code and all derivative works
+# thereof are subject to the non-disclosure terms of that agreement.
+
+# ------------------------------------------------------------------------
+# 
+# DICOM Data Dictionary
+#
+# Copyright 1993-2003 The MathWorks, Inc.
+# $Revision: 1.1 $  $Date: 2013/01/04 19:31:59 $
+#
+# Attributes can appear multiple times.  The last duplicate entry is the
+# one which is used.
+#
+# Comment lines begin with "#".
+#
+# Items are tab-delimited:
+# 
+# Tag		VR	Attribute Name	VM
+# ------------------------------------------------------------------------
+# ACR/NEMA codes
+#
+(0008,0021) DA  SeriesDate  1
+(0008,0022) DA  AcquisitionDate 1
+(0008,0031) TM  SeriesTime  1
+(0008,0032) TM  AcquisitionTime 1
+(0018,1242) IS  ActualFrameDuration 1
+(0020,0013) IS InstanceNumber 1
+(0020,1041) DS  SliceLocation   1
+(0028,1052) DS  RescaleIntercept    1
+(0028,1053) DS  RescaleSlope    1
+

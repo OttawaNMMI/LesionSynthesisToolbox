@@ -516,11 +516,11 @@ for subset=1:reconParams.numSubsets
                 warning('Hanif lesionInsertionFix')
             end
             
-            disp('--------------------') 
-
-            disp('Check Hanif Edit ^^^') 
-           
-            disp('--------------------') 
+%             disp('--------------------') 
+% 
+%             disp('Check Hanif Edit ^^^') 
+%            
+%             disp('--------------------') 
             
             currentRawFile =  [fileNames.lesionTOFprojFilename '/lesionProj.' num2str(subset) '.' num2str(angle)];
             writeRaw(currentRawFile,projLI,'uint8','l',0);

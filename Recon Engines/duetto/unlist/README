@@ -1,0 +1,65 @@
+
+Getting started:
+UnlistMain.m is the top-level of the unlister so please review the comments in this file carefully to 
+gain an understanding of the interface (API) to the unlister ('help UnlistMain' in Matlab). The 'examples/' 
+sub-directory contains a variety of short scripts intended to demonstrate different types of supported 
+requests to the unlister.
+
+Unlist related functions:
+UnlistCalcSinoDims.m        - Calculate sinogram dimensions based on detector geometry.
+UnlistCoinEvents.m          - Wrapper to PtbUnlist.cpp
+UnlistCreateCalFileLinks.m  - Create cal file soft links in the raw/ for image recon purposes.
+UnlistCreateDicomHdr.m      - Create a DICOM header file corresponding to a RDF SINO file.
+UnlistCreateResultsFile.m   - Create 'results.txt' file used for autotest.
+UnlistDynamic.m             - Create a set of dynamic SINO frames and corresponding DICOM header files.
+UnlistFindListHdr.m         - Find the DICOM list file header corresponding to the given list file.
+UnlistGated.m               - Create a set of gated SINO frames and corresponding DICOM header files.
+UnlistGatedPercentVec.m     - Return startMsecVec/endMsecVec for gated percent binning 
+UnlistGatedSppbVec.m        - Return startMsecVec/endMsecVec for gated single phase percent binning (sppb)
+UnlistGatedTimeVec.m        - Return startMsecVec/endMsecVec for gated time binning 
+UnlistGatedTrigRej.m        - Return startMsecVec/endMsecVec for gated trigger rejection
+UnlistMain.m                - Top-level unlist function (ref: help UnlistMain)
+UnlistStatic.m              - Create a static SINO frame and corresponding DICOM header files.
+UnlistWriteCommon.m         - Write HDF5 data sets that are common static, dynamic, and gated frames.
+
+List file PDD related:
+ListPddAdd.m                - Add the elements in two PDD (Periodic Detector Data) structs.              
+ListPddGetHeaderInfo.m      - Return a struct with PDD relevant header info.
+ListPddGetOneInterval.m     - Get list file Periodic Detector Data (PDD) corresponding to one start/end time interval.
+ListPddGetOneSample.m       - Get list file Periodic Detector Data (PDD) for one sample specified by sampleSec.
+ListPddGetTopLevel.m        - Return a single PDD sample that represents the given list of time intervals.
+ListPddMultiply.m           - Return the product of a PDD struct times a ratio.
+ListPddWriteToSino.m        - Write a single PDD sample to the given "sinoFilePath".
+
+GE HDF5 related functions:
+GEh5CopyGroupData.m         - Copy the HDF5 datasets and attribute data at the given "groupLoc" from "inFilePath" to "outFilePath".
+GEh5CopyGroupTree.m         - Recursively copy HDF5 group datasets and attribtues from "inFilePath" to "outFilePath".
+GEh5CreateGroup.m           - Create the given HDF5 group and all intermediate groups.
+GEh5CreateStringDataset.m   - Create a HDF5 string dataset given the group absolute path, dataset name, and string (char array).
+GEh5DisplayGroupData.m      - Display the HDF5 datasets and attribute data at the given "groupLoc" from "inFilePath" in text format.
+GEh5DisplayGroupTree.m      - Recursively display HDF5 group datasets and attribtues from "inFilePath" in text format.
+GEh5DisplaySinoChecksum.m   - Display sinogram slice, block busy, block mux loss checksums in text format.
+GEh5GetGroupInfo.m          - Given a HDF5 file path and group location, return a group struct as returned from h5info().
+
+Other utility functions:
+ListFileIsValid.m           - Throw an exception if the given list file is not valid. 
+
+
+To generate and display images:
+% final line of UnlistMain script shows the unlistDirPath
+cd <unlistDirPath>
+
+testMakeImgTof | testMakeImgNonTof
+
+cd Offline_3D
+f1 = readCTPETDICOM('_bin1*');
+size(f1)
+f2 = readCTPETDICOM('_bin2*');
+dispOrthoSlices(f1) % displays 3D volume (all slices)
+dispOrthoSlices(f2)
+
+figure, imagesc(f1(:,:,45)) % display single slice
+hold
+figure, imagesc(f2(:,:,45))
+hold
+
