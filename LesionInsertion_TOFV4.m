@@ -1,5 +1,5 @@
 % LesionInsertion_TOFV4 - This function genrated the lesion projection
-% files and reconstructs the target image with the synthesic lesions 
+% files and reconstructs the target image with the synthesic lesions
 %
 % To generate the projection files, a reconstruction
 % of the target patient data is needed to (revert) take the inverse of any
@@ -7,8 +7,8 @@
 % must be generated using indentical recon parameters as the target image
 % and therefore a single lesion synthesis is only applicable for the
 % reconsruction parameters it was generated with. Once the preliminary
-% recon is complete (Baseline_PET), a secondary directory is generated 
-% and necessary files are copied over. 
+% recon is complete (Baseline_PET), a secondary directory is generated
+% and necessary files are copied over.
 %
 % The second recon is initialized where during the
 % reconstruction take individal projections of the lesion(s) are combined
@@ -17,16 +17,16 @@
 %
 % To modify the recon parametrs used: LesionInsertion_GEPETreconParams
 %
-% Lesion Synthesis at this time is only supported using the GE RECON 
+% Lesion Synthesis at this time is only supported using the GE RECON
 % TOOLOX (VER: REGRECON5) for Time-of-flight reconstructions. For
-% development/modifications/access to source code please contact 
-% GE Healthcare PET image reconstrcution development team 
+% development/modifications/access to source code please contact
+% GE Healthcare PET image reconstrcution development team
 % (As of early 2019: Michael.Spohn@ge.com)
 %
 % This function uses tools from the GE RECON TOOLBOX (REGRECON5) and
 % therefore needs REGRECON5 in the available directory
 %
-% Usage: 
+% Usage:
 % ======
 % LesionInsertion_TOFV4(reconName,lesionImg,patdatadir,LIparams)
 %
@@ -39,9 +39,9 @@
 % the patient CTAC image used to ATTEN CORR by the GE RECON TOOLBOX.
 %
 % LIparams - generated in previous caller function but a cell describing
-% the following parameters: 
+% the following parameters:
 %         LIparams.copyFiles = 1; yes, unless its already present in the
-%         necessary directories (used to debugging or crash situations) 
+%         necessary directories (used to debugging or crash situations)
 %
 %         LIparams.baselineRecon = 1; ye , dont need if data was generated in
 %         final lesion + patient recon parameters
@@ -61,31 +61,31 @@ function LesionInsertion_TOFV4(reconName,lesionImg,patdatadir,LIparams,reconDir)
 
 copyFiles = LIparams.copyFiles;
 baselineRecon = LIparams.baselineRecon;
-genLesionFiles = LIparams.genLesionFiles; 
-mainFS = LIparams.mainFS; 
+genLesionFiles = LIparams.genLesionFiles;
+mainFS = LIparams.mainFS;
 
 % Set the important dirs for this simulation
-if isempty(reconName) 
-    reconName = ['LesionInsertion - ' datestr(now)]; 
-end 
+if isempty(reconName)
+	reconName = ['LesionInsertion - ' datestr(now)];
+end
 
 
 if isempty(patdatadir)
 	% Really not necessary...early stage development...but here anyways
-    if ~mainFS %Main File System (Linux Errors)
-        reconDir = '/media/hanif/HANIFHDD/Lesion_Synthesis_Code/Simulation/'; % Where to save all generated files
-        PETrawDir = '/media/hanif/hdd/GE_710_DATA/Console_Data/October2018/Empty3BedPosPETCT/raw/'; % RAW PET data
-        CTfiles = '/media/hanif/hdd/GE_710_DATA/Console_Data/October2018/Empty3BedPosPETCT/CTAC/'; % CT data
-    else
-        reconDir = '/home/hanif/Documents/TOFLesionInsertion_MainFSystem/';
-        PETrawDir = '/home/hanif/Documents/TOFLesionInsertion_MainFSystem/October2018/Empty3BedPosPETCT/raw/'; % RAW PET data
-        CTfiles = '/home/hanif/Documents/TOFLesionInsertion_MainFSystem/October2018/Empty3BedPosPETCT/CTAC/'; % CT data
-    end
+	if ~mainFS %Main File System (Linux Errors)
+		reconDir = '/media/hanif/HANIFHDD/Lesion_Synthesis_Code/Simulation/'; % Where to save all generated files
+		PETrawDir = '/media/hanif/hdd/GE_710_DATA/Console_Data/October2018/Empty3BedPosPETCT/raw/'; % RAW PET data
+		CTfiles = '/media/hanif/hdd/GE_710_DATA/Console_Data/October2018/Empty3BedPosPETCT/CTAC/'; % CT data
+	else
+		reconDir = '/home/hanif/Documents/TOFLesionInsertion_MainFSystem/';
+		PETrawDir = '/home/hanif/Documents/TOFLesionInsertion_MainFSystem/October2018/Empty3BedPosPETCT/raw/'; % RAW PET data
+		CTfiles = '/home/hanif/Documents/TOFLesionInsertion_MainFSystem/October2018/Empty3BedPosPETCT/CTAC/'; % CT data
+	end
 else % THIS IS THE GOOD STUFF =)
-        %reconDir = '/home/hanif/Documents/TOFLesionInsertion_MainFSystem/';
-        %reconDir = 'C:\Users\hjuma\Documents\MATLAB\Lesion Synthesis DB'; 
-        PETrawDir = [patdatadir filesep 'raw' filesep]; 
-        CTfiles = [patdatadir filesep 'CTAC' filesep]; 
+	%reconDir = '/home/hanif/Documents/TOFLesionInsertion_MainFSystem/';
+	%reconDir = 'C:\Users\hjuma\Documents\MATLAB\Lesion Synthesis DB';
+	PETrawDir = [patdatadir filesep 'raw' filesep];
+	CTfiles = [patdatadir filesep 'CTAC' filesep];
 end
 
 
@@ -101,97 +101,178 @@ mkdir([bPETdir filesep 'CTAC']);
 
 % Copy the necessary files to Baseline PET dirs
 if copyFiles
-%% New HJUMA Modification Feb 1 2019 
-copyfile(patdatadir,bPETdir)
-
+	% New HJUMA Modification Feb 1 2019
+	copyfile([patdatadir filesep 'raw'],[bPETdir filesep 'raw'])
+	copyfile([patdatadir filesep 'CTAC'],[bPETdir filesep 'CTAC'])
+	copyfile([patdatadir filesep 'norm3d'],[bPETdir])
+	copyfile([patdatadir filesep 'geo3d'],[bPETdir])
+	
+	if LIparams.LesionBedPosRecon
+		for i = 1:size(lesionImg,3)
+			temp = lesionImg(:,:,i);
+			a(i) = sum(temp(:));
+			[M I] = max(a(:));
+		end
+		[map] = BedPosMap(47,8,11,299);
+		range = DetBedPos(map,I);
+		
+		
+		if range(1) == range(2)
+			% Lesion is within a single bed pos
+			r = DetBedPos(map,size(lesionImg,3));
+			disp(['KEEPING SINGLE BED POS: ' num2str(range(1))])
+			range = r - (range - [1 1]); % Reverse order cuz thats how RPDC files are stored.. 
+			for i = 1:r(1)
+				files = listfiles(['.' num2str(i)],[bPETdir filesep 'raw']);
+				if i == range(1) || i == range(1)-1
+					for j = 1:length(files)
+						if (i == range(1)-1) && contains(files{j},'SINO')
+							disp('Keeping SINO')
+						elseif (i == range(1)) && contains(files{j},'RPDC')
+							disp('Keeping RPDC')
+						else
+							delete([bPETdir filesep 'raw' filesep files{j}])
+							delete([bPETdir filesep 'raw' filesep 'SINO000' num2str(i-1)])
+						end
+						
+					end
+				else
+					for j = 1:length(files)
+						delete([bPETdir filesep 'raw' filesep files{j}])
+						delete([bPETdir filesep 'raw' filesep 'SINO000' num2str(i-1)])
+					end
+				end
+				
+			end
+			disp('only recon lesion bed positions')
+		end
+	end
+	
 else
-    disp(['User specified not to copy RAW PET & CT files'])
+	disp(['User specified not to copy RAW PET & CT files'])
 end
 
 % Change workspace to Baseline PET recon dir
 cd(bPETdir)
 
 if baselineRecon
-    % Define and save the recon parameters
-    reconParams = LesionInsertion_GEPETreconParams; % gen Default LI Params
-    reconParams.genCorrectionsFlag = 1; %Turn Corrections on
-    save([bPETdir filesep 'ReconParams.mat'],'reconParams')
-    
-    % Perform a PET recon with Attenuation Correction [GT: Patient without Lesion]
-    img = GEPETrecon(reconParams);
+	% Define and save the recon parameters
+	reconParams = LesionInsertion_GEPETreconParams; % gen Default LI Params
+	reconParams.genCorrectionsFlag = 1; %Turn Corrections on
+	save([bPETdir filesep 'ReconParams.mat'],'reconParams')
+	
+	% Perform a PET recon with Attenuation Correction [GT: Patient without Lesion]
+	img = GEPETrecon(reconParams);
 else
-    if exist([bPETdir filesep 'ReconParams.mat'])
-        load([bPETdir filesep 'ReconParams.mat'])
-    else
-        warning('Cannot Pull Recon Params - Might be okay since no baseline Recon')
-    end
+	if exist([bPETdir filesep 'ReconParams.mat'])
+		load([bPETdir filesep 'ReconParams.mat'])
+	else
+		warning('Cannot Pull Recon Params - Might be okay since no baseline Recon')
+	end
 end
 
-%% Create Lesion Image
-if isempty(lesionImg) 
-    img = readSavefile([bPETdir filesep 'ir3d.sav']);
-    
-    [nx,ny,nz] = size(img);
-    cx = 130; cy = 93; cz = 45; % lesion center coordinates
-    sx = 700/nx; sz = 3.2700; %2.78; % voxel size in mm %Previously 600 ? HGJ
-    lesionDiameter = 10; % in mm
-    rx = (lesionDiameter/2)/sx; rz = (lesionDiameter/2)/sz; % radius in voxel
-    lesionProfile = ellipsoid(nx,ny,nz,cx,cy,cz,rx,rx,rz);
-    lesionBinaryMask = lesionProfile>0; % ROI for quantitation. Alternatively, you lesionBinaryMask = lesionProfile>0.5
-    localBackgroundActivity = mean(img(lesionBinaryMask));
-    localContrast = 3;
-    lesionImg = lesionProfile*localContrast*localBackgroundActivity; % lesion image (in Bq/ml) to be added
-    trueImg = lesionImg + img; % Ground truth image
-    
+% Create Lesion Image
+if isempty(lesionImg)
+	img = readSavefile([bPETdir filesep 'ir3d.sav']);
+	
+	[nx,ny,nz] = size(img);
+	cx = 130; cy = 93; cz = 45; % lesion center coordinates
+	sx = 700/nx; sz = 3.2700; %2.78; % voxel size in mm %Previously 600 ? HGJ
+	lesionDiameter = 10; % in mm
+	rx = (lesionDiameter/2)/sx; rz = (lesionDiameter/2)/sz; % radius in voxel
+	lesionProfile = ellipsoid(nx,ny,nz,cx,cy,cz,rx,rx,rz);
+	lesionBinaryMask = lesionProfile>0; % ROI for quantitation. Alternatively, you lesionBinaryMask = lesionProfile>0.5
+	localBackgroundActivity = mean(img(lesionBinaryMask));
+	localContrast = 3;
+	lesionImg = lesionProfile*localContrast*localBackgroundActivity; % lesion image (in Bq/ml) to be added
+	trueImg = lesionImg + img; % Ground truth image
+	
 end
 
-%% Lesion insertion: create (Poisson-noisy) lesion sinogram in /LesionProjs_frame1
-if genLesionFiles 
-% The same recon params as used in recon
-reconParams = LesionInsertion_GEPETreconParams; % "TOFOSEMS" incorporates PSF
+% Lesion insertion: create (Poisson-noisy) lesion sinogram in /LesionProjs_frame1
+if genLesionFiles
+	% The same recon params as used in recon
+	reconParams = LesionInsertion_GEPETreconParams; % "TOFOSEMS" incorporates PSF
+	
+	% IMPORTANT !!!!!!!!!!!!!!!!!!!!!!!!!!!
+	% Good idea to generate the corrections here..unless the directory where
+	% the target image is stored used the same recon params you need for your
+	% image with the synthesic lesions
+	reconParams.genCorrectionsFlag = 0;
+	reconParams.dicomImageSeriesDesc = 'Perception_Liver_Offline_3D';   % No spaces allowed
+	
+	
+	% Lesion insertion flag
+	reconParams.lesionInsertionTOFFlag = 1;
+	
+	if LIparams.LesionBedPosRecon && range(1) == range(2)
+		range = r-range+1;  
+		lesionImg = lesionImg(:,:,36*(range(1)-1)+1:47+36*(range(1)-1));
+	end 
+	
+	% Generate Poisson-noisy lesion sinogram in /LesionProjs_frame1
+	lesionInsertion(lesionImg,reconParams);
+end
 
-%% IMPORTANT !!!!!!!!!!!!!!!!!!!!!!!!!!!
-% Good idea to generate the corrections here..unless the directory where
-% the target image is stored used the same recon params you need for your
-% image with the synthesic lesions
-reconParams.genCorrectionsFlag = 1;
-reconParams.dicomImageSeriesDesc = 'Perception_Liver_Offline_3D';   % No spaces allowed
-
-
-% Lesion insertion flag 
-reconParams.lesionInsertionTOFFlag = 1;
-
-% Generate Poisson-noisy lesion sinogram in /LesionProjs_frame1
-lesionInsertion(lesionImg,reconParams);
-end 
-
-%% Recon with registered CT AC using inserted lesion data
+% Recon with registered CT AC using inserted lesion data
 CTreconWithLesionDir = [basedir '/CTreconWithLesion']; % working directory for recon
+warning('HANIF FIX ME - TOFV4 changed to fix single bed pos recon')
 mkdir(CTreconWithLesionDir);
 cd(CTreconWithLesionDir);
 
-%copyfile(patdatadir,CTreconWithLesionDir); 
-copyfile(bPETdir,CTreconWithLesionDir); 
-system(sprintf('cp -r %s .',PETrawDir)); % Copy PET raw data
-system(sprintf('cp -r %s .',CTfiles));
+%copyfile(patdatadir,CTreconWithLesionDir);
 
-% Link the TOF Lesion Sinogram Data 
-for i = 1:8 % Hard Coded 8 bed positions (find a better way please)     
-    
-	LesProjName = ['LesionProjs_frame' num2str(i)]; 
-    
-    if exist([bPETdir filesep LesProjName],'dir')
-        mkdir(CTreconWithLesionDir,LesProjName)
-        copyfile([bPETdir filesep LesProjName],[CTreconWithLesionDir filesep LesProjName])
-        disp(['Linked ' LesProjName])
-    end 
-    
-end 
+%copyfile(bPETdir,CTreconWithLesionDir); % UNCOMMENT PLS ***********
+copyfile([bPETdir filesep 'raw'],[CTreconWithLesionDir filesep 'raw'])
+copyfile([bPETdir filesep 'CTAC'],[CTreconWithLesionDir filesep 'CTAC'])
+copyfile([bPETdir filesep 'norm3d'],[CTreconWithLesionDir])
+copyfile([bPETdir filesep 'geo3d'],[CTreconWithLesionDir])
+%system(sprintf('cp -r %s .',PETrawDir)); % Copy PET raw data
+%system(sprintf('cp -r %s .',CTfiles));
 
-reconParams = LesionInsertion_GEPETreconParams; 
+% Link the TOF Lesion Sinogram Data
+s = size(lesionImg,3);
+bedpos = 1;
+while 47 + 36*(bedpos-1) ~= s
+	bedpos = bedpos + 1;
+end
+
+for i = 1:bedpos % Hard Coded 8 bed positions (find a better way please)
+	
+	LesProjName = ['LesionProjs_frame' num2str(i)];
+	
+	if exist([bPETdir filesep LesProjName],'dir')
+		mkdir(CTreconWithLesionDir,LesProjName)
+		copyfile([bPETdir filesep LesProjName],[CTreconWithLesionDir filesep LesProjName])
+		disp(['Linked ' LesProjName])
+	else % Delete other files
+		% 		f = listfiles(['.' num2str(i)],[CTreconWithLesionDir filesep 'raw']);
+		% 		for L = 1:size(f,1)
+		% 			n = f{L};
+		% 			if contains(n,'SINO')
+		% 				sinoname = [n(1:end) num2str(i-1)];
+		% 			elseif contains(n,'RPDC')
+		% 				rawname = n;
+		% 			end
+		% 		end
+		% 		if ~exist('sinoname')
+		% 			sinoname = ['SINO000' num2str(i-1)];
+		% 		end
+		% 		sinoname = [CTreconWithLesionDir filesep 'raw' filesep sinoname];
+		% 		rawname  = [CTreconWithLesionDir filesep 'raw' filesep rawname ];
+		%
+		% 		delete(sinoname)
+		% 		delete(rawname)
+	end
+	% 	clear sinoname
+	% 	clear rawname
+	
+end
+
+reconParams = LesionInsertion_GEPETreconParams;
 reconParams.dicomImageSeriesDesc = 'Synthetic_Lesion_Offline_3D';
 reconParams.lesionInsertionTOFFlag = 1; % Lesion insertion flag
-reconParams.genCorrectionsFlag = 0; 
+reconParams.genCorrectionsFlag = 1;
 
 % Save the recon parameters for future reference
 save Params reconParams ;

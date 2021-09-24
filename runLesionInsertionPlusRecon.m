@@ -30,7 +30,7 @@
 % Created: 2018
 % Last Modified: April 30 2019
 
-function runLesionInsertionPlusRecon(patdatadir,fname)
+function runLesionInsertionPlusRecon(patdatadir,fname,reconName)
 
 %fname = '/home/hanif/Documents/TOFLesionInsertion_MainFSystem/Patient_13187';
 %patdatadir = '/media/hanif/HANIFHDD/Console Data/Local Patient DB/13187';
@@ -38,25 +38,34 @@ function runLesionInsertionPlusRecon(patdatadir,fname)
 recondir = fname; 
 
 % Load the gold truth image..if only worth gold
-imgGT = readSavefile([patdatadir filesep 'ir3d.sav']);
 
-[~, f, ~] = fileparts(patdatadir); 
+if ~exist([patdatadir filesep 'ir3d.sav'])
+	noGT = 1; 
+else
+	imgGT = readSavefile([patdatadir filesep 'ir3d.sav']);
+	noGT = 0; 
+end
 
-reconName = ['Patient_' num2str(f)]; 
+[p f e] = fileparts(patdatadir); 
+
+if isempty(reconName)
+	reconName = ['Patient_' num2str(f)];
+end
 
 fname = [fname filesep reconName];
 
 % Grab the previously generated lesion synthesis parameters
 load([fname filesep 'LesionParams_' reconName '.mat'],'lesion','lesionCount')     
 
+
+if noGT 
+	imgGT = ones(size(lesion{1}.map)); 
+end 
+
 % Create a single matrix with all the lesions 
 lesionImg = zeros(size(lesion{1}.map)); 
 for i = 1:lesionCount-1
     lesionImg = lesionImg + lesion{i}.map; 
-	disp('FIX ME HERE')
-	%%
-	% We want to first sample the target patient data, and then take an average
-	% of the sample, and then multiple by the scaling factor
 end 
 
 % Multiple the lesion binary map (indicies are lesion-to-background factors)
@@ -66,9 +75,19 @@ lesionImg = lesionImg .* imgGT;
 
 % Typically used for debugging or when the system crashes mid synthesis 
 LIparams.copyFiles = 1; % yes you want to copy the files over 
-LIparams.baselineRecon = 0; % Only if you really want to gen a baseline recon but multiple time to sim by 2 
+LIparams.baselineRecon = 1; % Typically want this on 
 LIparams.genLesionFiles = 1; % Yes I want to generate the lesion projections
 LIparams.mainFS = 1; % only necessary when running on the linux machine..it got werid sometimes 
+
+if lesionCount <=2 
+	LIparams.LesionBedPosRecon = 1; 
+	disp('RECON ONLY THE BED POS WHERE LESION IS LOCATED')
+else 
+	LIparams.LesionBedPosRecon = 0; 
+end 
+
+
+%LIparams.LesionBedPosRecon = 1; % Recon ALL bed positions
 
 % Fourth version is the best..casue who even like 1-3? 
 LesionInsertion_TOFV4(reconName,lesionImg,patdatadir,LIparams,recondir)
@@ -81,11 +100,64 @@ mkdir([recondir filesep reconName],[reconName '_DICOM'])
 
 dirOut = [recondir filesep reconName filesep reconName '_DICOM']; 
 
-hdrOverwrite = struct('PatientName','ANON0001',...
-					'PatientID','0000001',...
-					'ReferringPhysicianName','DELETE',...
-					'StudyDescription','Synthetic Lesions - Test Toolbox',...
-					'SeriesDescription','Testing Toolbox'); 
-
+hdrOverwrite = struct('PatientName',reconName,...
+					'PatientID',reconName,...
+					'ReferringPhysicianName','Discovery Toolbox',...
+					'StudyDescription','Discovery Toolbox',...
+					'SeriesDescription',reconName); 
+% In order for anon to work, recon must spit out recon files in DICOM
+% format .. 
 anonGEreconOutput(dirIn, dirOut, hdrOverwrite)
+
+
+%% Clean Up
+% Projections
+for i = 1:20
+	projName = [recondir filesep reconName filesep 'CTreconWithLesion',...
+		filesep 'LesionProjs_frame' num2str(i)];
+	if exist(projName)
+		movefile(projName,...
+			[recondir filesep reconName]);
+		disp('Archived simulated projections') 
+		disp(projName)
+	end
+	
+end
+
+reconMatDir = [recondir filesep reconName filesep 'CTreconWithLesion',...
+	filesep 'ir3d.sav'];
+
+if exist(reconMatDir)
+	movefile(reconMatDir,...
+		[recondir filesep reconName]);
+	disp('Archived recon sav file')
+	disp(reconMatDir)
+end
+
+reconDICOMDir = [recondir filesep reconName filesep 'CTreconWithLesion',...
+	filesep 'Synthetic_Lesion_Offline_3D'];
+
+if exist(reconDICOMDir)
+	movefile(reconDICOMDir,...
+		[recondir filesep reconName]);
+	disp('Archived recon DICOM files')
+	disp(reconDICOMDir)
+end
+
+reconParamsDir = [recondir filesep reconName filesep 'CTreconWithLesion',...
+	filesep 'Params.mat'];
+
+if exist(reconParamsDir)
+	movefile(reconParamsDir,...
+		[recondir filesep reconName]);
+	disp('Archived recon sav file')
+	disp(reconParamsDir)
+end
+
+cd([recondir filesep reconName])
+
+rmdir([recondir filesep reconName filesep 'CTreconWithLesion'],'s')
+rmdir([recondir filesep reconName filesep 'Baseline_PET'],'s')
+
+%% 
 end
