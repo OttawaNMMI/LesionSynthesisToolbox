@@ -74,13 +74,23 @@ while i<length(varargin)
 	i = i+2;
 end
 
-% optLen = length(items);
-% params.InitialValue = validateOptions(params, 'InitialValue', 1, optLen);
+initialValue = [];
+if ischar(params.InitialValue)
+    if any(strcmpi(items, params.InitialValue))
+        initialValue = params.InitialValue;
+    end
+elseif isscalar(params.InitialValue)
+    if isnumeric(items) && any(items == params.InitialValue)
+        initialValue = params.InitialValue;
+    elseif isinteger(params.InitialValue)
+        initialValue = validateOptions(params, 'InitialValue', 1, length(items));
+    end
+end
 
 app.fig = uifigure('WindowStyle','modal','Name',titleString,'CloseRequestFcn',{@Done});
 pos = app.fig.Position;
 app.message = uilabel(app.fig,'Text',messageString,'Position',[pos(3)*0.1 pos(4)*0.9 pos(3)*0.8 pos(4)*0.1]);
-app.listbox = uilistbox(app.fig,'Items',items,'Multiselect',params.Multiselect,'Position',[pos(3)*0.1 pos(4)*0.25 pos(3)*0.8 pos(4)*0.65],'Value',params.InitialValue);
+app.listbox = uilistbox(app.fig,'Items',items,'Multiselect',params.Multiselect,'Position',[pos(3)*0.1 pos(4)*0.25 pos(3)*0.8 pos(4)*0.65],'Value',initialValue);
 app.okButton = uibutton(app.fig,'Text','OK','Position',[pos(3)*0.6 pos(4)*0.1 pos(3)*0.3 pos(4)*0.1],'ButtonPushedFcn',{@Done});
 app.cancelButton = uibutton(app.fig,'Text','Cancel','Position',[pos(3)*0.2 pos(4)*0.1 pos(3)*0.3 pos(4)*0.1],'ButtonPushedFcn',{@Done});
 app.Value = [];
