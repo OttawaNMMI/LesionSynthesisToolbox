@@ -90,14 +90,13 @@ userConfig.attenDataDir = [patientDir filesep 'CTAC'];
 % TO DO: don't want this hardcoded
 userConfig.nParallelThreads = 4;
 vol = ptbRunRecon(userConfig);
-% To load the volume from the saved DICOM use
-% vol = ptbReadAndOrientDicom([patientDir filesep info.reconName]);
+
 %% Clean up parallel pool
 delete(gcp('nocreate'));
 myCluster = parcluster('local');
 delete(myCluster.Jobs);
+
 %% Clean up unclosed files
-% TO DO - discuss with GE regarding leaving files open.
 fId = fopen('all');
 if ~isempty(fId)
 	disp('Someone left files open:');
@@ -109,10 +108,14 @@ if ~isempty(fId)
 end
 
 % This is where the DICOM series is saved
-files = listfiles('*.sdcopen', [patientDir filesep info.reconName]);
-infodcm = dicominfo([patientDir filesep info.reconName filesep files{1}]);
+dicomDir = [patientDir filesep info.reconName];
+
+% Fix the DICOM files to include radiopharmaceutical information
+fixGEReconDICOMOutput(dicomDir);
 
 % Make one clean mat file of the reconstructed image
+files = listfiles('*.sdcopen', dicomDir);
+infodcm = dicominfo([patientDir filesep info.reconName filesep files{1}]);
 [hdr, infodcm] = hdrInitDcm(infodcm);
 save([patientDir filesep info.reconName '_fIR3D.mat'], 'vol', 'hdr', 'infodcm');
 
@@ -198,6 +201,9 @@ if ~isempty(fId)
 	fclose('all');
 	disp('But we closed them');
 end
+
+% Fix the DICOM files to include radiopharmaceutical information
+fixGEReconDICOMOutput(reconParams.dicomImageSeriesDesc)
 
 % Make one clean mat file of the reconstructed image
 [hdr, infodcm] = hdrInitDcm(infodcm);

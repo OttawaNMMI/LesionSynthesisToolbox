@@ -1,10 +1,30 @@
+% fixGEReconDICOMOutput - appends missing data to the DICOM files produced
+% by GE Recon.
+% 
+% Includes:
+%  - Radiopharmaceutical information (type and activity)
+%
+% Can also be used to overwrite header information and anonymize the 
+% patient identifiers
+%
+% Usage:
+% fixGEReconDICOMOutput(dirIn, dirOut) - complete the missing information
+% in place (overwiting source files).
+% fixGEReconDICOMOutput(dirIn, dirOut) - complete the missing information
+% in the input directory and save to the output directory.
+% fixGEReconDICOMOutput(dirIn, dirOut, hdrOverwriteIn) - also overwrite
+% header information with those specified in hdrOverwiteIn.
+% fixGEReconDICOMOutput(dirIn, dirOut, hdrOverwriteIn, anonFlag) - also
+% anonymize the patient identifiers using defualts.
+
 function fixGEReconDICOMOutput(dirIn, dirOut, hdrOverwriteIn, anonFlag)
 
 if nargin<1
 	dirIn = pwd;
 end
 if nargin<2
-	dirOut = [dirIn filesep 'Anon'];
+% 	dirOut = [dirIn filesep 'Anon'];
+	dirOut = dirIn;
 end
 
 if nargin<4
