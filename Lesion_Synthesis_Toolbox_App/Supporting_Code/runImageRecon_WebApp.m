@@ -61,10 +61,12 @@ load(reconParamFile,'info');
 patientDir = fileparts(reconParamFile);
 
 % Copy the necessary files to Baseline PET dirs
-copyfile([info.patDataDir filesep 'raw'],[patientDir filesep 'raw'])
-copyfile([info.patDataDir filesep 'CTAC'],[patientDir filesep 'CTAC'])
-copyfile([info.patDataDir filesep 'norm3d'],[patientDir filesep 'norm3d.RDF'])
-copyfile([info.patDataDir filesep 'geo3d'],[patientDir filesep 'geo3d.RDF'])
+if isMissingRawData(patientDir)
+	copyfile([info.patDataDir filesep 'raw'],[patientDir filesep 'raw'])
+	copyfile([info.patDataDir filesep 'CTAC'],[patientDir filesep 'CTAC'])
+	copyfile([info.patDataDir filesep 'norm3d'],[patientDir filesep 'norm3d.RDF'])
+	copyfile([info.patDataDir filesep 'geo3d'],[patientDir filesep 'geo3d.RDF'])
+end
 
 cd(patientDir)
 
@@ -73,7 +75,7 @@ userConfig = ptbUserConfig(info.reconParams.Algorithm);
 %reconParams = LesionInsertion_GEPETreconParams; % gen Default LI Params
 %reconParams.genCorrectionsFlag = 1; %Turn Corrections on
 
-userConfig.dicomSeriesDesc = info.reconName;
+userConfig.dicomSeriesDesc = info.reconParams.SeriesDesc;
 userConfig.dicomImageSeriesDesc = [info.reconParams.SimName '_BaselineRecon'];
 userConfig.nX = info.reconParams.nXdim;
 % reconParams.ny = info.reconParams.nYdim;
@@ -115,28 +117,30 @@ fixGEReconDICOMOutput(dicomDir);
 
 % Make one clean mat file of the reconstructed image
 files = listfiles('*.sdcopen', dicomDir);
-infodcm = dicominfo([patientDir filesep info.reconName filesep files{1}]);
+infodcm = dicominfo([dicomDir filesep files{1}]);
 [hdr, infodcm] = hdrInitDcm(infodcm);
 save([patientDir filesep info.reconName '_fIR3D.mat'], 'vol', 'hdr', 'infodcm');
 
 cd(fileparts(patientDir))
 
 [~, f, ~] = fileparts(patientDir);
+archiveDir = [info.saveDir filesep f];
 if lastPatientRecon(patientDir)
 	disp('Moving results to archive directory')
 	% clean up
-	movefile(patientDir, [info.saveDir filesep f], 'f');
+	movefile(patientDir, info.saveDir, 'f');
 else
 	disp('Copying results to archive directory')
 	% keep the raw and intermediate files for next recon of data
-	copyfile(patientDir, [info.saveDir filesep f] ,'f');
-	delete(reconParamFile)
-	%TO DO: Need to delete all _reconParams.mat from the saveDir that don't
-	%apply.
+	movefile(dicomDir, archiveDir ,'f');
+	movefile(reconParamFile, archiveDir, 'f');
+	movefile([patientDir filesep info.reconName '_fIR3D.mat'], archiveDir ,'f');
 end
 
-disp('Making a mat file image for the CT in the archive')
-makeCTmatFile([info.saveDir filesep f filesep 'CTAC']);
+if ~exist([archiveDir filesep 'CTAC.mat'], 'file')
+	disp('Making a mat file image for the CT in the archive')
+	makeCTmatFile([archiveDir filesep 'CTAC']);
+end
 end
 
 
@@ -233,4 +237,12 @@ end
 function result = lastPatientRecon(patientDir)
 files = listfiles('*_reconParams.mat', patientDir);
 result = length(files) == 1;
+end
+
+%% Are raw data missing?
+function result = isMissingRawData(patientDir)
+result = ~(exist([patientDir filesep 'raw'],'dir') && ...
+	       exist([patientDir filesep 'CTAC'],'dir') && ...
+		   exist([patientDir filesep 'norm3d.RDF'],'file') &&...
+		   exist([patientDir filesep 'geo3d.RDF'],'file'));
 end

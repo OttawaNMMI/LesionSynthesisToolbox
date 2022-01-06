@@ -2,10 +2,17 @@
 % fname = makefIR3DmatFile(fpath)
 function fname = makefIR3DmatFile(fpath, fname)
 
-load([fpath filesep 'ReconParams.mat'],'reconParams');
+if exist(fpath,'dir')==7
+	load([fpath filesep 'ReconParams.mat'],'reconParams');
+	dicomDir = [fpath filesep reconParams.dicomImageSeriesDesc];
+else
+	load(fpath, 'info');
+	fpath = fileparts(fpath);
+	dicomDir = [fpath filesep info.reconParams.SimName];
+end
 % TO DO: should be able to do this without GE generating a DICOM series
-infodcm = dicominfo([fpath filesep reconParams.dicomImageSeriesDesc filesep '_bin1_sl1.sdcopen']);
-vol = readSavefile([fpath filesep 'ir3d.sav']);
+infodcm = dicominfo([dicomDir filesep '_bin1_sl1.sdcopen']);
+vol = ptbReadSaveFile([fpath filesep 'ir3d.sav']);
 hdr = hdrInitDcm(infodcm);
 if nargin<2
 	fname = [fpath filesep 'fIR3D.mat'];
