@@ -72,8 +72,10 @@ switch lower(command)
 		start(LSTProcessingServiceTimer);
 		status = 'running';
 	case {'kill','stop'}
-		stop(LSTProcessingServiceTimer);
-		delete(LSTProcessingServiceTimer);
+		if ~isempty(LSTProcessingServiceTimer)
+			stop(LSTProcessingServiceTimer);
+			delete(LSTProcessingServiceTimer);
+		end
 		LSTProcessingServiceTimer = [];
 		status = 'stopped';
 	case 'one time'

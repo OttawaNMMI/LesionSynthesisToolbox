@@ -115,6 +115,9 @@ dicomDir = [patientDir filesep info.reconName];
 % Fix the DICOM files to include radiopharmaceutical information
 fixGEReconDICOMOutput(dicomDir);
 
+disp('Take a breath')
+pause(3);
+
 % Make one clean mat file of the reconstructed image
 files = listfiles('*.sdcopen', dicomDir);
 infodcm = dicominfo([dicomDir filesep files{1}]);
@@ -125,22 +128,27 @@ cd(fileparts(patientDir))
 
 [~, f, ~] = fileparts(patientDir);
 archiveDir = [info.saveDir filesep f];
+if ~exist(archiveDir,'dir')
+	mkdir(archiveDir)
+end
+
+if ~exist([archiveDir filesep 'CTAC.mat'], 'file')
+	disp('Making a mat file image for the CT in the archive')
+	makeCTmatFile([patientDir filesep 'CTAC'], [archiveDir filesep 'CTAC.mat']);
+end
+
 if lastPatientRecon(patientDir)
-	disp('Moving results to archive directory')
+	disp('Moving all results and intermediates to archive directory')
 	% clean up
 	movefile(patientDir, info.saveDir, 'f');
 else
-	disp('Copying results to archive directory')
+	disp('Moving results to archive directory')
 	% keep the raw and intermediate files for next recon of data
 	movefile(dicomDir, archiveDir ,'f');
 	movefile(reconParamFile, archiveDir, 'f');
 	movefile([patientDir filesep info.reconName '_fIR3D.mat'], archiveDir ,'f');
 end
 
-if ~exist([archiveDir filesep 'CTAC.mat'], 'file')
-	disp('Making a mat file image for the CT in the archive')
-	makeCTmatFile([archiveDir filesep 'CTAC']);
-end
 end
 
 
