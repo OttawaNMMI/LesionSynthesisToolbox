@@ -92,6 +92,7 @@ userConfig.attenDataDir = [patientDir filesep 'CTAC'];
 % TO DO: don't want this hardcoded
 userConfig.nParallelThreads = 4;
 vol = ptbRunRecon(userConfig);
+% vol = ptbReadSaveFile('ir3d.sav'); % to load vol
 
 %% Clean up parallel pool
 delete(gcp('nocreate'));
@@ -110,7 +111,7 @@ if ~isempty(fId)
 end
 
 % This is where the DICOM series is saved
-dicomDir = [patientDir filesep info.reconName];
+dicomDir = [patientDir filesep userConfig.dicomSeriesDesc];
 
 % Fix the DICOM files to include radiopharmaceutical information
 fixGEReconDICOMOutput(dicomDir);
