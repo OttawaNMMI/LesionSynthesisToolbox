@@ -24,6 +24,8 @@
 %
 
 % Example
+% LSTProcessingService('start',{'F:\LST Temp\Simulation Queue','F:\LST Temp\Recon Queue'})
+% LSTProcessingService('stop')
 % LSTProcessingService('one time debug',{'F:\LST Temp\Simulation Queue','F:\LST Temp\Recon Queue'})
 
 function status = LSTProcessingService(command, dataDirs)
@@ -38,7 +40,7 @@ if nargin<2
 end
 
 options = struct('dataDirs', [],...
-				  'parallelComputing', false); % TO DO
+				 'parallelComputing', false); % We used to have parallel computing option enabled before we swtiched to DUETTO which is multithreaded.
 
 command = lower(command);
 if contains(command,'debug')
@@ -110,10 +112,10 @@ end
 
 
 function LSTProcessingRoutine(hObject, event)
-if isstruct(hObject)
+if isstruct(hObject) % this indicates that we launched be calling with "one time" mode
 	options = hObject;
 	startTime = now;
-else
+else % this indicates that we laucnhed as a timer event
 	options = hObject.UserData;
 	startTime = event.Data.time;
 end
@@ -184,7 +186,7 @@ catch err
 end
 end
 
-
+%% Returns true is a lesion synthesis file or false if not (ie. reconstruction file)
 function val = isLesionSynthesisParamFile(filename)
 val = endsWith(filename, '_LesionParams.mat');
 end
