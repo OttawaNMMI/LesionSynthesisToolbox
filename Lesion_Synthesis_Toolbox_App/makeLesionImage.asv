@@ -125,7 +125,7 @@ end
 
 
 function [intensity, map, voxelValues] = sampleROI(imgData, ROI)
-map = makeMap(imgData.hdr, ROI, 1, 1);
+map = makeMap(imgData.hdr, ROI, 1, 2);
 voxelValues = imgData.vol(map>0);
 intensity = mean(voxelValues);
 end

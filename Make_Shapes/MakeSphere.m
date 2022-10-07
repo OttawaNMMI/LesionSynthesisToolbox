@@ -29,8 +29,8 @@
 % Created: 2017
 % Last Modified: April 18 2019 (Doc.)
 
-function img = MakeSphere(hdr, ROI_x, ROI_y, ROI_z, ROI_r, int)
-
+function img = MakeSphere(hdr, ROI_x, ROI_y, ROI_z, ROI_r, ~)
+int = 1;
 img = zeros(hdr.xdim, hdr.ydim, hdr.nplanes);
 ROI_x = (ROI_x-0.5)*hdr.pix_mm_xy; 
 ROI_y = (ROI_y-0.5)*hdr.pix_mm_xy; 
