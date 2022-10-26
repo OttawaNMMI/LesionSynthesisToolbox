@@ -3,6 +3,8 @@ function params = getShapeParamStr(ROIData)
 switch ROIData.shape
 	case 'Sphere (homo)'
 		params = [num2str(ROIData.rad) 'mm'];
+    case 'Blobby sphere (homo)'
+        params = [num2str(ROIData.rad) 'mm'];
 	otherwise
 		params = '';
 end

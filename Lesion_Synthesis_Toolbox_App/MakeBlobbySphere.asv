@@ -42,7 +42,7 @@ else
     x(:,1) = 0;
     x(:,end)=0;
     y(:,1) = 0;
-y(:,end) = 0;
+    y(:,end) = 0;
     % Create image
     h = figure();
     sph = trisurf(boundary([x(:)+ROI_x,y(:)+ROI_y,z(:)+ROI_z]),x+ROI_x, y+ROI_y, z+ROI_z, 'facecolor', 'r','AmbientStrength',0.5);
@@ -52,14 +52,16 @@ y(:,end) = 0;
     img2 = img1.*int;
     
     vol = 4/3 * pi * rad^3;
+    les_vol = sum(img2,'all');
     
     %testing 
-    disp(vol)
-    disp(sum(img2,'all'))
-    figure();
-    imshow(img2(:,:,round(ROI_z)));
+    %disp(vol)
+    %disp(les_vol)
+    %figure();
+    %imshow(img2(:,:,round(ROI_z)));
+ 
     
-    if sum(img2,'all') < (vol/1.5) 
+    if les_vol < (vol/1.5) %|| les_vol > (vol*1.5)
         img = MakeBlobbySphere(hdr,ROI_x,ROI_y,ROI_z,ROI_r, int,vars);
     else
         img = img2;

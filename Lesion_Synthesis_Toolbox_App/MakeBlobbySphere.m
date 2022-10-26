@@ -61,11 +61,11 @@ else
     %imshow(img2(:,:,round(ROI_z)));
  
     
-    if les_vol < (vol/1.5) || les_vol > (vol*1.5)
-        img = MakeBlobbySphere(hdr,ROI_x,ROI_y,ROI_z,ROI_r, int,vars);
-    else
+    %if les_vol < (vol/1.5) %|| les_vol > (vol*1.5)
+     %   img = MakeBlobbySphere(hdr,ROI_x,ROI_y,ROI_z,ROI_r, int,vars);
+    %else
         img = img2;
-    end
+    %end
 end
 end
 
