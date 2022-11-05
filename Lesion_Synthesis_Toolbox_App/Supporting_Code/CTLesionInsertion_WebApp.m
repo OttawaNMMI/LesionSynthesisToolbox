@@ -1,4 +1,4 @@
-% LesionInsertion_TOFV4 - This function genrated the lesion projection
+% CTLesionInsertion_WebApp - This function genrated the lesion projection
 % files and reconstructs the target image with the synthesic lesions
 %
 % To generate the projection files, a reconstruction
@@ -59,8 +59,7 @@
 
 function status = LesionInsertionDUETTO_WebApp(simulationName, lesionParamsFile, patDataDir, LIparams, baseDir, archiveDir)
 
-disp('WELCOME!!!!')
-disp('LesionInsertionDUETTO_WebApp - version that works 2021-07-04')
+disp('CTLesionInsertion_WebApp')
 
 if nargin<6
 	archiveDir = '';
@@ -227,7 +226,7 @@ reconParams.postFilterFwhm = lesionData.info.simParams.FilterFWHM;
 reconParams.beta = lesionData.info.simParams.beta;
 reconParams.attenDataDir = [baselinePETdir filesep 'CTAC'];
 % TO DO: don't want this hardcoded
-reconParams.nParallelThreads = getLSTThreads;
+reconParams.nParallelThreads = 4;
 
 % TO DO - baseline image needs to be trimmed to bedRange
 if status.baselineRecon 
@@ -349,7 +348,8 @@ reconParams.extractDataFlag = 0; % New 3/7/2021
 disp('Lesion:')
 disp(reconParams)
 
-reconParams.nParallelThreads = getLSTThreads;
+% TO DO: don't want this hardcoded
+reconParams.nParallelThreads = 4;
 % Save the recon parameters for future reference
 save reconParams ;
 
@@ -372,21 +372,6 @@ if ~isempty(fId)
 	disp('But we closed them');
 end
 status.lesionSynthesis = true;
-
-%% Insert the lesion in the CT as well - QUINN
-if synthesizeInCT
-	CTmatFile = [baselinePETdir filesep 'CTAC,mat'];
-	if ~exist(CTmatFile,'file')
-		makeCTmatFile([reconWithLesionDir filesep 'CTAC'], CTmatFile)
-	end
-	baselineCTImgData = load(CTmatFile);
-	lesionCTImgData = makeLesionImage(baselineCTImgData, lesionData);
-
-	save([basedir filesep 'CTwithLesion.mat'], '-struct', 'lesionCTImgData')
-	status.CTlesionSynthesis = true;
-else
-	status.CTlesionSynthesis = false;
-end
 
 end
 

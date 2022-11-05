@@ -89,8 +89,7 @@ userConfig.beta = info.reconParams.beta;
 
 userConfig.attenDataDir = [patientDir filesep 'CTAC'];
 
-% TO DO: don't want this hardcoded
-userConfig.nParallelThreads = 4;
+userConfig.nParallelThreads = getLSTThreads;
 vol = ptbRunRecon(userConfig);
 % vol = ptbReadSaveFile('ir3d.sav'); % to load vol
 
