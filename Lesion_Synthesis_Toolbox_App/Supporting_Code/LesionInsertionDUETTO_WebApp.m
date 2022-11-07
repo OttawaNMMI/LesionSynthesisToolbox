@@ -356,10 +356,6 @@ save reconParams ;
 % Perform PET reconstruction
 ptbRunRecon(reconParams);
 
-%% Clean up parallel pool
-delete(gcp('nocreate'));
-myCluster = parcluster('local');
-delete(myCluster.Jobs);
 %% Clean up unclosed files
 % TO DO - discuss with GE regarding leaving files open.
 fId = fopen('all');
@@ -374,23 +370,39 @@ end
 status.lesionSynthesis = true;
 
 %% Insert the lesion in the CT as well - QUINN
-if synthesizeInCT
-	CTmatFile = [baselinePETdir filesep 'CTAC,mat'];
+if synthesizeInCT(lesionData)
+	CTmatFile = [baselinePETdir filesep 'CTAC.mat'];
 	if ~exist(CTmatFile,'file')
+		CTmatFile = [reconWithLesionDir filesep 'CTAC.mat'];
 		makeCTmatFile([reconWithLesionDir filesep 'CTAC'], CTmatFile)
 	end
 	baselineCTImgData = load(CTmatFile);
-	lesionCTImgData = makeLesionImage(baselineCTImgData, lesionData);
+	lesionCTImgData = simulateCTLesion(baselineCTImgData, lesionData);
 
-	save([basedir filesep 'CTwithLesion.mat'], '-struct', 'lesionCTImgData')
+	save([reconWithLesionDir filesep 'CTwithLesion.mat'], '-struct', 'lesionCTImgData')
+
+	%Update the DICOM
+	files = listfiles('*.*',[reconWithLesionDir filesep 'CTAC']);
+	assert(length(files)==size(baselineCTImgData.vol,3))
+	parfor i=1:length(files)
+		info = dicominfo([reconWithLesionDir filesep 'CTAC' filesep files{i}]);
+% 		img = dicomread(info);
+		img = lesionCTImgData.vol(:,:,info.InstanceNumber)';
+		dicomwrite(img, [reconWithLesionDir filesep 'CTAC' filesep files{i}], info, 'CreateMode', 'copy');
+	end
 	status.CTlesionSynthesis = true;
 else
 	status.CTlesionSynthesis = false;
 end
 
+%% Clean up parallel pool
+delete(gcp('nocreate'));
+myCluster = parcluster('local');
+delete(myCluster.Jobs);
+
 end
 
-
+%% Are the reconstruction parameters the same? Detemrine need for baseline reconstruction to be performed.
 function isSame = isSameReconParam(reconParamsSim, reconParamsBL)
 if ischar(reconParamsSim)
 	reconParamsSim = load(reconParamsSim);
@@ -414,4 +426,14 @@ isSame = ...
 	(~contains(reconParamsSim.Algorithm,'OSEM') && reconParamsBL.beta == reconParamsSim.beta)) && ...
 	reconParamsBL.FilterFWHM == reconParamsSim.FilterFWHM  && ...
 	reconParamsBL.zfilter == reconParamsSim.zfilter;
+end
+
+%% Do we also need to synthesize a lesion in the CT?
+function res = synthesizeInCT(lesionData)
+res = false;
+for i=1:length(lesionData.lesion)
+	if ~isnan(lesionData.lesion{i}.CTval)
+		res = true;
+	end
+end
 end
