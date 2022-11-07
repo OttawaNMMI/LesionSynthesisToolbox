@@ -84,7 +84,12 @@ if archiveDataFlag
 
 	% Move the lesion parameters file
 	movefile(lesionParamsFile, [archiveDir filesep simulationName filesep info.reconProfile '_LesionParams.mat']);
-	
+
+	if isfield(status,'CTlesionSynthesis') && status.CTlesionSynthesis
+		copyfile([baseDir filesep 'reconWithLesion' filesep 'CTAC'], [archiveDir filesep simulationName]);
+		movefile([baseDir filesep 'reconWithLesion' filesep 'CTAC.mat'],[archiveDir filesep simulationName]);
+	end
+
 	% Send results to DICOM node
 	if isfield(info,'DICOMSend')
 		sendCmd = ['"' which('storescu.exe') '" -aet ' info.DICOMSend.SourceAET ' -aec ' info.DICOMSend.TargetAET ' -v ' info.DICOMSend.TargetHost ' ' num2str(info.DICOMSend.TargetPort) ' '];

@@ -230,6 +230,7 @@ reconParams.attenDataDir = [baselinePETdir filesep 'CTAC'];
 reconParams.nParallelThreads = getLSTThreads;
 
 % TO DO - baseline image needs to be trimmed to bedRange
+% TO DO - need to harmonize teh reconstruction pipeline (e.g. fixGEReconDICOMOutput)
 if status.baselineRecon 
 	disp(['Reconstructing a new baseline image in ' baselinePETdir])
 	% Define and save the recon parameters
@@ -379,7 +380,7 @@ if synthesizeInCT(lesionData)
 	baselineCTImgData = load(CTmatFile);
 	lesionCTImgData = simulateCTLesion(baselineCTImgData, lesionData);
 
-	save([reconWithLesionDir filesep 'CTwithLesion.mat'], '-struct', 'lesionCTImgData')
+	save([reconWithLesionDir filesep 'CTAC.mat'], '-struct', 'lesionCTImgData')
 
 	%Update the DICOM
 	files = listfiles('*.*',[reconWithLesionDir filesep 'CTAC']);
