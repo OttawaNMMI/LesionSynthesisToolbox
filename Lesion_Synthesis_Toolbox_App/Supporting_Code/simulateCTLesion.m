@@ -1,4 +1,4 @@
-function [lesionImgData, lesions, refROI] = simulateCTLesion(baselineImgData, lesionData, surroundingMargin)
+function [lesionImgData, lesions] = simulateCTLesion(baselineImgData, lesionData, surroundingMargin)
 
 % Reference regions not implemented for CT lesion intensity
 % % Sample the reference ROI PET activities from the baseline image
@@ -12,6 +12,11 @@ function [lesionImgData, lesions, refROI] = simulateCTLesion(baselineImgData, le
 
 % scale the pixel size to the target simulated image matrix
 lesionImgData = baselineImgData;
+
+% TO DO - do we want to indicate in the header information that this has a
+% synthetic lesion?????
+% lesionImgData.SeriesDescription = [lesionImgData.SeriesDescription ' - with lesion'];
+
 nLesions = length(lesionData.lesion);
 lesions = cell(nLesions,1);
 for li=1:nLesions
