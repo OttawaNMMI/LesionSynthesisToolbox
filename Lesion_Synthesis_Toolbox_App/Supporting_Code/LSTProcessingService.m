@@ -30,14 +30,16 @@
 
 function status = LSTProcessingService(command, dataDirs)
 
-persistent LSTProcessingServiceTimer
-
 if nargin<1
 	command = 'start';
 end
 if nargin<2
 	dataDirs = [];
 end
+
+timerTag = 'LST Processing Service'; % tag of the timer for the processing service trigger
+statusFile = 'c:\temp\LSTServiceStatus.txt'; % File indicating status of the LST service
+refreshTime = 3/24/60/60; % seconds interval to determine if service is running
 
 options = struct('dataDirs', [],...
 				 'parallelComputing', false); % We used to have parallel computing option enabled before we swtiched to DUETTO which is multithreaded.
@@ -52,47 +54,112 @@ end
 
 switch lower(command)
 	case 'start'
-		options.dataDirs = resolveDataDirs(dataDirs);
-		if ~isempty(LSTProcessingServiceTimer) && ishandle(LSTProcessingServiceTimer) && strcmpi(LSTProcessingServiceTimer.Running,'on')
-			disp('Simulation server is already running')
-			return
+		if strcmpi(LSTProcessingService('status'),'Running')
+			disp('LST Service is already running. A new service cannot be started. Stop the process first and then restart.')
+			return;
+		else
+			options.dataDirs = resolveDataDirs(dataDirs);
+
+			LSTProcessingServiceTimer = timer('TimerFcn',@LSTProcessingRoutine,...
+				'ExecutionMode','FixedDelay',...
+				'Period',5.0,'BusyMode','Drop','Userdata', options,...
+				'Name','LST Processing Service Timer',...
+				'Tag',timerTag);
+			start(LSTProcessingServiceTimer);
+
+			startStatusRefresh(statusFile, LSTProcessingServiceTimer);
 		end
-		timerTag = 'LST Processing Service';
-		
-		% Avoid multiple services
-		LSTProcessingServiceTimer = timerfind('Tag', timerTag);
-		if ~isempty(LSTProcessingServiceTimer)
-			stop(LSTProcessingServiceTimer)
-			delete(LSTProcessingServiceTimer);
-		end
-		
-		LSTProcessingServiceTimer = timer('TimerFcn',@LSTProcessingRoutine,...
-			'ExecutionMode','FixedDelay',...'FixedSpacing',...
-			'Period',5.0,'BusyMode','Drop','Userdata', options,...
-			'Name','LST Processing Service Timer',...
-			'Tag',timerTag);
-		start(LSTProcessingServiceTimer);
 		status = 'running';
 	case {'kill','stop'}
+		LSTProcessingServiceTimer = timerfind('tag',timerTag);
 		if ~isempty(LSTProcessingServiceTimer)
 			stop(LSTProcessingServiceTimer);
 			delete(LSTProcessingServiceTimer);
 		end
-		LSTProcessingServiceTimer = [];
+		
+		stopStatusRefresh;
+
 		status = 'stopped';
 	case 'one time'
 		options.dataDirs = resolveDataDirs(dataDirs);
+		
+		startStatusRefresh(statusFile, LSTProcessingServiceStatusTimer);
+		
 		LSTProcessingRoutine(options)
+		
+		stopStatusRefresh;
+
 		status = 'stopped';
 	case 'status'
-		if isempty(LSTProcessingServiceTimer)
-			status = 'stopped';
-		elseif strcmpi(LSTProcessingServiceTimer.Running,'on')
-			status = 'running';
+		if 0 % old way of doing it, but will not work for as a service running ina differnt MatLab environment
+			if isempty(LSTProcessingServiceTimer)
+				status = 'stopped';
+			elseif strcmpi(LSTProcessingServiceTimer.Running,'on')
+				status = 'running';
+			else
+				status = 'stopped';
+				LSTProcessingServiceTimer.disp
+			end
 		else
-			status = 'stopped';
-			LSTProcessingServiceTimer.disp
+			if exist(statusFile,'file')
+				try
+					fID = fopen(statusFile,"r");
+					lastUpdated = fgetl(fID);
+					fclose(fID);
+					timeDiff = now()-datenum(lastUpdated);
+					if timeDiff<0 || timeDiff>refreshTime
+						status = 'stopped';
+					else
+						status = 'running';
+					end
+				catch
+					status = 'stopped';
+				end
+			else
+				status = 'stopped';
+			end
 		end
+end
+end
+
+
+function LSTProcessingServiceStatusTimer = startStatusRefresh(statusFile, LSTProcessingServiceTimer)
+% this service will update the status file with a time stamp
+% every second. The status can be monitored using the following
+% to test if the service is running:
+%       strcmpi(LSTProcessingService('status'),'Running')
+LSTProcessingServiceStatusTimer = timer('TimerFcn',@refreshStatus,...
+	'ExecutionMode','FixedDelay',...
+	'Period',1.0,'BusyMode','Drop',...
+	'Name','LST Processing Service Status Timer',...
+	'Tag','LST Processing Service Status Timer',...
+	'UserData',struct('statusFile',statusFile,...
+	                  'timerHandle',LSTProcessingServiceTimer));
+start(LSTProcessingServiceStatusTimer);
+end
+
+
+function LSTProcessingServiceStatusTimer = stopStatusRefresh
+LSTProcessingServiceStatusTimer = timerfind('tag','LST Processing Service Status Timer');
+data = get(LSTProcessingServiceStatusTimer, 'UserData');
+if ~isempty(LSTProcessingServiceStatusTimer)
+	stop(LSTProcessingServiceStatusTimer);
+	delete(LSTProcessingServiceStatusTimer);
+end
+LSTProcessingServiceStatusTimer = [];
+if isfield(data,'statusFile') && exist(data.statusFile,'file')
+	delete(data.statusFile)
+end
+end
+
+
+function refreshStatus(hObject, event)
+data = get(hObject,'UserData');
+% LSTProcessingServiceTimer = timerfind('Tag', data.timerTag);
+if ~isempty(data.timerHandle) && strcmpi(data.timerHandle.Running,'on')
+	fID = fopen(data.statusFile,"w+");
+	fprintf(fID, datestr(now(),31));
+	fclose(fID);
 end
 end
 
@@ -105,7 +172,7 @@ if isempty(dataDirs)
 		load([p filesep 'DataDirectories.mat'], 'simulationQueueDir')
 		dataDirs = simulationQueueDir;
 	catch
-		error('No processing directories specified or DataDirectories.mat configureation file found')
+		error('No processing directories specified or DataDirectories.mat configuration file found.')
 	end
 end
 end
