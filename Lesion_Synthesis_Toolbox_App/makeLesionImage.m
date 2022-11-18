@@ -31,6 +31,9 @@ for li=1:nLesions
 		case 'Bq/cc'
 			lesion.PTintensity = lesion.PTval;
 			lesion.referencePTintensity = 1;
+		case {'SUV','SUV-bw [g/mL]'}
+			lesion.PTintensity = lesion.PTval;
+			lesion.referencePTintensity = 1 / applyUptakeUnits(1, lesionImgData.hdr, 'SUV-bw [g/mL]');
 		otherwise
 			indx = strfind(lesion.mode,':');
 			if length(indx) == 1
