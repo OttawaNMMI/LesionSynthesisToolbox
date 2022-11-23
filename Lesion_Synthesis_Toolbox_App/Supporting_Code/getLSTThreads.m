@@ -7,6 +7,6 @@ switch 2
 	case 1 %number of cores avaialable
 		n = feature('NumCores');
 	case 2 %use resources, but leave some as spare
-		n = min([floor(feature('NumCores')*.75),...
-			feature('NumCores')-2]);
+		n = max(4,min([floor(feature('NumCores')*.75),...
+			feature('NumCores')-2]));
 end
