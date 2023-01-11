@@ -83,7 +83,7 @@ switch lower(command)
 	case 'one time'
 		options.dataDirs = resolveDataDirs(dataDirs);
 		
-		startStatusRefresh(statusFile, LSTProcessingServiceStatusTimer);
+		startStatusRefresh(statusFile, 'One time');
 		
 		LSTProcessingRoutine(options)
 		
@@ -156,7 +156,7 @@ end
 function refreshStatus(hObject, event)
 data = get(hObject,'UserData');
 % LSTProcessingServiceTimer = timerfind('Tag', data.timerTag);
-if ~isempty(data.timerHandle) && strcmpi(data.timerHandle.Running,'on')
+if ischar(data.timerHandle) && strcmpi(data.timerHandle,'One time') || ~isempty(data.timerHandle) && strcmpi(data.timerHandle.Running,'on')
 	fID = fopen(data.statusFile,"w+");
 	fprintf(fID, datestr(now(),31));
 	fclose(fID);
