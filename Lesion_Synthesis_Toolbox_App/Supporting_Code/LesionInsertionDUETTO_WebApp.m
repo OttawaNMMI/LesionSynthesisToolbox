@@ -240,9 +240,16 @@ reconParams.nParallelThreads = getLSTThreads;
 if status.baselineRecon 
 	disp(['Reconstructing a new baseline image in ' baselinePETdir])
 	% Define and save the recon parameters
+	info = struct('reconParams',lesionData.info.simParams,...
+				  'saveDir', fileparts(patDataDir),...
+				  'reconName', lesionData.info.reconProfile,...
+				  'patDataDir', [patDataDir filesep 'raw']);
+	info.reconParams.SimName = lesionData.info.reconProfile;
+	info.reconParams.SeriesDesc = 'LST Baseline Reconstruction';
+	save([baselinePETdir filesep lesionData.info.reconProfile '_reconParams.mat'],'info')
+
 	reconParams.dicomSeriesDesc = lesionData.info.reconProfile;
 	reconParams.dicomImageSeriesDesc = [lesionData.info.reconProfile '_BaselineRecon'];
-	save([baselinePETdir filesep lesionData.info.reconProfile '_reconParams.mat'],'reconParams')
 	
 	% Perform a PET recon with Attenuation Correction [GT: Patient without Lesion]
 	vol = ptbRunRecon(reconParams);
