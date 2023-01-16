@@ -35,7 +35,7 @@
 % TO DO - determine if there is suitable baseline data to copy over from
 % the lesion archive
 
-function ReconJob(reconParamFile)
+function img = ReconJob(reconParamFile)
 load(reconParamFile,'info');
 switch info.reconParams.ReconToolbox
 	case 'DUETTO'
@@ -123,6 +123,9 @@ files = listfiles('*.sdcopen', dicomDir);
 infodcm = dicominfo([dicomDir filesep files{1}]);
 [hdr, infodcm] = hdrInitDcm(infodcm);
 save([patientDir filesep info.reconName '_fIR3D.mat'], 'vol', 'hdr', 'infodcm');
+img = struct('vol', vol,...
+			'hdr', hdr,...
+			'infodcm', infodcm);
 
 cd(fileparts(patientDir))
 

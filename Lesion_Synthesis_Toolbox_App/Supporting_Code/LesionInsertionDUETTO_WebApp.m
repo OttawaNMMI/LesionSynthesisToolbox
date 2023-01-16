@@ -235,55 +235,73 @@ reconParams.attenDataDir = [baselinePETdir filesep 'CTAC'];
 % TO DO: don't want this hardcoded
 reconParams.nParallelThreads = getLSTThreads;
 
+%% Perrfom a baseline reconstruction
+% In the context of LesionSynthesis Toolbox, this is treakier than it at
+% first seems, because needs to simulate first reconstructing the baseline
+% including archiving in the right location. Best practice is to call 
+% runImageRecon_WebApp(filename), where filename contains all the
+% reconstruction parameters.
+
 % TO DO - baseline image needs to be trimmed to bedRange
 % TO DO - need to harmonize teh reconstruction pipeline (e.g. fixGEReconDICOMOutput)
-if status.baselineRecon 
+if status.baselineRecon
 	disp(['Reconstructing a new baseline image in ' baselinePETdir])
-	% Define and save the recon parameters
-	info = struct('reconParams',lesionData.info.simParams,...
-				  'saveDir', fileparts(patDataDir),...
-				  'reconName', lesionData.info.reconProfile,...
-				  'patDataDir', [patDataDir filesep 'raw']);
-	info.reconParams.SimName = lesionData.info.reconProfile;
-	info.reconParams.SeriesDesc = 'LST Baseline Reconstruction';
-	save([baselinePETdir filesep lesionData.info.reconProfile '_reconParams.mat'],'info')
+	if 1
+		filename = [baselinePETdir filesep lesionData.info.reconProfile '_reconParams.mat'];
+		info = struct('reconParams',lesionData.info.simParams,...
+			'saveDir', fileparts(patDataDir),...
+			'reconName', lesionData.info.reconProfile,...
+			'patDataDir', [patDataDir filesep 'raw']);
+		save(filename, 'info')
+		baselineImgData =  runImageRecon_WebApp(filename);
+		clear('info')
+	else
+		% Define and save the recon parameters
+		info = struct('reconParams',lesionData.info.simParams,...
+			'saveDir', fileparts(patDataDir),...
+			'reconName', lesionData.info.reconProfile,...
+			'patDataDir', [patDataDir filesep 'raw']);
+		info.reconParams.SimName = lesionData.info.reconProfile;
+		info.reconParams.SeriesDesc = 'LST Baseline Reconstruction';
+		save([baselinePETdir filesep lesionData.info.reconProfile '_reconParams.mat'],'info')
 
-	reconParams.dicomSeriesDesc = lesionData.info.reconProfile;
-	reconParams.dicomImageSeriesDesc = [lesionData.info.reconProfile '_BaselineRecon'];
-	
-	% Perform a PET recon with Attenuation Correction [GT: Patient without Lesion]
-	vol = ptbRunRecon(reconParams);
-	%% Clean up parallel pool
-	delete(gcp('nocreate'));
-	myCluster = parcluster('local');
-	delete(myCluster.Jobs);
-	%% Clean up unclosed files
-	% TO DO - discuss with GE regarding leaving files open.
-	fId = fopen('all');
-	if ~isempty(fId)
-		disp('Someone left files open:');
-		for i=1:length(fId)
-			disp(fopen(fId(i)));
+		reconParams.dicomSeriesDesc = lesionData.info.reconProfile;
+		reconParams.dicomImageSeriesDesc = [lesionData.info.reconProfile '_BaselineRecon'];
+
+		% Perform a PET recon with Attenuation Correction [GT: Patient without Lesion]
+		vol = ptbRunRecon(reconParams);
+		%% Clean up parallel pool
+		delete(gcp('nocreate'));
+		myCluster = parcluster('local');
+		delete(myCluster.Jobs);
+		%% Clean up unclosed files
+		% TO DO - discuss with GE regarding leaving files open.
+		fId = fopen('all');
+		if ~isempty(fId)
+			disp('Someone left files open:');
+			for i=1:length(fId)
+				disp(fopen(fId(i)));
+			end
+			fclose('all');
+			disp('But we closed them');
 		end
-		fclose('all');
-		disp('But we closed them');
-	end
-	
-	% This is where the DICOM series is saved
-	dir = [baselinePETdir filesep info.reconName];
-	files = listfiles('*.sdcopen', dir);
-	infodcm = dicominfo([dir filesep files{1}]);
-	
 
-	% Make one clean mat file of the reconstructed image
-    hdr = hdrInitDcm(infodcm);
-    save([baselinePETdir filesep lesionData.info.reconProfile '_fIR3D.mat'], 'vol', 'hdr', 'infodcm');
-	baselineImgData = struct('vol', vol,...
-		                     'hdr', hdr,...
-							 'infodcm', infodcm);
-    if ~isempty(archiveDir)
-		disp(['Archiving baseline image data to ' archiveDir filesep 'Baseline_PET']);
-		copyfile(baselinePETdir, [archiveDir filesep 'Baseline_PET']); % what about adding the reconProfileName to the image filenames?
+		% This is where the DICOM series is saved
+		dir = [baselinePETdir filesep info.reconName];
+		files = listfiles('*.sdcopen', dir);
+		infodcm = dicominfo([dir filesep files{1}]);
+
+
+		% Make one clean mat file of the reconstructed image
+		hdr = hdrInitDcm(infodcm);
+		save([baselinePETdir filesep lesionData.info.reconProfile '_fIR3D.mat'], 'vol', 'hdr', 'infodcm');
+		baselineImgData = struct('vol', vol,...
+			'hdr', hdr,...
+			'infodcm', infodcm);
+		if ~isempty(archiveDir)
+			disp(['Archiving baseline image data to ' archiveDir filesep 'Baseline_PET']);
+			copyfile(baselinePETdir, [archiveDir filesep 'Baseline_PET']); % what about adding the reconProfileName to the image filenames?
+		end
 	end
 end
 
