@@ -112,6 +112,7 @@ end
 % This is where the DICOM series is saved
 % dicomDir = [patientDir filesep userConfig.dicomSeriesDesc];
 dicomDir = [patientDir filesep info.reconName];
+movefile([patientDir filesep userConfig.dicomSeriesDesc], dicomDir)
 
 % Fix the DICOM files to include radiopharmaceutical information
 fixGEReconDICOMOutput(dicomDir);
@@ -146,7 +147,7 @@ if lastPatientRecon(patientDir)
 	% clean up
 	movefile(patientDir, info.saveDir, 'f');
 else
-	disp('Moving results to archive directory')
+	disp(['Moving results to archive directory:' archiveDir])
 	% keep the raw and intermediate files for next recon of data
 	movefile(dicomDir, archiveDir ,'f');
 	movefile(reconParamFile, archiveDir, 'f');
