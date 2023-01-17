@@ -35,18 +35,18 @@
 % TO DO - determine if there is suitable baseline data to copy over from
 % the lesion archive
 
-function img = ReconJob(reconParamFile)
+function img = runImageRecon_WebApp(reconParamFile)
 load(reconParamFile,'info');
 switch info.reconParams.ReconToolbox
 	case 'DUETTO'
-		ReconJob_DUETTO(reconParamFile);
+		img = ReconJob_DUETTO(reconParamFile);
 	otherwise
 		ReconJob_GEPETRecon(reconParamFile);
 end
 end
 
 %% DUETTO
-function ReconJob_DUETTO(reconParamFile)
+function img = ReconJob_DUETTO(reconParamFile)
 disp('======================================================================================================')
 disp('|                                                                                                    |')
 disp(['|  Starting DUETTO recon job for: ' reconParamFile repmat(' ',1, 67-length(reconParamFile)) '|'])   
@@ -110,7 +110,8 @@ if ~isempty(fId)
 end
 
 % This is where the DICOM series is saved
-dicomDir = [patientDir filesep userConfig.dicomSeriesDesc];
+% dicomDir = [patientDir filesep userConfig.dicomSeriesDesc];
+dicomDir = [patientDir filesep info.reconName];
 
 % Fix the DICOM files to include radiopharmaceutical information
 fixGEReconDICOMOutput(dicomDir);
@@ -129,8 +130,8 @@ img = struct('vol', vol,...
 
 cd(fileparts(patientDir))
 
-[~, f, ~] = fileparts(patientDir);
-archiveDir = [info.saveDir filesep f];
+% [~, f, ~] = fileparts(patientDir);
+archiveDir = [info.saveDir filesep hdr.patientID];
 if ~exist(archiveDir,'dir')
 	mkdir(archiveDir)
 end
@@ -160,7 +161,7 @@ end
 
 
 %% GEPETRecon - deprecated by DUETTO
-function ReconJob_GEPETRecon(reconParamFile)
+function img = ReconJob_GEPETRecon(reconParamFile)
 disp('==============================================================')
 disp('|                                                            |')
 disp(['|  Starting recon job for: ' reconParamFile repmat(' ',1, 34-length(reconParamFile)) '|'])   
@@ -223,6 +224,9 @@ fixGEReconDICOMOutput(reconParams.dicomImageSeriesDesc)
 % Make one clean mat file of the reconstructed image
 [hdr, infodcm] = hdrInitDcm(infodcm);
 save([patientDir filesep info.reconName '_fIR3D.mat'], 'vol', 'hdr', 'infodcm');
+img = struct('vol', vol,...
+			'hdr', hdr,...
+			'infodcm', infodcm);
 
 cd(fileparts(patientDir))
 
