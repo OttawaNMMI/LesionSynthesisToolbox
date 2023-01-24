@@ -11,6 +11,10 @@ switch sourceUnits
 		loc(3) = loc(3)/hdr.pix_mm_z;
 	case 'pixel'
 		% do nothing
+    case 'relative fraction'
+        loc(1) = loc(1)*hdr.xdim;
+        loc(2) = loc(2)*hdr.ydim;
+        loc(3) = (1-loc(3))*hdr.nplanes;
 end
 
 switch targetUnits
@@ -24,5 +28,9 @@ switch targetUnits
 		loc(3) = loc(3)*hdr.pix_mm_z;
 	case 'pixel'
 		% do nothing
+     case 'relative fraction'
+        loc(1) = loc(1)/hdr.xdim;
+        loc(2) = loc(2)/hdr.ydim;
+        loc(3) = 1-loc(3)/hdr.nplanes;
 end
 end
