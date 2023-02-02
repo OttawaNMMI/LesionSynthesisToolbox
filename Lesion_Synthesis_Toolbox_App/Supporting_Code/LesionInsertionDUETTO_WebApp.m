@@ -418,7 +418,6 @@ if synthesizeInCT(lesionData)
 	assert(length(files)==size(baselineCTImgData.vol,3))
 	parfor i=1:length(files)
 		info = dicominfo([reconWithLesionDir filesep 'CTAC' filesep files{i}]);
-% 		img = dicomread(info);
 		img = lesionCTImgData.vol(:,:,info.InstanceNumber)';
 		dicomwrite(img, [reconWithLesionDir filesep 'CTAC' filesep files{i}], info, 'CreateMode', 'copy');
 	end
