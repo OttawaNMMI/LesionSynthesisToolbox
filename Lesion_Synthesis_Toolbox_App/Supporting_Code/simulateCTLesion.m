@@ -33,7 +33,7 @@ for li=1:nLesions
 			lesionImgData.vol(lesion.map>0) = lesion.CTval;
 		case 'Final (Maintain Texture)'
 			map = lesion.map>0;
-			lesionImgData.vol(map) = lesionImgData.vol(map) + lesion.CTval - baselineBackgroundCTintesity;
+			lesionImgData.vol(map) = lesionImgData.vol(map) + lesion.CTval - lesion.baselineBackgroundCTintesity;
 		otherwise
 			error(['Unrecognized lesion additionMode property ' lesion.CTadditionMode]);
 	end

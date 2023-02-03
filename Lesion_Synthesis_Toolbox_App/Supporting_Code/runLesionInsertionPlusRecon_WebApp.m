@@ -86,12 +86,12 @@ if archiveDataFlag
 	movefile(lesionParamsFile, [archiveDir filesep simulationName filesep info.reconProfile '_LesionParams.mat']);
 
 	if isfield(status,'CTlesionSynthesis') && status.CTlesionSynthesis
-		copyfile([baseDir filesep 'reconWithLesion' filesep 'CTAC'], [archiveDir filesep simulationName]);
+		copyfile([baseDir filesep 'reconWithLesion' filesep 'CTAC_DICOM'], [archiveDir filesep simulationName filesep 'CTAC_DICOM']);
 		movefile([baseDir filesep 'reconWithLesion' filesep 'CTAC.mat'],[archiveDir filesep simulationName]);
 	end
 
 	% Send results to DICOM node
-	if isfield(info,'DICOMSend')
+	if isfield(info,'DICOMSend') && ~isempty(info.DICOMSend.TargetAET)
 		sendCmd = ['"' which('storescu.exe') '" -aet ' info.DICOMSend.SourceAET ' -aec ' info.DICOMSend.TargetAET ' -v ' info.DICOMSend.TargetHost ' ' num2str(info.DICOMSend.TargetPort) ' '];
 		disp('Sending lesion PET to DICOM:')
 		disp(sendCmd)
@@ -101,7 +101,7 @@ if archiveDataFlag
 		if info.DICOMSend.IncludeCT
 			disp('Sending CT data to DICOM:')
 			disp(sendCmd)
-			[status, response] = system([sendCmd '+sd "' baseDir filesep 'reconWithLesion' filesep 'CTAC"']);
+			[status, response] = system([sendCmd '+sd "' baseDir filesep 'reconWithLesion' filesep 'CTAC_DICOM"']);
 			disp('DICOM send response:')
 			disp(response);
 		end
@@ -109,11 +109,7 @@ if archiveDataFlag
 	
 	% Clean up temporary directory
 	rmdir(baseDir,'s')
-	
-	%% Test that lesion intenisties are as expected
-	% TO DO - fix me
-% 	testLesionIntensities([archiveDir filesep simulationName]);
-	
+
 else % Don't archive the data - leave at all where it was processed   TO DO: not tested
 	
 	% Reorganize the data

@@ -232,7 +232,6 @@ reconParams.zFilter = lesionData.info.simParams.zfilter;
 reconParams.postFilterFwhm = lesionData.info.simParams.FilterFWHM;
 reconParams.beta = lesionData.info.simParams.beta;
 reconParams.attenDataDir = [baselinePETdir filesep 'CTAC_DICOM'];
-% TO DO: don't want this hardcoded
 reconParams.nParallelThreads = getLSTThreads;
 
 %% Perrfom a baseline reconstruction
@@ -243,7 +242,6 @@ reconParams.nParallelThreads = getLSTThreads;
 % reconstruction parameters.
 
 % TO DO - baseline image needs to be trimmed to bedRange
-% TO DO - need to harmonize teh reconstruction pipeline (e.g. fixGEReconDICOMOutput)
 if status.baselineRecon
 	disp(['Reconstructing a new baseline image in ' baselinePETdir])
 	if 1
