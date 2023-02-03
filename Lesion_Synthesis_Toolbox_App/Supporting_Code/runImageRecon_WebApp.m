@@ -21,7 +21,7 @@
 % synthesis files should be generated 
 %
 % patdatadir - Typically this folder should have two
-% stored directies within. The first is a CTAC folder with the slices of
+% stored directies within. The first is a CTAC_DICOM folder with the slices of
 % the patient CTAC image used to ATTEN CORR by the GE RECON TOOLBOX.
 %
 % Next Steps: LesionInsertion_GEPETreconParams, LesionInsertion_TOFV4,
@@ -63,7 +63,7 @@ patientDir = fileparts(reconParamFile);
 % Copy the necessary files to Baseline PET dirs
 if isMissingRawData(patientDir)
 	copyfile([info.patDataDir filesep 'raw'],[patientDir filesep 'raw'])
-	copyfile([info.patDataDir filesep 'CTAC'],[patientDir filesep 'CTAC'])
+	copyfile([info.patDataDir filesep 'CTAC_DICOM'],[patientDir filesep 'CTAC_DICOM'])
 	copyfile([info.patDataDir filesep 'norm3d'],[patientDir filesep 'norm3d.RDF'])
 	copyfile([info.patDataDir filesep 'geo3d'],[patientDir filesep 'geo3d.RDF'])
 end
@@ -87,7 +87,7 @@ userConfig.zFilter = info.reconParams.zfilter;
 userConfig.postFilterFwhm = info.reconParams.FilterFWHM;
 userConfig.beta = info.reconParams.beta;
 
-userConfig.attenDataDir = [patientDir filesep 'CTAC'];
+userConfig.attenDataDir = [patientDir filesep 'CTAC_DICOM'];
 
 userConfig.nParallelThreads = getLSTThreads;
 vol = ptbRunRecon(userConfig);
@@ -139,7 +139,7 @@ end
 
 if ~exist([archiveDir filesep 'CTAC.mat'], 'file')
 	disp('Making a mat file image for the CT in the archive')
-	makeCTmatFile([patientDir filesep 'CTAC'], [archiveDir filesep 'CTAC.mat']);
+	makeCTmatFile([patientDir filesep 'CTAC_DICOM'], [archiveDir filesep 'CTAC.mat']);
 end
 
 if lastPatientRecon(patientDir)
@@ -178,7 +178,7 @@ patientDir = fileparts(reconParamFile);
 
 % Copy the necessary files to Baseline PET dirs
 copyfile([info.patDataDir filesep 'raw'],[patientDir filesep 'raw'])
-copyfile([info.patDataDir filesep 'CTAC'],[patientDir filesep 'CTAC'])
+copyfile([info.patDataDir filesep 'CTAC_DICOM'],[patientDir filesep 'CTAC_DICOM'])
 copyfile([info.patDataDir filesep 'norm3d'],patientDir)
 copyfile([info.patDataDir filesep 'geo3d'],patientDir)
 
@@ -243,7 +243,7 @@ else
 	%apply.
 end
 
-makeCTmatFile([info.saveDir filesep f filesep 'CTAC']);
+makeCTmatFile([info.saveDir filesep f filesep 'CTAC_DICOM']);
 end
 
 
@@ -258,7 +258,7 @@ end
 %% Are raw data missing?
 function result = isMissingRawData(patientDir)
 result = ~(exist([patientDir filesep 'raw'],'dir') && ...
-	       exist([patientDir filesep 'CTAC'],'dir') && ...
+	       exist([patientDir filesep 'CTAC_DICOM'],'dir') && ...
 		   exist([patientDir filesep 'norm3d.RDF'],'file') &&...
 		   exist([patientDir filesep 'geo3d.RDF'],'file'));
 end

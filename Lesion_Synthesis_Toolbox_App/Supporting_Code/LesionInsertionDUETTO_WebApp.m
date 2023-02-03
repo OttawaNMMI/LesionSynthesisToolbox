@@ -35,7 +35,7 @@
 % lesionImg - matrix describing image with indicies in units of Bq/cc
 %
 % patdatadir - Typically this folder should have two
-% stored directies within. The first is a CTAC folder with the slices of
+% stored directies within. The first is a CTAC_DICOM folder with the slices of
 % the patient CTAC image used to ATTEN CORR by the GE RECON TOOLBOX.
 %
 % LIparams - generated in previous caller function but a cell describing
@@ -96,8 +96,8 @@ switch LIparams.copyFiles
 			mkdir([baselinePETdir filesep 'raw']);
 			status.copyFiles = true;
 		end
-		if ~exist([baselinePETdir filesep 'CTAC'],'dir')
-			mkdir([baselinePETdir filesep 'CTAC']);
+		if ~exist([baselinePETdir filesep 'CTAC_DICOM'],'dir')
+			mkdir([baselinePETdir filesep 'CTAC_DICOM']);
 			status.copyFiles = true;
 		end
 		if ~status.copyFiles
@@ -132,7 +132,7 @@ if status.copyFiles
 		copyfile(patDataDir, baselinePETdir)
 	else
 		copyfile([patDataDir filesep 'raw'], [baselinePETdir filesep 'raw'])
-		copyfile([patDataDir filesep 'CTAC'], [baselinePETdir filesep 'CTAC'])
+		copyfile([patDataDir filesep 'CTAC_DICOM'], [baselinePETdir filesep 'CTAC_DICOM'])
 		% TO DO: do we need this????
 		copyfile([patDataDir filesep 'norm3d'], [baselinePETdir filesep 'norm3d.RDF'])
 		copyfile([patDataDir filesep 'geo3d'], [baselinePETdir filesep 'geo3d.RDF'])
@@ -231,7 +231,7 @@ reconParams.nIterations = lesionData.info.simParams.Iterations;
 reconParams.zFilter = lesionData.info.simParams.zfilter;
 reconParams.postFilterFwhm = lesionData.info.simParams.FilterFWHM;
 reconParams.beta = lesionData.info.simParams.beta;
-reconParams.attenDataDir = [baselinePETdir filesep 'CTAC'];
+reconParams.attenDataDir = [baselinePETdir filesep 'CTAC_DICOM'];
 % TO DO: don't want this hardcoded
 reconParams.nParallelThreads = getLSTThreads;
 
@@ -349,7 +349,7 @@ else
 	cd(reconWithLesionDir);
 	
 	copyfile([baselinePETdir filesep 'raw'],[reconWithLesionDir filesep 'raw'])
-	copyfile([baselinePETdir filesep 'CTAC'],[reconWithLesionDir filesep 'CTAC'])
+	copyfile([baselinePETdir filesep 'CTAC_DICOM'],[reconWithLesionDir filesep 'CTAC_DICOM'])
 	copyfile([baselinePETdir filesep 'norm3d.RDF'],reconWithLesionDir)
 	copyfile([baselinePETdir filesep 'geo3d.RDF'],reconWithLesionDir)
 	
@@ -375,7 +375,7 @@ reconParams.dicomSeriesDesc = lesionData.info.simParams.SeriesDesc;
 reconParams.dicomImageSeriesDesc = lesionData.info.simParams.SeriesDesc; %'Synthetic_Lesion_Offline_3D';
 reconParams.workDir = reconWithLesionDir;
 reconParams.petDataDir = [reconWithLesionDir filesep 'raw'];
-reconParams.attenDataDir = [reconWithLesionDir filesep 'CTAC'];
+reconParams.attenDataDir = [reconWithLesionDir filesep 'CTAC_DICOM'];
 reconParams.extractDataFlag = 0; % New 3/7/2021
 
 disp('Lesion:')
@@ -406,7 +406,7 @@ if synthesizeInCT(lesionData)
 	CTmatFile = [baselinePETdir filesep 'CTAC.mat'];
 	if ~exist(CTmatFile,'file')
 		CTmatFile = [reconWithLesionDir filesep 'CTAC.mat'];
-		makeCTmatFile([reconWithLesionDir filesep 'CTAC'], CTmatFile)
+		makeCTmatFile([reconWithLesionDir filesep 'CTAC_DICOM'], CTmatFile)
 	end
 	baselineCTImgData = load(CTmatFile);
 	lesionCTImgData = simulateCTLesion(baselineCTImgData, lesionData);
@@ -414,12 +414,12 @@ if synthesizeInCT(lesionData)
 	save([reconWithLesionDir filesep 'CTAC.mat'], '-struct', 'lesionCTImgData')
 
 	%Update the DICOM
-	files = listfiles('*.*',[reconWithLesionDir filesep 'CTAC']);
+	files = listfiles('*.*',[reconWithLesionDir filesep 'CTAC_DICOM']);
 	assert(length(files)==size(baselineCTImgData.vol,3))
 	parfor i=1:length(files)
-		info = dicominfo([reconWithLesionDir filesep 'CTAC' filesep files{i}]);
+		info = dicominfo([reconWithLesionDir filesep 'CTAC_DICOM' filesep files{i}]);
 		img = lesionCTImgData.vol(:,:,info.InstanceNumber)';
-		dicomwrite(img, [reconWithLesionDir filesep 'CTAC' filesep files{i}], info, 'CreateMode', 'copy');
+		dicomwrite(img, [reconWithLesionDir filesep 'CTAC_DICOM' filesep files{i}], info, 'CreateMode', 'copy');
 	end
 	status.CTlesionSynthesis = true;
 else

@@ -7,7 +7,7 @@ end
 if exist(targetDir,'dir')~=7
 	mkdir(targetDir)
 	mkdir([targetDir filesep 'raw'])
-	mkdir([targetDir filesep 'CTAC'])
+	mkdir([targetDir filesep 'CTAC_DICOM'])
 end
 
 defNewHdr.PatientName = struct('FamilyName','Anon',...
@@ -174,14 +174,14 @@ end
 if nargin>=4
 	progressBar.Message = 'Anonymizing CTAC files';
 end
-files = listfiles('*.CTDC.*',[dir filesep 'CTAC']);
+files = listfiles('*.CTDC.*',[dir filesep 'CTAC_DICOM']);
 nfiles = length(files);
 for fi=1:nfiles
 	if nargin>=4
 		progressBar.Value = 0.2 +0.8 * fi/nfiles;
 	end
 	disp(files{fi})
-	info = dicominfo([dir filesep 'CTAC' filesep files{fi}]);
+	info = dicominfo([dir filesep 'CTAC_DICOM' filesep files{fi}]);
 	for i = 1:nfields
 		if isfield(info, fields{i})
 			if ~isfield(sourceHdr,fields{i})
@@ -203,7 +203,7 @@ for fi=1:nfiles
 			disp([' - Missing field: ' fields{i}])
 		end
 	end
-	status = dicomwrite(dicomread(info),[targetDir filesep 'CTAC' filesep files{fi}],info,'CreateMode','copy','WritePrivate',true);
+	status = dicomwrite(dicomread(info),[targetDir filesep 'CTAC_DICOM' filesep files{fi}],info,'CreateMode','copy','WritePrivate',true);
 end
 
 dir2 = 'CT';

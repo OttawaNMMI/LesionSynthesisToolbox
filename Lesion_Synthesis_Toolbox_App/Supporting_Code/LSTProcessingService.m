@@ -136,6 +136,7 @@ LSTProcessingServiceStatusTimer = timer('TimerFcn',@refreshStatus,...
 	'UserData',struct('statusFile',statusFile,...
 	                  'timerHandle',LSTProcessingServiceTimer));
 start(LSTProcessingServiceStatusTimer);
+disp('Started status referesh timer')
 end
 
 
