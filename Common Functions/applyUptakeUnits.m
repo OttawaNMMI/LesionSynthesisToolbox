@@ -6,7 +6,9 @@
 % myo_avg - activity concentration [Bq/cc]
 % hdr - the image file header
 % uptakeUnits - the desrired uptake units:
-%               Activity [Bq/cc]
+%               Activity [Bq/cc] - automatically adjusts to u, m, M or k
+%                                  Bq/cc based on maximum data value
+%               Activity [Bq/cc] fixed - keeps at Bq/cc
 %               SUV-bw [g/mL]
 %               SUV-lbm [g/mL]
 %               SUV-bmi [g/mL m2]
@@ -30,6 +32,7 @@
 
 % by Ran Klein 2010-07-02
 % 2011-01-28 RK Note 2 added.
+% 2023-02-06 added fixed activity option
 
 
 % *******************************************************************************************************************
@@ -44,34 +47,72 @@
 function [myo_avg, uptakeUnits, metric, status] = applyUptakeUnits(myo_avg, hdr, uptakeUnits)
 
 status = false;
+if endsWith(uptakeUnits, ' fixed')
+	fixedUnits = true;
+	uptakeUnits = uptakeUnits(1:end-6);
+else
+	fixedUnits = false;
+end
+
 switch uptakeUnits
 	case ''
 		status = false;
-	case {'Activity [Bq/cc]','Bq/cc'}
-		if ~iscell(myo_avg)
-			maxactivity = max(myo_avg(:));
-		else
-			maxactivity = max(myo_avg{1}(:)); % normalize to maximum of LV PM
+	case {'Activity [Bq/cc]','Bq/cc',...
+		  'Activity [uBq/cc]','uBq/cc',...
+		  'Activity [kBq/cc]','kBq/cc',...
+		  'Activity [mBq/cc]','mBq/cc',...
+		  'Activity [MBq/cc]','MBq/cc '}
+
+		% The target units
+		if fixedUnits % - indicated as fixed
+			i = strfind(uptakeUnits,'Bq/cc')-1;
+			if i>0
+				prefix = uptakeUnits(i);
+				switch prefix
+					case 'u'
+						factor = 1e6;
+					case 'm'
+						factor = 1e3;
+					case 'k'
+						factor = 1e-3;
+					case 'M'
+						factor = 1e-6;
+					otherwise
+						error(['Unrecognized units prefix ' prefix ' encountered'])
+				end
+			else
+				prefix = [];
+				factor = 1;
+			end
+			
+			uptakeUnits = [prefix 'Bq/cc'];
+		else % determined automatically by image intensity
+			if ~iscell(myo_avg)
+				maxactivity = max(myo_avg(:));
+			else
+				maxactivity = max(myo_avg{1}(:)); % normalize to maximum of LV PM
+			end
+			if maxactivity<2e-3
+				uptakeUnits = 'uBq/cc';
+				factor = 1e6;
+			elseif maxactivity<2
+				uptakeUnits = 'mBq/cc';
+				factor = 1e3;
+			elseif maxactivity>2e6
+				uptakeUnits = 'MBq/cc';
+				factor = 1e-6;
+			elseif maxactivity>2000
+				uptakeUnits = 'kBq/cc';
+				factor = 1e-3;
+			else
+				uptakeUnits = 'Bq/cc';
+				factor = 1;
+			end
 		end
-        if maxactivity<2e-3
-            uptakeUnits = 'uBq/cc';
-            factor = 1e6;
-        elseif maxactivity<2
-            uptakeUnits = 'mBq/cc';
-            factor = 1e3;
-        elseif maxactivity>2e6
-            uptakeUnits = 'MBq/cc';
-            factor = 1e-6;
-        elseif maxactivity>2000
-            uptakeUnits = 'kBq/cc';
-            factor = 1e-3;
-        else
-            uptakeUnits = 'Bq/cc';
-			factor = 1;
-        end
         metric = 'Activity';
         status = true;
-	case {'SUV-bw [g/mL]','SUV'}
+	
+	case {'SUV-bw [g/mL]','SUV','SUV_{bw}[g/mL]'}
 		if isfield(hdr,'patientWeight') && isfield(hdr,'injectedActivity') &&...
 			~isempty(hdr.patientWeight) && ~isempty(hdr.injectedActivity) &&...
 			 isscalar(hdr.patientWeight) && isscalar(hdr.injectedActivity) &&...
@@ -81,7 +122,7 @@ switch uptakeUnits
 			metric = 'SUV_{bw}';
 			status = true;
 		end
-	case 'SUV-lbm [g/mL]'
+	case {'SUV-lbm [g/mL]','SUV_{lbm}[g/mL]'}
 		if isfield(hdr,'patientWeight') && isfield(hdr,'patientHeight') && isfield(hdr,'injectedActivity') && isfield(hdr,'patientSex') &&...
 				~isempty(hdr.patientWeight) && ~isempty(hdr.patientHeight) && ~isempty(hdr.injectedActivity) && ~isempty(hdr.patientSex) &&...
 				isscalar(hdr.patientWeight) && isscalar(hdr.patientHeight) && isscalar(hdr.injectedActivity) &&...

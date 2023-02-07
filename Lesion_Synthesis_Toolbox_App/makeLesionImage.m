@@ -1,4 +1,23 @@
 function [lesionImgData, lesions, refROI] = makeLesionImage(baselineImgData, lesionData, surroundingMargin)
+% makeLesionImage - adds synthetic lesions to a baseline image.
+%
+% Usage:
+% ======
+%
+% [lesionImgData, lesions, refROI] = makeLesionImage(baselineImgData, lesionData, surroundingMargin)
+%
+% Inputs:
+%   baselineImgData, lesionData, surroundingMargin
+% Outputs:
+% ========
+% lesionImgData - a structiure of the lesion image consisting of:
+%   vol - the image volume as a binary. Units are as in hdr.image_units
+%   hdr - a FlowQuant hdr structure
+%
+% See also: lesionSynthesisToolbox, applyUptakeUnits
+
+% By Ran Klein, The Ottawa Hospital, 2019
+% 2023-02-6 - added support for Bq/cc and SUV image units. Added comments.
 
 % Sample the reference ROI PET activities from the baseline image
 refROI = lesionData.refROI;
@@ -16,6 +35,7 @@ lesionImgData.hdr = baselineImgData.hdr;
 lesionImgData.hdr.xdim = lesionData.info.simParams.nXdim;  % Clarification here - this is the size of the image for simulating the lesion, not what we are reconstructing (256)
 lesionImgData.hdr.ydim = lesionData.info.simParams.nYdim;
 lesionImgData.hdr.pix_mm_xy = lesionImgData.hdr.pix_mm_xy * fac;
+lesionImgData.hdr.image_units = baselineImgData.hdr.image_units;
 
 lesionImgData.vol = zeros([lesionImgData.hdr.xdim, lesionImgData.hdr.ydim, lesionImgData.hdr.nplanes]);
 nLesions = length(lesionData.lesion);
@@ -29,11 +49,21 @@ for li=1:nLesions
 			lesion.PTintensity = lesion.PTval * lesion.baselineBackgroundPTintesity;
 			lesion.referencePTintensity = lesion.baselineBackgroundPTintesity;
 		case 'Bq/cc'
-			lesion.PTintensity = lesion.PTval;
-			lesion.referencePTintensity = 1;
-		case {'SUV','SUV-bw [g/mL]'}
-			lesion.PTintensity = lesion.PTval;
-			lesion.referencePTintensity = 1 / applyUptakeUnits(1, lesionImgData.hdr, 'SUV-bw [g/mL]');
+			lesion.PTintensity = applyUptakeUnits(lesion.PTval, lesionImgData.hdr, [baselineImgData.hdr.image_units ' fixed']);
+			switch baselineImgData.hdr.image_units(1)
+				case 'k'
+					lesion.referencePTintensity = lesion.referencePTintensity*1000;
+				case 'M'
+					lesion.referencePTintensity = lesion.referencePTintensity*1000000;
+				case 'm'
+					lesion.referencePTintensity = lesion.referencePTintensity/1000;
+				case 'u'
+					lesion.referencePTintensity = lesion.referencePTintensity/1000000;
+			end
+			lesion.referencePTintensity = 1; 
+		case {'SUV','SUV-bw [g/mL],SUV_{bw}[g/mL]'}
+			lesion.PTintensity = applyUptakeUnits(lesion.PTval, lesionImgData.hdr, [baselineImgData.hdr.image_units ' fixed']) / applyUptakeUnits(1, lesionImgData.hdr, 'SUV-bw [g/mL]');
+			lesion.referencePTintensity = 1; 
 		otherwise
 			indx = strfind(lesion.mode,':');
 			if length(indx) == 1
