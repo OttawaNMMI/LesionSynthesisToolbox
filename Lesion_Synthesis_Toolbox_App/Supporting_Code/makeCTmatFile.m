@@ -1,5 +1,19 @@
-% makeCTmatFile - create a FlowQuant standard mat file 
-% fname = makeCTmatFile(fpath)
+% makeCTmatFile - create a FlowQuant standard mat file of an image in a
+% DICOM directory, fpath.
+%
+% Usage:
+% ======
+% fname = makeCTmatFile(fpath, fname) - specifies the DICOM directory,
+% fpath and destinames file name, fname;
+%
+% fname = makeCTmatFile(fpath) - uses a default destiname file name, fname
+% which is the same as fpath directory.
+%
+% See also: LesionSynthesisToolbox, runImageRecon_WebApp
+
+% By Ran Klein, The Ottawa Hospital
+% 2023-02-09 - Comments added
+
 function fname = makeCTmatFile(fpath, fname)
 
 [vol, spatial] = dicomreadVolume(fpath);
