@@ -243,7 +243,7 @@ else
 	%apply.
 end
 
-makeCTmatFile([info.saveDir filesep f filesep 'CTAC_DICOM']);
+makeCTmatFile([info.saveDir filesep f filesep 'CTAC_DICOM'], [info.saveDir filesep f filesep 'CTAC.mat']);
 end
 
 
