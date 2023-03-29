@@ -36,7 +36,7 @@ end
 files={};
 if nargin<1
 	error('No search pattern passed to listfiles');
-end;
+end
 
 if nargin<2 || isempty(directory)
     directory = pwd;
@@ -53,16 +53,20 @@ dir_struct = [];
 for j=1:length(strpat)
 	dir_struct=[dir_struct; dir([directory filesep strrep(['*' strpat{j}],'**','*')])];
 end
-% Added by Ran Klein 2011-03-01
-if any(lower(flag)=='d')
-    dir_struct = [dir_struct;  dir([directory filesep '*'])];
-end
+
+% % Added by Ran Klein 2011-03-01
+% if any(lower(flag)=='d')
+%     dir_struct = [dir_struct;  dir([directory filesep '*'])];
+% end
 % Keep only files - or directory if flagged
+% commented out 2023-03-29 - this didn't make sense as it ended up listing
+% all directories, even the onese that didn't match the search string.
+
 sorted_names = unique(sortrows({dir_struct.name}'));
 for i=1:length(sorted_names)
 	if ~all(sorted_names{i}=='.') &&...
-			(exist([directory filesep sorted_names{i}])==2 || ... is a file
-			(any(lower(flag)=='d') && exist([directory filesep sorted_names{i}])==7))
+			(exist([directory filesep sorted_names{i}],'file') || ... is a file
+			(any(lower(flag)=='d') && exist([directory filesep sorted_names{i}],'dir')))
 		files = [files; sorted_names{i}];
 	end
 end
@@ -73,7 +77,7 @@ if any(lower(flag)=='s')
 	for i=1:length(subdirs)
 		if subdirs(i).isdir
 			subdir = subdirs(i).name;
-			if subdir(1)~='.'; % ignore . and .. dirs
+			if subdir(1)~='.' % ignore . and .. dirs
 				sublist = listfiles(strpat, [directory filesep subdir], flag);
 				if ~isempty(sublist)
 					files = [files; strcat([subdir filesep], sublist)];
