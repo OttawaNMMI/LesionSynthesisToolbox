@@ -1,0 +1,97 @@
+D: $dcmtk: findscu v3.6.2 2017-07-14 $
+D: 
+D: Request Parameters:
+D: ====================== BEGIN A-ASSOCIATE-RQ =====================
+D: Our Implementation Class UID:      1.2.276.0.7230010.3.0.3.6.2
+D: Our Implementation Version Name:   OFFIS_DCMTK_362
+D: Their Implementation Class UID:    
+D: Their Implementation Version Name: 
+D: Application Context Name:    1.2.840.10008.3.1.1.1
+D: Calling Application Name:    NMAI_AE
+D: Called Application Name:     HSERVER1_TOH
+D: Responding Application Name: HSERVER1_TOH
+D: Our Max PDU Receive Size:    16384
+D: Their Max PDU Receive Size:  0
+D: Presentation Contexts:
+D:   Context ID:        1 (Proposed)
+D:     Abstract Syntax: =FINDStudyRootQueryRetrieveInformationModel
+D:     Proposed SCP/SCU Role: Default
+D:     Proposed Transfer Syntax(es):
+D:       =LittleEndianExplicit
+D:       =BigEndianExplicit
+D:       =LittleEndianImplicit
+D: Requested Extended Negotiation: none
+D: Accepted Extended Negotiation:  none
+D: Requested User Identity Negotiation: none
+D: User Identity Negotiation Response:  none
+D: ======================= END A-ASSOCIATE-RQ ======================
+I: Requesting Association
+D: setting network send timeout to 60 seconds
+D: setting network receive timeout to 60 seconds
+D: Constructing Associate RQ PDU
+D: PDU Type: Associate Accept, PDU Length: 173 + 6 bytes PDU header
+D:   02  00  00  00  00  ad  00  01  00  00  48  53  45  52  56  45
+D:   52  31  5f  54  4f  48  20  20  20  20  4e  4d  41  49  5f  41
+D:   45  20  20  20  20  20  20  20  20  20  00  00  00  00  00  00
+D:   00  00  00  00  00  00  00  00  00  00  00  00  00  00  00  00
+D:   00  00  00  00  00  00  00  00  00  00  10  00  00  15  31  2e
+D:   32  2e  38  34  30  2e  31  30  30  30  38  2e  33  2e  31  2e
+D:   31  2e  31  21  00  00  19  01  00  00  00  40  00  00  11  31
+D:   2e  32  2e  38  34  30  2e  31  30  30  30  38  2e  31  2e  32
+D:   50  00  00  2f  51  00  00  04  00  00  40  00  52  00  00  11
+D:   31  2e  32  2e  37  35  32  2e  33  37  2e  35  2e  34  2e  31
+D:   32  55  00  00  0e  48  45  52  4d  45  53  47  4f  4c  44  34
+D:   31  32  30
+D: Parsing an A-ASSOCIATE PDU
+D: Association Parameters Negotiated:
+D: ====================== BEGIN A-ASSOCIATE-AC =====================
+D: Our Implementation Class UID:      1.2.276.0.7230010.3.0.3.6.2
+D: Our Implementation Version Name:   OFFIS_DCMTK_362
+D: Their Implementation Class UID:    1.2.752.37.5.4.12
+D: Their Implementation Version Name: HERMESGOLD4120
+D: Application Context Name:    1.2.840.10008.3.1.1.1
+D: Calling Application Name:    NMAI_AE
+D: Called Application Name:     HSERVER1_TOH
+D: Responding Application Name: HSERVER1_TOH
+D: Our Max PDU Receive Size:    16384
+D: Their Max PDU Receive Size:  16384
+D: Presentation Contexts:
+D:   Context ID:        1 (Accepted)
+D:     Abstract Syntax: =FINDStudyRootQueryRetrieveInformationModel
+D:     Proposed SCP/SCU Role: Default
+D:     Accepted SCP/SCU Role: Default
+D:     Accepted Transfer Syntax: =LittleEndianImplicit
+D: Requested Extended Negotiation: none
+D: Accepted Extended Negotiation:  none
+D: Requested User Identity Negotiation: none
+D: User Identity Negotiation Response:  none
+D: ======================= END A-ASSOCIATE-AC ======================
+I: Association Accepted (Max Send PDV: 16372)
+I: Sending Find Request
+D: ===================== OUTGOING DIMSE MESSAGE ====================
+D: Message Type                  : C-FIND RQ
+D: Presentation Context ID       : 1
+D: Message ID                    : 1
+D: Affected SOP Class UID        : FINDStudyRootQueryRetrieveInformationModel
+D: Data Set                      : present
+D: Priority                      : low
+D: ======================= END DIMSE MESSAGE =======================
+I: Request Identifiers:
+I: 
+I: # Dicom-Data-Set
+I: # Used TransferSyntax: Little Endian Explicit
+I: (0008,0020) DA (no value available)                     #   0, 0 StudyDate
+I: (0008,0030) TM [PET*]                                   #   4, 1 StudyTime
+I: (0008,0052) CS [STUDY]                                  #   6, 1 QueryRetrieveLevel
+I: (0008,1030) LO (no value available)                     #   0, 0 StudyDescription
+I: 
+D: DcmDataset::read() TransferSyntax="Little Endian Implicit"
+I: Received Final Find Response
+D: ===================== INCOMING DIMSE MESSAGE ====================
+D: Message Type                  : C-FIND RSP
+D: Message ID Being Responded To : 1
+D: Affected SOP Class UID        : FINDStudyRootQueryRetrieveInformationModel
+D: Data Set                      : none
+D: DIMSE Status                  : 0x0000: Success
+D: ======================= END DIMSE MESSAGE =======================
+I: Releasing Association
