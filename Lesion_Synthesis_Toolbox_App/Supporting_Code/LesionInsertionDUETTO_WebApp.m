@@ -401,6 +401,7 @@ status.lesionSynthesis = true;
 
 %% Insert the lesion in the CT as well - QUINN
 if synthesizeInCT(lesionData)
+	uid = dicomuid; % give each CT a unique UID
 	CTmatFile = [baselinePETdir filesep 'CTAC.mat'];
 	if ~exist(CTmatFile,'file')
 		CTmatFile = [reconWithLesionDir filesep 'CTAC.mat'];
@@ -408,15 +409,24 @@ if synthesizeInCT(lesionData)
 	end
 	baselineCTImgData = load(CTmatFile);
 	lesionCTImgData = simulateCTLesion(baselineCTImgData, lesionData);
-
+	lesionCTImgData.dicominfo.SeriesInstanceUID = uid;
+	
 	save([reconWithLesionDir filesep 'CTAC.mat'], '-struct', 'lesionCTImgData')
 
 	%Update the DICOM
 	files = listfiles('*.*',[reconWithLesionDir filesep 'CTAC_DICOM']);
-	assert(length(files)==size(baselineCTImgData.vol,3))
-	parfor i=1:length(files)
+	nfiles = (length(files);
+	assert(nfiles==size(baselineCTImgData.vol,3))
+	parfor i=1:nfiles
 		info = dicominfo([reconWithLesionDir filesep 'CTAC_DICOM' filesep files{i}]);
-		img = lesionCTImgData.vol(:,:,info.InstanceNumber)';
+		img = lesionCTImgData.vol(:,:,nfiles-info.InstanceNumber+1)';  % fix image orientation
+        img = img - info.RescaleIntercept; % account for rescaleIntercept in header
+		info.SeriesInstanceUID = uid; % avoid multiple CTs interacting on PACS
+% 		info.StudyInstanceUID = studyUid; % associate with corresponding PET
+% 		 -TO DO
+		if ~startsWith(info.SeriesDescription, 'NON_DIAGNOSTIC')
+			info.SeriesDescription = ['NON_DIAGNOSTIC_' info.SeriesDescription];
+		end
 		dicomwrite(img, [reconWithLesionDir filesep 'CTAC_DICOM' filesep files{i}], info, 'CreateMode', 'copy');
 	end
 	status.CTlesionSynthesis = true;
