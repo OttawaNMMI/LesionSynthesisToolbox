@@ -415,15 +415,18 @@ if synthesizeInCT(lesionData)
 
 	%Update the DICOM
 	files = listfiles('*.*',[reconWithLesionDir filesep 'CTAC_DICOM']);
-	nfiles = (length(files);
+	nfiles = (length(files));
 	assert(nfiles==size(baselineCTImgData.vol,3))
 	parfor i=1:nfiles
 		info = dicominfo([reconWithLesionDir filesep 'CTAC_DICOM' filesep files{i}]);
-		img = lesionCTImgData.vol(:,:,nfiles-info.InstanceNumber+1)';  % fix image orientation
+		if strcmpi(info.PatientPosition,'FFS')
+			img = lesionCTImgData.vol(:,:,nfiles-info.InstanceNumber+1)';  % fix image orientation
+		else
+			img = lesionCTImgData.vol(:,:,info.InstanceNumber)';  % fix image orientation
+		end
         img = img - info.RescaleIntercept; % account for rescaleIntercept in header
 		info.SeriesInstanceUID = uid; % avoid multiple CTs interacting on PACS
 % 		info.StudyInstanceUID = studyUid; % associate with corresponding PET
-% 		 -TO DO
 		if ~startsWith(info.SeriesDescription, 'NON_DIAGNOSTIC')
 			info.SeriesDescription = ['NON_DIAGNOSTIC_' info.SeriesDescription];
 		end
