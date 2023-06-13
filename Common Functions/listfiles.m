@@ -1,12 +1,35 @@
+% listfiles - lists files matching a pattern in a directory.
+%
+% USAGE:
+% ======
 % files=listfiles(strpat, directory, flag)
+%
 % files=listfiles(strpat) - list all the file with strpat
-% pattern in directory. Uses the current directory. files is a cell 
-% structure of the file names that meet the pattern in the direcotry. 
+% pattern in the current directory.returns files ia a cell 
+% structure of the file names that meet the pattern in the direcotry.
+% strpat can be a string or cell of strings with the file patterns to
+% match. Examples: '*.dcm',  {'*.001','*.002','*.003'}, or 'comp*'. '*' indicates
+% wild card, and is optional at the start of strpat.
+%
 % files=listfiles(strpat, directory) - Searches for matching files in 
 % directory (may or may not have a '\' at the end).
-% files=listfiles(strpat, directory, flag) - additional earch flags:
-%     s - recursive subdirectory search.
-%     d - include directories.
+%
+% files=listfiles(strpat, directory, flag) - additional search flags:
+%     s - recursively search in the subdirectories.
+%     d - include directories in the results. Otherwise, only files are returned.
+%
+% EXAMPLES:
+% =========
+% 1) All files with extentions .m in the current directory
+% listfiles('*.m', pwd)
+% ans =
+% 
+%   4×1 cell array
+% 
+%     {'compileC.m'             }
+%     {'duettoToolboxLocation.m'}
+%     {'getDuettoVersion.m'     }
+%     {'initializeDuetto.m'     }
 %
 % By Ran Klein 22/2/2005
 
