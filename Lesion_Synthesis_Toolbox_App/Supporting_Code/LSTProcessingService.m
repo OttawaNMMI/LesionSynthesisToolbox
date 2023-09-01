@@ -56,7 +56,11 @@ switch lower(command)
 	case 'start'
 		if strcmpi(LSTProcessingService('status'),'Running')
 			disp('LST Service is already running. A new service cannot be started. Stop the process first and then restart.')
-			return;
+			if usejava('desktop')
+				return;
+			else
+				exit;
+			end
 		else
 			options.dataDirs = resolveDataDirs(dataDirs);
 
