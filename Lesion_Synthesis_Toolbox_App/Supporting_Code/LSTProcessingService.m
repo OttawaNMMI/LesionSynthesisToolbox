@@ -2,7 +2,7 @@
 % synthesisze lesions. Previously generated parameter files are 
 % sequentially processed for the search directory:
 % 1) Image reconstruction
-% 2) Lesion sysnthesis
+% 2) Lesion synthesis
 %
 % Notes: Lesion Synthesis and reconstruction at this time is only supported
 % using the GE DUETTO. For
@@ -16,7 +16,7 @@
 % LSTProcessingService(command, dataDirs)
 %
 % Input parameters
-% command - 'start' - start the server as a background service
+% command -  'start' - start the server as a background service
 %            'stop'  - stop the server
 %            'kill'  - stop the server
 %            'one time'  - run the service once
