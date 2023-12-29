@@ -11,7 +11,7 @@
 %
 % See also: LesionSynthesisToolbox, runImageRecon_WebApp
 
-% By Ran Klein, The Ottawa Hospital
+% By Ran Klein, The Ottawa Hospital, 2022
 % 2023-02-09 - Comments added
 
 function fname = makeCTmatFile(fpath, fname)
@@ -21,7 +21,7 @@ vol = squeeze(vol);
 files = listfiles('*.1',fpath);
 infodcm = dicominfo([fpath filesep files{1}]);
 hdr = hdrInitDcm(infodcm);
-hdr.pix_mm_z = diff(spatial.PatientPositions(1:2,3)); % I think this is a GE bag that flips SliceThickness and SpacingBetweenSLices
+hdr.pix_mm_z = diff(spatial.PatientPositions(1:2,3)); % I think this is a GE bug that flips SliceThickness and SpacingBetweenSLices
 hdr.nplanes = size(vol,3);
 vol = permute(vol,[2 1 3]);
 vol = flip(vol,3);

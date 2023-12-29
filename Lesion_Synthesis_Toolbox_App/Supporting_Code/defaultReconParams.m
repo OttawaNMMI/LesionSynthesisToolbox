@@ -1,3 +1,16 @@
+% defaultReconParams - Initialize the reconstruction structure with
+% default field values.
+%
+% Usage:
+% params = defaultReconParams
+%
+% Typically, this is only for generating the structure and the required
+% values are overwritten.
+%
+% See also: LesionSynthesisToolbox
+
+% By Ran Klein, The Ottawa Hospital, 2022
+
 function params = defaultReconParams
 
 params = struct('SimName','UnspecifiedReconName',...

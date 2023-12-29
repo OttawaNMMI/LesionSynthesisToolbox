@@ -1,5 +1,8 @@
 % makefIR3DmatFile - create a FlowQuant standard mat file 
 % fname = makefIR3DmatFile(fpath)
+
+% By Ran Klein, The Ottawa Hospital, 2022
+
 function fname = makefIR3DmatFile(fpath, fname)
 
 if exist(fpath,'dir')==7

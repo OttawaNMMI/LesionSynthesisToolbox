@@ -8,8 +8,8 @@
 % using the GE DUETTO. For
 % development/modifications/access to source code please contact 
 % GE Healthcare PET image reconstrcution development team 
-% (As of early 2019: Michael.Spohn@ge.com)
-
+% (As of early 2019: Michael.Spohn@ge.com and/or Elizabeth.Philps@med.ge.com)
+%
 %
 % USAGE
 % =====
@@ -21,12 +21,14 @@
 %            'kill'  - stop the server
 %            'one time'  - run the service once
 %
-%
-
-% Example
+% Examples:
 % LSTProcessingService('start',{'F:\LST Temp\Simulation Queue','F:\LST Temp\Recon Queue'})
 % LSTProcessingService('stop')
 % LSTProcessingService('one time debug',{'F:\LST Temp\Simulation Queue','F:\LST Temp\Recon Queue'})
+%
+% See also: runImageRecon_WebApp, runLesionInsertionPlusRecon_Webapp
+
+% By Ran Klein, The Ottawa Hospital, 2022
 
 function status = LSTProcessingService(command, dataDirs)
 

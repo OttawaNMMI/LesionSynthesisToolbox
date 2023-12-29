@@ -25,7 +25,7 @@
 % View4D(vol)
 %
 %
-% Author: Hanif Gabrani-Juma, B.Eng, MASc (2019)
+% Author: Hanif Gabrani-Juma, B.Eng, MASc (2019), The Ottawa Hospital
 % Created: 2017
 % Last Modified: April 18 2019 (Doc.)
 

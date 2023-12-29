@@ -1,6 +1,27 @@
+% simulateCTLesion - simulate a lesion in a recpnstructed CT volume image.
+%
+% Usage:
+% [lesionImgData, lesions] = simulateCTLesion(baselineImgData, lesionData,
+% surroundingMargin) where:
+% - baselineImgData is the LST image structure for the image in which the
+% lesions are added.
+% - lesionData is the LST structure for the lesions to add.
+% surroundingMargin (mm) is the amount of margin around each lesion to
+% sample for background intensity metrics. Default is 20 mm.
+% - lesionImgData is the LST image structure for the image with the lesions
+% added.
+% lesions is a cell of structures with summary statistics of the lesion and
+% background intensities.
+%
+% See also: makeLesionImage
+
+% By Ran Klein, The Ottawa Hospital, 2022
+
+
 function [lesionImgData, lesions] = simulateCTLesion(baselineImgData, lesionData, surroundingMargin)
 
-% Reference regions not implemented for CT lesion intensity
+% Note: Reference regions not implemented for CT lesion intensity as not
+% seen as important functionality.
 % % Sample the reference ROI PET activities from the baseline image
 % refROI = lesionData.refROI;
 % nRefROIs=length(refROI);
@@ -38,24 +59,26 @@ for li=1:nLesions
 			error(['Unrecognized lesion additionMode property ' lesion.CTadditionMode]);
 	end
 	
-	% surrounding summary statistics
-	if nargin<3 % TO DO: this assumes spheres, will need to accomodate other shapes when we get there.
-		surroundingMargin = 20; % mm
+	if nargout<2 % if not returning lesion stats, don't need to do this.
+		% surrounding summary statistics
+		if nargin<3 % TO DO: this assumes spheres, will need to accomodate other shapes when we get there.
+			surroundingMargin = 20; % mm
+		end
+		surrounding = lesion;
+		surrounding.shape = 'Empty Sphere (homo)';
+		surrounding.rad2 = surrounding.rad + surroundingMargin;
+
+		[lesion.baselineSurroundingCTval, ~, voxelVals] = sampleROI(baselineImgData, surrounding);
+		lesion.baselineSurroundingCTnoise = std(single(voxelVals));
+		lesion.baselineSurroundingCTmin = min(voxelVals);
+		lesion.baselineSurroundingCTmax = max(voxelVals);
+
+		lesions{li} = lesion;
 	end
-	surrounding = lesion;
-	surrounding.shape = 'Empty Sphere (homo)';
-	surrounding.rad2 = surrounding.rad + surroundingMargin;
-
-	[lesion.baselineSurroundingCTval, ~, voxelVals] = sampleROI(baselineImgData, surrounding);
-	lesion.baselineSurroundingCTnoise = std(single(voxelVals));
-	lesion.baselineSurroundingCTmin = min(voxelVals);
-	lesion.baselineSurroundingCTmax = max(voxelVals);
-	
-	lesions{li} = lesion;
 end
 end
 
-
+%%
 function map = makeMap(hdr, ROI, li, lesionData)
 if ~isfield(ROI,'locUnits')
 	ROI.locUnits = 'pixel';
@@ -67,6 +90,7 @@ else
 	loc = convertImgLocationUnits(hdr, ROI.loc, ROI.locUnits, 'pixel');
 end
 
+% TO DO: should not replicate functionality of makeShape. Reimplement.
 switch ROI.shape
 	case 'Sphere (homo)'
 		map = MakeSphere(hdr,...
@@ -90,8 +114,8 @@ switch ROI.shape
         end
         map = MakeBlobbySphere(hdr,...
             loc(1), loc(2), loc(3),...
-            ROI.rad,...
-            1,vars);
+            ROI.rad,vars,...
+            1);
         
 	otherwise
 		disp(['Unrecognized ROI shape ' ROI.shape])

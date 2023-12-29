@@ -1,1 +1,0 @@
-"matlab" -nodesktop -nosplash -r runSimulationServer

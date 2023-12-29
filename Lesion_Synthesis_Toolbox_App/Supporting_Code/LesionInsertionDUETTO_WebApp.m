@@ -1,5 +1,6 @@
-% LesionInsertion_TOFV4 - This function genrated the lesion projection
+% LesionInsertionDUETTO_WebApp - This function genrates the lesion projection
 % files and reconstructs the target image with the synthesic lesions
+% inserted.
 %
 % To generate the projection files, a reconstruction
 % of the target patient data is needed to (revert) take the inverse of any
@@ -28,7 +29,7 @@
 %
 % Usage:
 % ======
-% LesionInsertion_TOFV4(reconName,lesionImg,patdatadir,LIparams)
+% LesionInsertionDUETTO_WebApp(reconName,lesionImg,patdatadir,LIparams)
 %
 % reconName = 'LesionInsertionExampleEmptyScan_TOF_Test';
 %
@@ -51,7 +52,6 @@
 %         LIparams.mainFS = 1; Only for Linux Box Needs to run on the disk
 %         with the OS and not other HD?? (most likely a formating error)
 %
-% Next Step: LesionInsertion_TOFV4
 %
 % Author: Hanif Gabrani-Juma, B.Eng, MASc (2019)
 % Created: 2018

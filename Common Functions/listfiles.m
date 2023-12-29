@@ -1,35 +1,13 @@
-% listfiles - lists files matching a pattern in a directory.
-%
-% USAGE:
-% ======
 % files=listfiles(strpat, directory, flag)
-%
 % files=listfiles(strpat) - list all the file with strpat
-% pattern in the current directory.returns files ia a cell 
-% structure of the file names that meet the pattern in the direcotry.
-% strpat can be a string or cell of strings with the file patterns to
-% match. Examples: '*.dcm',  {'*.001','*.002','*.003'}, or 'comp*'. '*' indicates
-% wild card, and is optional at the start of strpat.
-%
+% pattern in directory. Uses the current directory. files is a cell 
+% structure of the file names that meet the pattern in the direcotry. 
 % files=listfiles(strpat, directory) - Searches for matching files in 
 % directory (may or may not have a '\' at the end).
-%
-% files=listfiles(strpat, directory, flag) - additional search flags:
-%     s - recursively search in the subdirectories.
-%     d - include directories in the results. Otherwise, only files are returned.
-%
-% EXAMPLES:
-% =========
-% 1) All files with extentions .m in the current directory
-% listfiles('*.m', pwd)
-% ans =
-% 
-%   4×1 cell array
-% 
-%     {'compileC.m'             }
-%     {'duettoToolboxLocation.m'}
-%     {'getDuettoVersion.m'     }
-%     {'initializeDuetto.m'     }
+% files=listfiles(strpat, directory, flag) - additional earch flags:
+%     s - recursive subdirectory search.
+%     d - include directories.
+%     n - exclude files.
 %
 % By Ran Klein 22/2/2005
 
@@ -73,28 +51,27 @@ if nargin<3
 end
 
 dir_struct = [];
-for j=1:length(strpat)
-	dir_struct=[dir_struct; dir([directory filesep strrep(['*' strpat{j}],'**','*')])];
+if ~any(lower(flag)=='n')
+	for j=1:length(strpat)
+		dir_struct = [dir_struct; dir([directory filesep strrep(['*' strpat{j}],'**','*')])];
+	end
+end
+% Added by Ran Klein 2011-03-01
+if any(lower(flag)=='d')
+    dir_struct = [dir_struct;  dir([directory filesep '*'])];
 end
 
-% % Added by Ran Klein 2011-03-01
-% if any(lower(flag)=='d')
-%     dir_struct = [dir_struct;  dir([directory filesep '*'])];
-% end
 % Keep only files - or directory if flagged
-% commented out 2023-03-29 - this didn't make sense as it ended up listing
-% all directories, even the onese that didn't match the search string.
-
 sorted_names = unique(sortrows({dir_struct.name}'));
 for i=1:length(sorted_names)
-	if ~all(sorted_names{i}=='.') &&...
-			(exist([directory filesep sorted_names{i}],'file') || ... is a file
-			(any(lower(flag)=='d') && exist([directory filesep sorted_names{i}],'dir')))
+	if ~all(sorted_names{i}=='.') &&... % ignore . and ..
+			(~any(lower(flag)=='n') && exist([directory filesep sorted_names{i}],'file')==2 || ... is a file
+			(any(lower(flag)=='d') && exist([directory filesep sorted_names{i}],'dir')==7)) % is a directory
 		files = [files; sorted_names{i}];
 	end
 end
 
-% recursive diretory search
+% recursive directory search
 if any(lower(flag)=='s')
 	subdirs = dir([directory filesep '*.']);
 	for i=1:length(subdirs)
