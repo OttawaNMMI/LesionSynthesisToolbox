@@ -8,7 +8,7 @@
 % using the GE DUETTO. For
 % development/modifications/access to source code please contact 
 % GE Healthcare PET image reconstrcution development team 
-% (As of early 2019: Michael.Spohn@ge.com and/or Elizabeth.Philps@med.ge.com)
+% (As of early 2019: Michael.Spohn@gehealthcare.com and/or Elizabeth.Philps@med.gehealthcare.com)
 %
 %
 % USAGE

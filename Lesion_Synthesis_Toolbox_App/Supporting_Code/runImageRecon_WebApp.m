@@ -7,7 +7,7 @@
 % Image reconstruction at this time is only supported using the GE DUETTO  
 % TOOLOX. For development/modifications/access to source code please contact 
 % GE Healthcare PET image reconstrcution development team 
-% (As of early 2023: Michael.Spohn@ge.com and/or Elizabeth.Philps@med.ge.com)
+% (As of early 2023: Michael.Spohn@gehealthcare.com and/or Elizabeth.Philps@med.gehealthcare.com)
 %
 % This function uses tools from the GE DUETTO TOOLBOX and
 % therefore needs DUETTO in the file path.
@@ -16,7 +16,7 @@
 % ======
 % runLesionInsertionPlusRecon(lesionParamsFile)
 %
-% Next Steps: LesionInsertion_GEPETreconParams, LesionInsertionDUETTO_WebApp,
+% Next Steps: ptbUserConfig, LesionInsertionDUETTO_WebApp,
 %
 % Author: Hanif Gabrani-Juma, B.Eng, MASc (2019)
 % Created: 2018
@@ -31,7 +31,7 @@ switch info.reconParams.ReconToolbox
 	case 'DUETTO'
 		img = ReconJob_DUETTO(reconParamFile);
 	otherwise
-		ReconJob_GEPETRecon(reconParamFile);
+		error
 end
 end
 
@@ -61,15 +61,9 @@ end
 cd(patientDir)
 
 userConfig = ptbUserConfig(info.reconParams.Algorithm);
-
-%reconParams = LesionInsertion_GEPETreconParams; % gen Default LI Params
-%reconParams.genCorrectionsFlag = 1; %Turn Corrections on
-
 userConfig.dicomSeriesDesc = info.reconParams.SeriesDesc;
 userConfig.dicomImageSeriesDesc = [info.reconParams.SimName '_BaselineRecon'];
 userConfig.nX = info.reconParams.nXdim;
-% reconParams.ny = info.reconParams.nYdim;
-% reconParams.nz = 47; % PER BED POS
 
 userConfig.nSubsets =  info.reconParams.Subsets;
 userConfig.nIterations = info.reconParams.Iterations;
@@ -145,97 +139,6 @@ else
 end
 
 end
-
-
-
-
-
-
-%% GEPETRecon - deprecated by DUETTO
-function img = ReconJob_GEPETRecon(reconParamFile)
-disp('==============================================================')
-disp('|                                                            |')
-disp(['|  Starting recon job for: ' reconParamFile repmat(' ',1, 34-length(reconParamFile)) '|'])   
-disp('|                                                            |')
-disp('==============================================================')
-disp(' ')
-
-load(reconParamFile,'info');
-
-% TO DO - rethink this, as cannot reconstruct two reconstructions in the
-% same directory. 
-patientDir = fileparts(reconParamFile);
-
-% Copy the necessary files to Baseline PET dirs
-copyfile([info.patDataDir filesep 'raw'],[patientDir filesep 'raw'])
-copyfile([info.patDataDir filesep 'CTAC_DICOM'],[patientDir filesep 'CTAC_DICOM'])
-copyfile([info.patDataDir filesep 'norm3d'],patientDir)
-copyfile([info.patDataDir filesep 'geo3d'],patientDir)
-
-cd(patientDir)
-
-reconParams = LesionInsertion_GEPETreconParams; % gen Default LI Params
-reconParams.genCorrectionsFlag = 1; %Turn Corrections on
-
-reconParams.dicomImageSeriesDesc = [info.reconParams.SimName '_BaselineRecon'];
-reconParams.nx = info.reconParams.nXdim;
-reconParams.ny = info.reconParams.nYdim;
-
-reconParams.nz = 47; % PER BED POS
-
-reconParams.algorithm = info.reconParams.Algorithm;
-reconParams.numSubsets =  info.reconParams.Subsets;
-reconParams.numIterations = info.reconParams.Iterations;
-reconParams.zfilter = info.reconParams.zfilter;
-reconParams.postFilterFWHM = info.reconParams.FilterFWHM;
-reconParams.beta = info.reconParams.beta;
-
-% This information neverget used again and file names were conflicting
-% save([patientDir filesep info.reconName '_ReconParams2.mat'],'reconParams')
-
-% Perform a PET recon with Attenuation Correction [GT: Patient without Lesion]
-
-[vol, infodcm] = GEPETrecon(reconParams);
-
-%% Clean up unclosed files
-% TO DO - discuss with GE regarding leaving files open.
-fId = fopen('all');
-if ~isempty(fId)
-	disp('Someone left files open:');
-	for i=1:length(fId)
-		disp(fopen(fId(i)));
-	end
-	fclose('all');
-	disp('But we closed them');
-end
-
-% Fix the DICOM files to include radiopharmaceutical information
-fixGEReconDICOMOutput(reconParams.dicomImageSeriesDesc)
-
-% Make one clean mat file of the reconstructed image
-[hdr, infodcm] = hdrInitDcm(infodcm);
-save([patientDir filesep info.reconName '_fIR3D.mat'], 'vol', 'hdr', 'infodcm');
-img = struct('vol', vol,...
-			'hdr', hdr,...
-			'infodcm', infodcm);
-
-cd(fileparts(patientDir))
-
-[~, f, ~] = fileparts(patientDir);
-if lastPatientRecon(patientDir)
-	% clean up
-	movefile(patientDir, [info.saveDir filesep f], 'f');
-else
-	% keep the raw and intermediate files for next recon of data
-	copyfile(patientDir, [info.saveDir filesep f] ,'f');
-	delete(reconParamFile)
-	%TO DO: Need to delete all _reconParams.mat fromt he saveDir that don't
-	%apply.
-end
-
-makeCTmatFile([info.saveDir filesep f filesep 'CTAC_DICOM'], [info.saveDir filesep f filesep 'CTAC.mat']);
-end
-
 
 
 

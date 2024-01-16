@@ -7,7 +7,7 @@
 % Lesion Synthesis at this time is only supported using the GE DUETTO  
 % TOOLOX. For development/modifications/access to source code please contact 
 % GE Healthcare PET image reconstrcution development team 
-% (As of early 2023: Michael.Spohn@ge.com and/or Elizabeth.Philps@med.ge.com)
+% (As of early 2023: Michael.Spohn@gehealthcare.com and/or Elizabeth.Philps@gehealthcare.com)
 %
 % This function uses tools from the GE DUETTO TOOLBOX and
 % therefore needs DUETTO in the file path.
@@ -16,7 +16,7 @@
 % ======
 % runLesionInsertionPlusRecon(lesionParamsFile)
 %
-% Next Steps: LesionInsertion_GEPETreconParams, LesionInsertionDUETTO_WebApp,
+% Next Steps: userConfig = ptbUserConfig(info.reconParams.Algorithm);, LesionInsertionDUETTO_WebApp,
 %
 % Author: Hanif Gabrani-Juma, B.Eng, MASc (2019)
 % Created: 2018

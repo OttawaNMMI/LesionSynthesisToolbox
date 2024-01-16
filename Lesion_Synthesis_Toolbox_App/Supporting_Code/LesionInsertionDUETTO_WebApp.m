@@ -16,16 +16,16 @@
 % with projections of the target patient data. The image with synthetic
 % lesions are stored in the secondary directory (CTreconWithLesion)
 %
-% To modify the recon parametrs used: LesionInsertion_GEPETreconParams
+% To modify the recon parametrs used: ptbUserConfig
 %
 % Lesion Synthesis at this time is only supported using the GE RECON
-% TOOLOX (VER: REGRECON5) for Time-of-flight reconstructions. For
+% TOOLOX (VER: DUETTO v2.18) for Time-of-flight reconstructions. For
 % development/modifications/access to source code please contact
 % GE Healthcare PET image reconstrcution development team
-% (As of early 2019: Michael.Spohn@ge.com)
+% (As of early 2019: Michael.Spohn@gehealthcare.com)
 %
-% This function uses tools from the GE RECON TOOLBOX (REGRECON5) and
-% therefore needs REGRECON5 in the available directory
+% This function uses tools from the GE RECON TOOLBOX (DUETTO) and
+% therefore needs DUETTO in the available directory
 %
 % Usage:
 % ======
