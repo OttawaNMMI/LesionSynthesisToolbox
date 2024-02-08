@@ -73,7 +73,8 @@ end
 
 % recursive directory search
 if any(lower(flag)=='s')
-	subdirs = dir([directory filesep '*.']);
+	subdirs = dir(directory);
+	subdirs = subdirs([subdirs(:).isdir]);
 	for i=1:length(subdirs)
 		if subdirs(i).isdir
 			subdir = subdirs(i).name;
