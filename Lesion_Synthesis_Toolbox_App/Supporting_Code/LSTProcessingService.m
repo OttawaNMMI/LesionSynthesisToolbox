@@ -228,7 +228,7 @@ for i=1:length(dataDirs)
 	for j=1:nfolders
 		subdir = [dataDirs{i} filesep folders{j}];
 		reconFilenames = [reconFilenames;...
-			strcat(subdir, filesep, listfiles('*_reconParams.mat', subdir))];
+			strcat(subdir, filesep, listfiles('*_ReconParams.mat', subdir))];
 	end
 end
 disp(['Found ' num2str(length(reconFilenames)) ' reconstructions to process'])
@@ -240,7 +240,7 @@ for i=1:length(dataDirs)
 	for j=1:nfolders
 		subdir = [dataDirs{i} filesep folders{j}];
 		simFilenames = [simFilenames;...
-			strcat(subdir, filesep, listfiles('*_lesionParams.mat', subdir))];
+			strcat(subdir, filesep, listfiles('*_LesionParams.mat', subdir))];
 	end
 end
 disp(['Found ' num2str(length(simFilenames)) ' simulations to process'])

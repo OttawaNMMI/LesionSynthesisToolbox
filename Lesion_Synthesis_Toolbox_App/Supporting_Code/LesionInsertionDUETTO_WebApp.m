@@ -183,7 +183,7 @@ switch LIparams.baselineRecon
 	case {'no',0}
 		status.baselineRecon = false;
 	case {'auto',[]}
-		status.baselineRecon = ~isSameReconParam(lesionData.info.simParams, [patDataDir filesep lesionData.info.reconProfile '_reconParams.mat']);
+		status.baselineRecon = ~isSameReconParam(lesionData.info.simParams, [patDataDir filesep lesionData.info.reconProfile '_ReconParams.mat']);
 		baselineImgData = [];
 		if ~status.baselineRecon 
 			try
@@ -207,8 +207,8 @@ switch LIparams.baselineRecon
 							'reconName', lesionData.info.reconProfile,...
 							'patDataDir', [patDataDir filesep 'raw']);
 						info.reconParams.SimName = lesionData.info.reconProfile;
-						save([baselinePETdir filesep lesionData.info.reconProfile '_reconParams.mat'],'info')
-						makefIR3DmatFile([baselinePETdir filesep lesionData.info.reconProfile '_reconParams.mat'], [baselinePETdir filesep lesionData.info.reconProfile '_fIR3D.mat']);
+						save([baselinePETdir filesep lesionData.info.reconProfile '_ReconParams.mat'],'info')
+						makefIR3DmatFile([baselinePETdir filesep lesionData.info.reconProfile '_ReconParams.mat'], [baselinePETdir filesep lesionData.info.reconProfile '_fIR3D.mat']);
 					end
 					disp(['Using baseline image ' baselinePETdir filesep lesionData.info.reconProfile '_fIR3D.mat']);
 					baselineImgData = load([baselinePETdir filesep lesionData.info.reconProfile '_fIR3D.mat']);
@@ -245,7 +245,7 @@ reconParams.nParallelThreads = getLSTThreads;
 if status.baselineRecon
 	disp(['Reconstructing a new baseline image in ' baselinePETdir])
 	if 1
-		filename = [baselinePETdir filesep lesionData.info.reconProfile '_reconParams.mat'];
+		filename = [baselinePETdir filesep lesionData.info.reconProfile '_ReconParams.mat'];
 		info = struct('reconParams',lesionData.info.simParams,...
 			'saveDir', fileparts(patDataDir),...
 			'reconName', lesionData.info.reconProfile,...
@@ -261,7 +261,7 @@ if status.baselineRecon
 			'patDataDir', [patDataDir filesep 'raw']);
 		info.reconParams.SimName = lesionData.info.reconProfile;
 		info.reconParams.SeriesDesc = 'LST Baseline Reconstruction';
-		save([baselinePETdir filesep lesionData.info.reconProfile '_reconParams.mat'],'info')
+		save([baselinePETdir filesep lesionData.info.reconProfile '_ReconParams.mat'],'info')
 
 		reconParams.dicomSeriesDesc = lesionData.info.reconProfile;
 		reconParams.dicomImageSeriesDesc = [lesionData.info.reconProfile '_BaselineRecon'];

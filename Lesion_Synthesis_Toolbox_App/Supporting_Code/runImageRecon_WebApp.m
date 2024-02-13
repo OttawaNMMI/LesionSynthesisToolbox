@@ -144,7 +144,7 @@ end
 
 %% Determine if this is the last reconstruction for this patient
 function result = lastPatientRecon(patientDir)
-files = listfiles('*_reconParams.mat', patientDir);
+files = listfiles('*_ReconParams.mat', patientDir);
 result = length(files) == 1;
 end
 

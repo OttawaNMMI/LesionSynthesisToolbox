@@ -2,7 +2,7 @@
 % simulation and its intended archive destination.
 %
 % Usage: conflict = conflictingSimulationInArchive(info, lesion, refROI) -
-% where info, lesion and refROI are the structures in a *_lesionParams.mat
+% where info, lesion and refROI are the structures in a *_LesionParams.mat
 % file.
 %
 % First tests the archive directory already exists. Then looks for
@@ -19,7 +19,7 @@ function conflict = conflictingSimulationInArchive(info, lesion, refROI)
 conflict = false;
 dir = [info.simulationArchiveDir filesep info.reconName];
 if exist(dir,'dir')
-	files = listfiles('*_lesionParams.mat', dir);
+	files = listfiles('*_LesionParams.mat', dir);
 	if ~isempty(files)
 		info1 = load([dir filesep files{1}]);
 		conflict = ~isequaln(info1.lesion, lesion) || ~isequaln(info1.refROI, refROI);
