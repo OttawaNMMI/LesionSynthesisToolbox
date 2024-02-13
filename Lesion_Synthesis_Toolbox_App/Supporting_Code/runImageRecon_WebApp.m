@@ -94,8 +94,7 @@ if ~isempty(fId)
 end
 
 % This is where the DICOM series is saved
-% dicomDir = [patientDir filesep userConfig.dicomSeriesDesc];
-dicomDir = [patientDir filesep info.reconName];
+dicomDir = [patientDir filesep info.reconName '_DICOM'];
 movefile([patientDir filesep userConfig.dicomSeriesDesc], dicomDir)
 
 % Fix the DICOM files to include radiopharmaceutical information
