@@ -16,8 +16,6 @@ fext = '.sdcopen';
 
 files = listfiles(fext,dirIn); 
 
-%vol = readSavefile('C:\Users\hjuma\Documents\MATLAB\Lesion Synthesis DB\Patient_40608184\CTreconWithLesion\ir3d.sav');
-
 for i = 1:length(files)
     
     fdir = [dirIn filesep nameconv num2str(i) fext]; 
