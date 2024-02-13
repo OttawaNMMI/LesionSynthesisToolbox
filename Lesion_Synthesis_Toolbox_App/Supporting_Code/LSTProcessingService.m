@@ -40,7 +40,7 @@ if nargin<2
 end
 
 timerTag = 'LST Processing Service'; % tag of the timer for the processing service trigger
-statusFile = 'c:\temp\LSTServiceStatus.txt'; % File indicating status of the LST service
+statusFile = [tempdir filesep 'LSTServiceStatus.txt']; % File indicating status of the LST service
 refreshTime = 3/24/60/60; % seconds interval to determine if service is running
 
 options = struct('dataDirs', [],...
