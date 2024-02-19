@@ -123,7 +123,10 @@ lesionMap = lesionMap.vol>0;
 % for i = 1:length(lesionData.refROI)
 % 	lesionMap = lesionMap + lesionData.refROI{i}.map;
 % end
-[bedRange, numBeds, slicePerBed, sliceOverlap] = getBedRangeData(lesionMap);
+
+if LIparams.LesionBedPosRecon
+    [bedRange, numBeds, slicePerBed, sliceOverlap] = getBedRangeData(lesionMap, 53, 13);
+end
 
 % Copy the necessary files to Baseline PET dirs
 if status.copyFiles
@@ -234,6 +237,13 @@ reconParams.beta = lesionData.info.simParams.beta;
 reconParams.attenDataDir = [baselinePETdir filesep 'CTAC_DICOM'];
 reconParams.nParallelThreads = getLSTThreads;
 
+if isfield(reconParams, 'reconLevelList')
+    tofFlag = reconParams.reconLevelList(end).tofFlag;
+else
+    tofFlag = reconParams.tofFlag;
+end
+
+
 %% Perrfom a baseline reconstruction
 % In the context of LesionSynthesis Toolbox, this is treakier than it at
 % first seems, because needs to simulate first reconstructing the baseline
@@ -322,7 +332,11 @@ if LIparams.genLesionFiles
 	end 
 	
 	% Generate Poisson-noisy lesion sinogram in /LesionProjs_frame1
-	lesionInsertionDuettoTOF(reconParams, lesionImgData.vol);
+    if tofFlag
+	    lesionInsertionDuettoTOF(reconParams, lesionImgData.vol);
+    else
+        lesionInsertionDuettoNonTOF(reconParams, lesionImgData.vol)
+    end
 else
 	disp('  - nothing to process!!!! Why is this running then?')
 end
@@ -334,13 +348,18 @@ if 1
 	cd(reconWithLesionDir);
 	
 	% Link the TOF Lesion Sinogram Data
-	suffix = '.lesion.mat';
+    if tofFlag
+	    fileFormat = '.mat';
+    else
+    	fileFormat = '.sav';
+    end
+    suffix = ['.lesion' fileFormat];
 	files = listfiles(['*' suffix], reconWithLesionDir);
 	for fi = 1:length(files)
 		prefix = files{fi}(1:end-length(suffix));
 		disp(['Lesions inserted into ' prefix])
-		movefile([reconWithLesionDir filesep prefix '.mat'], [reconWithLesionDir filesep prefix '.noLesion.mat']);
-		movefile([reconWithLesionDir filesep prefix '.lesion.mat'], [reconWithLesionDir filesep prefix '.mat']);
+		movefile([reconWithLesionDir filesep prefix fileFormat], [reconWithLesionDir filesep prefix '.noLesion' fileFormat]);
+		movefile([reconWithLesionDir filesep prefix suffix], [reconWithLesionDir filesep prefix fileFormat]);
 	end
 else
 	mkdir(reconWithLesionDir);

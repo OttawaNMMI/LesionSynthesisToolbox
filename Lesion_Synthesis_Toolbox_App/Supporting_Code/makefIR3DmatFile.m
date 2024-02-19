@@ -6,7 +6,7 @@
 function fname = makefIR3DmatFile(fpath, fname)
 
 if exist(fpath,'dir')==7
-	load([fpath filesep 'ReconParams.mat'],'reconParams');
+	load([fpath filesep 'reconParams.mat'],'reconParams');
 	dicomDir = [fpath filesep reconParams.dicomImageSeriesDesc];
 else
 	load(fpath, 'info');
