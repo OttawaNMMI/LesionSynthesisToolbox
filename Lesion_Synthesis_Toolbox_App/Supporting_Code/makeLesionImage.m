@@ -96,7 +96,7 @@ for li=1:nLesions
 			error(['Unrecognized lesion additionMode property ' lesion.additionMode]);
 	end
 	
-	% surrounding summury statistics
+	% surrounding summary statistics
 	if nargin<3 % TO DO: this assumes spheres, will need to accomodate other shapes when we get there.
 		surroundingMargin = 20; % mm
 	end

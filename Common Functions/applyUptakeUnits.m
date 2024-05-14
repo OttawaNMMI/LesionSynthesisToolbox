@@ -54,116 +54,134 @@ else
 	fixedUnits = false;
 end
 
-switch uptakeUnits
-	case ''
-		status = false;
-	case {'Activity [Bq/cc]','Bq/cc',...
-		  'Activity [uBq/cc]','uBq/cc',...
-		  'Activity [kBq/cc]','kBq/cc',...
-		  'Activity [mBq/cc]','mBq/cc',...
-		  'Activity [MBq/cc]','MBq/cc '}
 
-		% The target units
-		if fixedUnits % - indicated as fixed
-			i = strfind(uptakeUnits,'Bq/cc')-1;
-			if i>0
-				prefix = uptakeUnits(i);
-				switch prefix
-					case 'u'
-						factor = 1e6;
-					case 'm'
-						factor = 1e3;
-					case 'k'
-						factor = 1e-3;
-					case 'M'
-						factor = 1e-6;
-					otherwise
-						error(['Unrecognized units prefix ' prefix ' encountered'])
+if endsWith(hdr.examType,'\MBF')
+	uptakeUnits = hdr.image_units;
+	metric = 'MBF';
+	factor = 1;
+	status = true;
+elseif endsWith(hdr.examType,'\K1')
+	uptakeUnits = hdr.image_units;
+	metric = 'K1';
+	factor = 1;
+	status = true;
+elseif endsWith(hdr.examType,'\TBV')
+	uptakeUnits = hdr.image_units;
+	metric = 'TBV';
+	factor = 1;
+	status = true;
+else
+	switch uptakeUnits
+		case ''
+			status = false;
+		case {'Activity [Bq/cc]','Bq/cc',...
+				'Activity [uBq/cc]','uBq/cc',...
+				'Activity [kBq/cc]','kBq/cc',...
+				'Activity [mBq/cc]','mBq/cc',...
+				'Activity [MBq/cc]','MBq/cc '}
+
+			% The target units
+			if fixedUnits % - indicated as fixed
+				i = strfind(uptakeUnits,'Bq/cc')-1;
+				if i>0
+					prefix = uptakeUnits(i);
+					switch prefix
+						case 'u'
+							factor = 1e6;
+						case 'm'
+							factor = 1e3;
+						case 'k'
+							factor = 1e-3;
+						case 'M'
+							factor = 1e-6;
+						otherwise
+							error(['Unrecognized units prefix ' prefix ' encountered'])
+					end
+				else
+					prefix = [];
+					factor = 1;
 				end
-			else
-				prefix = [];
-				factor = 1;
+
+				uptakeUnits = [prefix 'Bq/cc'];
+			else % determined automatically by image intensity
+				if ~iscell(myo_avg)
+					maxactivity = max(myo_avg(:));
+				else
+					maxactivity = max(myo_avg{1}(:)); % normalize to maximum of LV PM
+				end
+				if maxactivity<2e-3
+					uptakeUnits = 'uBq/cc';
+					factor = 1e6;
+				elseif maxactivity<2
+					uptakeUnits = 'mBq/cc';
+					factor = 1e3;
+				elseif maxactivity>2e6
+					uptakeUnits = 'MBq/cc';
+					factor = 1e-6;
+				elseif maxactivity>2000
+					uptakeUnits = 'kBq/cc';
+					factor = 1e-3;
+				else
+					uptakeUnits = 'Bq/cc';
+					factor = 1;
+				end
 			end
-			
-			uptakeUnits = [prefix 'Bq/cc'];
-		else % determined automatically by image intensity
-			if ~iscell(myo_avg)
-				maxactivity = max(myo_avg(:));
-			else
-				maxactivity = max(myo_avg{1}(:)); % normalize to maximum of LV PM
-			end
-			if maxactivity<2e-3
-				uptakeUnits = 'uBq/cc';
-				factor = 1e6;
-			elseif maxactivity<2
-				uptakeUnits = 'mBq/cc';
-				factor = 1e3;
-			elseif maxactivity>2e6
-				uptakeUnits = 'MBq/cc';
-				factor = 1e-6;
-			elseif maxactivity>2000
-				uptakeUnits = 'kBq/cc';
-				factor = 1e-3;
-			else
-				uptakeUnits = 'Bq/cc';
-				factor = 1;
-			end
-		end
-        metric = 'Activity';
-        status = true;
-	
-	case {'SUV-bw [g/mL]','SUV','SUV_{bw}[g/mL]'}
-		if isfield(hdr,'patientWeight') && isfield(hdr,'injectedActivity') &&...
-			~isempty(hdr.patientWeight) && ~isempty(hdr.injectedActivity) &&...
-			 isscalar(hdr.patientWeight) && isscalar(hdr.injectedActivity) &&...
-			 hdr.patientWeight>0 && hdr.injectedActivity>0
-			factor = 1/(hdr.injectedActivity*1e6/(hdr.patientWeight*1000));
-			uptakeUnits = 'g/mL';
-			metric = 'SUV_{bw}';
+			metric = 'Activity';
 			status = true;
-		end
-	case {'SUV-lbm [g/mL]','SUV_{lbm}[g/mL]'}
-		if isfield(hdr,'patientWeight') && isfield(hdr,'patientHeight') && isfield(hdr,'injectedActivity') && isfield(hdr,'patientSex') &&...
-				~isempty(hdr.patientWeight) && ~isempty(hdr.patientHeight) && ~isempty(hdr.injectedActivity) && ~isempty(hdr.patientSex) &&...
-				isscalar(hdr.patientWeight) && isscalar(hdr.patientHeight) && isscalar(hdr.injectedActivity) &&...
-				hdr.patientWeight>0 && hdr.patientHeight>0 && hdr.injectedActivity>0
-			% Lean body mass 
-			if strcmpi(hdr.patientSex,'male')
-				factor = 1/(hdr.injectedActivity*1e6)*...
-					(1.10*hdr.patientWeight - 128*(hdr.patientWeight/(100*hdr.patientHeight))^2) * 1000;
-			else
-				factor = 1/(hdr.injectedActivity*1e6)*...
-					(1.07*hdr.patientWeight - 148*(hdr.patientWeight/(100*hdr.patientHeight))^2) * 1000;
-			end
-			uptakeUnits = 'g/mL';
-			metric = 'SUV_{lbm}';
-			status = true;
-		end
-	case {'SUV-bmi [g/mL m2]', 'SUV-bmi [g/mL m²]', 'SUV-bmi [g m²/mL]'}
-		if isfield(hdr,'patientWeight') && isfield(hdr,'patientHeight') && isfield(hdr,'injectedActivity') &&...
-			~isempty(hdr.patientWeight) && ~isempty(hdr.patientHeight) && ~isempty(hdr.injectedActivity) &&...
-			 isscalar(hdr.patientWeight) && isscalar(hdr.patientHeight) && isscalar(hdr.injectedActivity) &&...
-			 hdr.patientWeight>0 && hdr.patientHeight>0 && hdr.injectedActivity>0
-			factor = 1/(hdr.injectedActivity*1e6/(hdr.patientWeight*1000))*(hdr.patientHeight)^2;
-			uptakeUnits = 'g/mL m^2';
-			metric = 'SUV_{bmi}';
-			status = true;
-		end
-	case 'Tracer Concentration [nmol/cc]'
-		if isfield(hdr,'SpecificActivity') && ~isempty(hdr.SpecificActivity)
-			if ischar(hdr.SpecificActivity)
-				hdr.SpecificActivity = str2double(hdr.SpecificActivity);
-			end
-			if isscalar(hdr.SpecificActivity) && ...
-					hdr.SpecificActivity>0
-				factor = 1/hdr.SpecificActivity*1e-6; % [Bq/cc]/[GBq/umol] = nmol/cc*1e-6
-				uptakeUnits = 'nmol/cc';
-				metric = 'Tracer Conc.';
+
+		case {'SUV-bw [g/mL]','SUV','SUV_{bw}[g/mL]'}
+			if isfield(hdr,'patientWeight') && isfield(hdr,'injectedActivity') &&...
+					~isempty(hdr.patientWeight) && ~isempty(hdr.injectedActivity) &&...
+					isscalar(hdr.patientWeight) && isscalar(hdr.injectedActivity) &&...
+					hdr.patientWeight>0 && hdr.injectedActivity>0
+				factor = 1/(hdr.injectedActivity*1e6/(hdr.patientWeight*1000));
+				uptakeUnits = 'g/mL';
+				metric = 'SUV_{bw}';
 				status = true;
 			end
-		end
-	otherwise
-		error(['Unknown uptake units (' uptakeUnits ') specified.']);
+		case {'SUV-lbm [g/mL]','SUV_{lbm}[g/mL]'}
+			if isfield(hdr,'patientWeight') && isfield(hdr,'patientHeight') && isfield(hdr,'injectedActivity') && isfield(hdr,'patientSex') &&...
+					~isempty(hdr.patientWeight) && ~isempty(hdr.patientHeight) && ~isempty(hdr.injectedActivity) && ~isempty(hdr.patientSex) &&...
+					isscalar(hdr.patientWeight) && isscalar(hdr.patientHeight) && isscalar(hdr.injectedActivity) &&...
+					hdr.patientWeight>0 && hdr.patientHeight>0 && hdr.injectedActivity>0
+				% Lean body mass
+				if strcmpi(hdr.patientSex,'male')
+					factor = 1/(hdr.injectedActivity*1e6)*...
+						(1.10*hdr.patientWeight - 128*(hdr.patientWeight/(100*hdr.patientHeight))^2) * 1000;
+				else
+					factor = 1/(hdr.injectedActivity*1e6)*...
+						(1.07*hdr.patientWeight - 148*(hdr.patientWeight/(100*hdr.patientHeight))^2) * 1000;
+				end
+				uptakeUnits = 'g/mL';
+				metric = 'SUV_{lbm}';
+				status = true;
+			end
+		case {'SUV-bmi [g/mL m2]', 'SUV-bmi [g/mL m²]', 'SUV-bmi [g m²/mL]'}
+			if isfield(hdr,'patientWeight') && isfield(hdr,'patientHeight') && isfield(hdr,'injectedActivity') &&...
+					~isempty(hdr.patientWeight) && ~isempty(hdr.patientHeight) && ~isempty(hdr.injectedActivity) &&...
+					isscalar(hdr.patientWeight) && isscalar(hdr.patientHeight) && isscalar(hdr.injectedActivity) &&...
+					hdr.patientWeight>0 && hdr.patientHeight>0 && hdr.injectedActivity>0
+				factor = 1/(hdr.injectedActivity*1e6/(hdr.patientWeight*1000))*(hdr.patientHeight)^2;
+				uptakeUnits = 'g/mL m^2';
+				metric = 'SUV_{bmi}';
+				status = true;
+			end
+		case 'Tracer Concentration [nmol/cc]'
+			if isfield(hdr,'SpecificActivity') && ~isempty(hdr.SpecificActivity)
+				if ischar(hdr.SpecificActivity)
+					hdr.SpecificActivity = str2double(hdr.SpecificActivity);
+				end
+				if isscalar(hdr.SpecificActivity) && ...
+						hdr.SpecificActivity>0
+					factor = 1/hdr.SpecificActivity*1e-6; % [Bq/cc]/[GBq/umol] = nmol/cc*1e-6
+					uptakeUnits = 'nmol/cc';
+					metric = 'Tracer Conc.';
+					status = true;
+				end
+			end
+		otherwise
+			error(['Unknown uptake units (' uptakeUnits ') specified.']);
+	end
 end
 
 if ~status
@@ -172,10 +190,12 @@ if ~status
 	metric = 'Activity';
 end
 
-if iscell(myo_avg)
-	for i=1:length(myo_avg)
-		myo_avg{i} = myo_avg{i}*factor;
+if factor~=1
+	if iscell(myo_avg)
+		for i=1:length(myo_avg)
+			myo_avg{i} = myo_avg{i}*factor;
+		end
+	else
+		myo_avg = myo_avg*factor;
 	end
-else
-	myo_avg = myo_avg*factor;
 end
