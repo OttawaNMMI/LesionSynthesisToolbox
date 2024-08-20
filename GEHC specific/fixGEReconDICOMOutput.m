@@ -65,6 +65,8 @@ for filei = 1:nfiles
 	
 	file = [dirIn filesep files{filei}];
 	
+	prevDICOMDict = dicomdict("get");
+	dicomdict("set","pet-dicom-dict.txt")
 	infodcm = dicominfo(file);
 	img = dicomread(infodcm);
 	
@@ -89,34 +91,48 @@ for filei = 1:nfiles
 		
 		end
 		% Radiophamaceutical info for SUV display
-		injectedActivity = infodcm.Private_0009_1038 - ...
-						infodcm.Private_0009_103c *...
-						exp(-log(2)/infodcm.Private_0009_103f * ... lambdah - time units = seconds
-						(datenum(infodcm.Private_0009_1039,'yyyymmddHHMMSS') - datenum(infodcm.Private_0009_103d,'yyyymmddHHMMSS'))*24*60*60); % Time Elapsed
-		injectedActivity = injectedActivity * 10^6; % Positron branching fraction
-		hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.Radiopharmaceutical = infodcm.Private_0009_1036;
-        hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalVolume = infodcm.Private_0009_1035; % unsure this is the correct field
-        hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStartTime = infodcm.Private_0009_103b(9:end);
-        hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStopTime = infodcm.Private_0009_103d(9:end);
-		hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideTotalDose = injectedActivity;
-        hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideHalfLife = infodcm.Private_0009_103f;
-        hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclidePositronFraction = infodcm.Private_0009_1040;
-		hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStartDatetime = infodcm.Private_0009_103b;
-        hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStopDatetime = infodcm.Private_0009_103d;
-		% TO DO : there are tons of other unpopulated fields that need to be transcribed/derived from private fields 
-%         hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideCodeSequence =
-%             <IdentifyingGroupLength size="4" element="0000" group="0008" htype="DCM">48</IdentifyingGroupLength>
-%             <CodeValue size="8" element="0100" group="0008" htype="DCM">C-111A1</CodeValue>
-%             <CodingSchemeDesignator size="4" element="0102" group="0008" htype="DCM">SRT</CodingSchemeDesignator>
-%             <CodeMeaning size="12" element="0104" group="0008" htype="DCM">^18^Fluorine</CodeMeaning>
-%         </RadionuclideCodeSequence>
-%         <RadiopharmaceuticalCodeSequence size="88" element="0304" group="0054" htype="HSQ">
-%             <IdentifyingGroupLength size="4" element="0000" group="0008" htype="DCM">60</IdentifyingGroupLength>
-%             <CodeValue size="8" element="0100" group="0008" htype="DCM">C-B1031</CodeValue>
-%             <CodingSchemeDesignator size="4" element="0102" group="0008" htype="DCM">SRT</CodingSchemeDesignator>
-%             <CodeMeaning size="24" element="0104" group="0008" htype="DCM">Fluorodeoxyglucose F^18^</CodeMeaning>
-% 		
-		
+		if isfield(infodcm,'tracer_activity') % using Ge dictionary
+			injectedActivity = infodcm.tracer_activity - ...
+				infodcm.post_inj_activity *...
+				exp(-log(2)/infodcm.half_life * ... lambdah - time units = seconds
+				(datenum(infodcm.meas_datetime,'yyyymmddHHMMSS') - datenum(infodcm.post_inj_datetime,'yyyymmddHHMMSS'))*24*60*60); % Time Elapsed
+			injectedActivity = injectedActivity * 10^6; 
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.Radiopharmaceutical = infodcm.tracer_name;
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStartTime = infodcm.admin_datetime(9:end);
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStopTime = infodcm.post_inj_datetime(9:end);
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideTotalDose = injectedActivity;
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideHalfLife = infodcm.half_life;
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclidePositronFraction = infodcm.positron_fraction;
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStartDatetime = infodcm.admin_datetime;
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStopDatetime = infodcm.post_inj_datetime;		
+		else % using a generic dictionary
+			injectedActivity = infodcm.Private_0009_1038 - ...
+				infodcm.Private_0009_103c *...
+				exp(-log(2)/infodcm.Private_0009_103f * ... lambdah - time units = seconds
+				(datenum(infodcm.Private_0009_1039,'yyyymmddHHMMSS') - datenum(infodcm.Private_0009_103d,'yyyymmddHHMMSS'))*24*60*60); % Time Elapsed
+			injectedActivity = injectedActivity * 10^6; 
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.Radiopharmaceutical = infodcm.Private_0009_1036;
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStartTime = infodcm.Private_0009_103b(9:end);
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStopTime = infodcm.Private_0009_103d(9:end);
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideTotalDose = injectedActivity;
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideHalfLife = infodcm.Private_0009_103f;
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclidePositronFraction = infodcm.Private_0009_1040;
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStartDatetime = infodcm.Private_0009_103b;
+			hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadiopharmaceuticalStopDatetime = infodcm.Private_0009_103d;
+			% TO DO : there are tons of other unpopulated fields that need to be transcribed/derived from private fields
+			%         hdrOverwrite.RadiopharmaceuticalInformationSequence.Item_1.RadionuclideCodeSequence =
+			%             <IdentifyingGroupLength size="4" element="0000" group="0008" htype="DCM">48</IdentifyingGroupLength>
+			%             <CodeValue size="8" element="0100" group="0008" htype="DCM">C-111A1</CodeValue>
+			%             <CodingSchemeDesignator size="4" element="0102" group="0008" htype="DCM">SRT</CodingSchemeDesignator>
+			%             <CodeMeaning size="12" element="0104" group="0008" htype="DCM">^18^Fluorine</CodeMeaning>
+			%         </RadionuclideCodeSequence>
+			%         <RadiopharmaceuticalCodeSequence size="88" element="0304" group="0054" htype="HSQ">
+			%             <IdentifyingGroupLength size="4" element="0000" group="0008" htype="DCM">60</IdentifyingGroupLength>
+			%             <CodeValue size="8" element="0100" group="0008" htype="DCM">C-B1031</CodeValue>
+			%             <CodingSchemeDesignator size="4" element="0102" group="0008" htype="DCM">SRT</CodingSchemeDesignator>
+			%             <CodeMeaning size="24" element="0104" group="0008" htype="DCM">Fluorodeoxyglucose F^18^</CodeMeaning>
+			%
+		end
 		if nargin>=3
 			hdrOverwrite = completeStructData(hdrOverwriteIn, hdrOverwrite);
 		end
@@ -125,6 +141,7 @@ for filei = 1:nfiles
 	[infodcm, hdrOverwrite] = replaceFields(infodcm, hdrOverwrite);
 	
 	dicomwrite(img, [dirOut filesep files{filei}] ,infodcm,'CreateMode','Copy','WritePrivate',true, 'UseMetadataBitDepths',true,'VR','explicit');
+	dicomdict("set",prevDICOMDict);
 end
 
 
