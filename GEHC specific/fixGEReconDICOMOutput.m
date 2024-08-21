@@ -66,8 +66,9 @@ for filei = 1:nfiles
 	file = [dirIn filesep files{filei}];
 	
 	prevDICOMDict = dicomdict("get");
-	dicomdict("set","pet-dicom-dict.txt")
+	dicomdict("set","pet-dicom-dict-LST.txt")
 	infodcm = dicominfo(file);
+	dicomdict("set",prevDICOMDict);
 	img = dicomread(infodcm);
 	
 	if filei==1
@@ -141,7 +142,6 @@ for filei = 1:nfiles
 	[infodcm, hdrOverwrite] = replaceFields(infodcm, hdrOverwrite);
 	
 	dicomwrite(img, [dirOut filesep files{filei}] ,infodcm,'CreateMode','Copy','WritePrivate',true, 'UseMetadataBitDepths',true,'VR','explicit');
-	dicomdict("set",prevDICOMDict);
 end
 
 

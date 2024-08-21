@@ -59,8 +59,7 @@
 
 function status = LesionInsertionDUETTO_WebApp(simulationName, lesionParamsFile, patDataDir, LIparams, baseDir, archiveDir)
 
-disp('WELCOME!!!!')
-disp('LesionInsertionDUETTO_WebApp - version that works 2021-07-04')
+disp('Starting LesionInsertionDUETTO_WebApp')
 
 if nargin<6
 	archiveDir = '';
@@ -124,6 +123,7 @@ lesionMap = lesionMap.vol>0;
 % 	lesionMap = lesionMap + lesionData.refROI{i}.map;
 % end
 
+% TO DO: Hard coded numbers need to change depending on scanner
 if LIparams.LesionBedPosRecon
     [bedRange, numBeds, slicePerBed, sliceOverlap] = getBedRangeData(lesionMap, 53, 13);
 end
