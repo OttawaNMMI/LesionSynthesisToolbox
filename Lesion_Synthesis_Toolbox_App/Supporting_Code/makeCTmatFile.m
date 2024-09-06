@@ -19,6 +19,9 @@ function fname = makeCTmatFile(fpath, fname)
 [vol, spatial] = dicomreadVolume(fpath);
 vol = squeeze(vol);
 files = listfiles('*.1',fpath);
+if isempty(files) % UBC provided filenames had .img extension appended.
+	files = listfiles('*.1.img',fpath);
+end
 infodcm = dicominfo([fpath filesep files{1}]);
 hdr = hdrInitDcm(infodcm);
 hdr.pix_mm_z = diff(spatial.PatientPositions(1:2,3)); % I think this is a GE bug that flips SliceThickness and SpacingBetweenSLices

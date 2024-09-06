@@ -92,7 +92,10 @@ for filei = 1:nfiles
 		
 		end
 		% Radiophamaceutical info for SUV display
-		if isfield(infodcm,'tracer_activity') % using Ge dictionary
+		if isfield(infodcm,'RadiopharmaceuticalInformationSequence') &&...
+				isfield(infodcm.RadiopharmaceuticalInformationSequence,'Item_1')
+			hdrOverwrite = struct; % Nothing to add to the DICOM header.
+		elseif isfield(infodcm,'tracer_activity') % using Ge dictionary
 			injectedActivity = infodcm.tracer_activity - ...
 				infodcm.post_inj_activity *...
 				exp(-log(2)/infodcm.half_life * ... lambdah - time units = seconds
@@ -134,11 +137,13 @@ for filei = 1:nfiles
 			%             <CodeMeaning size="24" element="0104" group="0008" htype="DCM">Fluorodeoxyglucose F^18^</CodeMeaning>
 			%
 		end
+
 		if nargin>=3
 			hdrOverwrite = completeStructData(hdrOverwriteIn, hdrOverwrite);
 		end
+		
 	end
-	
+
 	[infodcm, hdrOverwrite] = replaceFields(infodcm, hdrOverwrite);
 	
 	dicomwrite(img, [dirOut filesep files{filei}] ,infodcm,'CreateMode','Copy','WritePrivate',true, 'UseMetadataBitDepths',true,'VR','explicit');

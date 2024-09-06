@@ -106,6 +106,9 @@ pause(3);
 % Make one clean mat file of the reconstructed image
 files = listfiles('*.sdcopen', dicomDir);
 infodcm = dicominfo([dicomDir filesep files{1}]);
+if ~isfield(infodcm.PatientName,'GivenName') % this is here because dicomwrite (in fixGEReconDICOMOutput) will remove PatientName.GivenName if it is empty, but we want it in the mat file.
+	infodcm.PatientName.GivenName = '';
+end
 [hdr, infodcm] = hdrInitDcm(infodcm);
 save([patientDir filesep info.reconName '_fIR3D.mat'], 'vol', 'hdr', 'infodcm');
 img = struct('vol', vol,...
