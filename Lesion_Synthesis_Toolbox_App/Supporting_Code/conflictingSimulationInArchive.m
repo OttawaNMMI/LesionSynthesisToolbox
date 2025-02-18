@@ -22,6 +22,23 @@ if exist(dir,'dir')
 	files = listfiles('*_LesionParams.mat', dir);
 	if ~isempty(files)
 		info1 = load([dir filesep files{1}]);
-		conflict = ~isequaln(info1.lesion, lesion) || ~isequaln(info1.refROI, refROI);
+		% enough to ensure that these belong the the same original scan if
+		% the StudyInstanceUID are the same. ALso check that same number of
+		% lesions and refROI, so that for loops below are simpler.
+		conflict = ~strcmp(lesion{1}.hdr.StudyInstanceUID, info1.lesion{1}.hdr.StudyInstanceUID) || ...
+			length(info1.lesion) ~= length(lesion) || length(info1.refROI) ~= length(refROI);
+		if ~conflict
+			% ignore the header, as a simulation and original
+			% reconstruction header will not be identical.
+			for i=1:length(lesion)
+				info1.lesion{i} = rmfield(info1.lesion{i}, 'hdr');
+				lesion{i} = rmfield(lesion{i}, 'hdr');
+			end
+			for i=1:length(refROI)
+				info1.refROI{i} = rmfield(info1.refROI{i}, 'hdr');
+				refROI{i} = rmfield(refROI{i}, 'hdr');
+			end
+			conflict = ~isequaln(info1.lesion, lesion) || ~isequaln(info1.refROI, refROI);
+		end
 	end
 end
